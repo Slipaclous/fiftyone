@@ -1,0 +1,152 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  @import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-color: #F4F4F4;
+}
+.hello{
+  font-size: 50px;
+  color: #F4F4F4;
+}
+.menu{
+  color: #F4F4F4;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.site-title {
+  margin: 0;
+  text-align: center;
+}
+.container-top{
+  
+  color: #F4F4F4;
+  width: 80%;
+  margin: 0;
+  padding:0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5vh;
+}
+.top-menu{
+  width: 100%;
+  background-color: #2D3B6F;
+  display: flex;
+  justify-content: center;
+}
+.top-menu a{
+  text-decoration: none;
+  color: #F4F4F4;
+  font-weight: 400;
+}
+.top-menu a:hover{
+  text-decoration: underline;
+}
+nav{
+  display: flex;
+ height: 5vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.login-link {
+  margin-left: auto;
+  padding: 20px;
+}
+.login-link a{
+  color: black;
+  text-decoration: none;
+}
+header {
+   text-align: center;
+  background-color: white;
+  font-weight: bolder;
+  }
+  
+  .site-title {
+    font-size: 28px;
+    margin-left: 40px;
+  }
+  
+  .site-links {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+
+  }
+  
+  .site-links li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .site-links li:last-child {
+    margin-right: 0;
+  }
+  
+  .site-links li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 5px 10px;
+  }
+  
+  .site-links li a:hover {
+    text-decoration: none;
+    color: #2D3B6F;
+  }
+  
+  .site-links li a:hover::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -9px;
+    width: 150%;
+    height: 4px;
+    background-color: #2D3B6F;
+  }
+  .presentation {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  #title {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    text-align: center;
+    margin: 50px;
+  }
+  
+  .blocks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .block {
+    width: 200px;
+    height: 200px;
+    background-color: #F4F4F4;
+  }
+  .carousel-img {
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  

@@ -1,0 +1,10 @@
+easy_admin:
+    design:
+        menu:
+            - { entity: 'App\Entity\News' }
+            - { dashboard: 'Dashboard', icon: 'fa fa-home', route: 'admin' }
+    entities:
+        News:
+            class: App\Entity\News
+            controller_name: App\Controller\Admin\NewsCrudController
+            # ...

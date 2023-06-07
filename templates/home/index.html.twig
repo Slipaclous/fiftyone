@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {% set active = true %}
+    {% for carouselItem in carouselImages %}
+      <div class="carousel-item{% if active %} active{% endif %}">
+        <img class="d-block w-100" src="{{ asset('images/' ~ carouselItem.image) }}" alt="{{ carouselItem.title }}">
+      </div>
+      {% set active = false %}
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<div class="container">
+  <h2 id="title">Nos dernières Actualités</h2>
+  <div class="row">
+    {% for newsItem in news %}
+      <div class="col-md-4">
+        <div class="card">
+          <img src="{{ newsItem.images.first.url }}" class="card-img-top" alt="News Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ newsItem.titre }}</h5>
+            <p class="card-text">{{ newsItem.description|slice(0, 100) ~ '...' }}</p>
+            <a href="" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+{% block javascripts %}
+<script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('.carousel').carousel();
+
+        $('.carousel-control-prev').click(function(event) {
+            event.preventDefault();
+            $('.carousel').carousel('prev');
+        });
+
+        $('.carousel-control-next').click(function(event) {
+            event.preventDefault();
+            $('.carousel').carousel('next');
+        });
+    });
+    function showTitle() {
+  var title = document.getElementById("title");
+  title.style.opacity = "1";
+}
+
+setTimeout(showTitle, 700); // Delay of 0.5 seconds (500 milliseconds)
+
+</script>
+{% endblock %}
+
+
+
+
+
+
+{% endblock %}
