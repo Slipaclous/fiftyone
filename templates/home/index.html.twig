@@ -25,20 +25,25 @@
 
 <div class="container">
   <h2 id="title">Nos dernières Actualités</h2>
-  <div class="row">
+<div class="row">
     {% for newsItem in news %}
-      <div class="col-md-4">
-        <div class="card">
-          <img src="{{ newsItem.images.first.url }}" class="card-img-top" alt="News Image">
-          <div class="card-body">
-            <h5 class="card-title">{{ newsItem.titre }}</h5>
-            <p class="card-text">{{ newsItem.description|slice(0, 100) ~ '...' }}</p>
-            <a href="" class="btn btn-primary">Read More</a>
-          </div>
+        <div class="col-md-4">
+            <div class="card">
+                {% if newsItem.images|length > 0 %}
+                    <img src="images/{{ newsItem.images.first.url }}" class="card-img-top" alt="News Image">
+                {% else %}
+                    <!-- Handle case when no image is available -->
+                    <img src="path/to/default/image.jpg" class="card-img-top" alt="Default Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ newsItem.titre }}</h5>
+                    <p class="card-text">{{ newsItem.description|slice(0, 100) ~ '...' }}</p>
+                    <a href="" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
         </div>
-      </div>
     {% endfor %}
-  </div>
+</div>
 </div>
 
 

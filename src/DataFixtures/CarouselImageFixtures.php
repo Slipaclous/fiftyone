@@ -13,7 +13,6 @@ class CarouselImageFixtures extends Fixture
         $images = [
             ['image' => 'fond1.jpg', 'title' => 'Image 1 Title'],
             ['image' => 'fond2.jpg', 'title' => 'Image 2 Title'],
-            ['image' => 'fond3.jpg', 'title' => 'Image 3 Title'],
         ];
 
         foreach ($images as $imageData) {

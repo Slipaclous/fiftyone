@@ -17,7 +17,7 @@ class News
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Titre = null;
+    private ?string $titre = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $soustitre = null;
@@ -26,14 +26,14 @@ class News
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'news', targetEntity: Images::class)]
-    private Collection $image;
+    private Collection $images;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     public function __construct()
     {
-        $this->image = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,12 +43,12 @@ class News
 
     public function getTitre(): ?string
     {
-        return $this->Titre;
+        return $this->titre;
     }
 
-    public function setTitre(string $Titre): self
+    public function setTitre(string $titre): self
     {
-        $this->Titre = $Titre;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -82,13 +82,13 @@ class News
      */
     public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
     public function addImage(Images $image): self
     {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
             $image->setNews($this);
         }
 
@@ -97,8 +97,8 @@ class News
 
     public function removeImage(Images $image): self
     {
-        if ($this->image->contains($image)) {
-            $this->image->removeElement($image);
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
             if ($image->getNews() === $this) {
                 $image->setNews(null);

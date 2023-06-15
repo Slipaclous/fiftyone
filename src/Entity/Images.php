@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ImagesRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
+#[Vich\Uploadable]
 class Images
 {
     #[ORM\Id]
@@ -13,11 +16,29 @@ class Images
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'image')]
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'url')]
+    private ?File $imageFile = null;
+
+    #[ORM\ManyToOne(inversedBy: 'images')]
     private ?News $news = null;
 
     #[ORM\Column(length: 255)]
     private ?string $url = null;
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+        
+
+        // if (null !== $imageFile) {
+        //     $this->updatedAt = new \DateTimeImmutable();
+        // }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
 
     public function getId(): ?int
     {
@@ -47,4 +68,10 @@ class Images
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getUrl();
+    }
 }
+

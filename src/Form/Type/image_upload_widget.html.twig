@@ -1,0 +1,7 @@
+{# templates/form/image_upload_widget.html.twig #}
+
+{% block image_upload_widget %}
+    {% spaceless %}
+        <input type="file" id="{{ id }}" name="{{ full_name }}"{% if required %} required{% endif %}{{ block('widget_attributes') }}>
+    {% endspaceless %}
+{% endblock %}

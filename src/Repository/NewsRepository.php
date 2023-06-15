@@ -29,14 +29,15 @@ class NewsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function findThirdLastNews(): array
-    {
-        return $this->createQueryBuilder('n')
-            ->orderBy('n.id', 'DESC')
-            ->setMaxResults(3)
-            ->getQuery()
-            ->getResult();
-    }
+    public function findThirdLastNews()
+{
+    return $this->createQueryBuilder('n')
+        ->orderBy('n.date', 'DESC')
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult();
+}
+
 
     public function remove(News $entity, bool $flush = false): void
     {
