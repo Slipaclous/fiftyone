@@ -29,9 +29,12 @@ class DashboardController extends AbstractDashboardController
     }
 
     #[Route('/admin', name: 'admin')]
-    #[Security ('is_granted("ROLE_ADMIN","ROLE_MEMBER")')]
     public function dashboardIndex(EntityManagerInterface $entityManager): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MEMBER')) {
+            // Redirect the user to the 403 page
+            return new Response($this->renderView('error/403.html.twig'), Response::HTTP_FORBIDDEN);
+        }
         $totalUsers = $this->getTotalUsers($entityManager);
         $totalNews = $this->getTotalNews($entityManager);
         $totalVisits = $this->getTotalVisits(); 

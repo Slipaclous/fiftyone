@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}403 Accès non autorisé{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <h1 class="display-4">403 Accès non Autorisé</h1>
+                <p class="lead">Vous essayez d'accéder à une page non autorisée.</p>
+                <p>Contactez l'administrateur si vous pensez que c'est une erreur .</p>
+                <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

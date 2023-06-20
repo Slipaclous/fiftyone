@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}404 Page non trouvé{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <h1 class="display-4">404 Aucune page trouvée</h1>
+                <p class="lead">La page à laquelle vous essayez d'accéder n'existe pas ou plus.</p>
+                <p>Contactez l'administrateur si vous pensez que c'est une erreur .</p>
+                <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

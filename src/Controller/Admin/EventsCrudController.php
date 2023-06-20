@@ -12,6 +12,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class EventsCrudController extends AbstractCrudController
 {
@@ -19,11 +21,16 @@ class EventsCrudController extends AbstractCrudController
     {
         return Events::class;
     }
-
+    #[Security ('is_granted("ROLE_ADMIN","ROLE_MEMBER")')]
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('titre');
+        yield ImageField::new('cover')
+            ->setBasePath('')
+            ->setUploadDir('public/images')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false);
         yield TextEditorField::new('description');
         yield DateField::new('date');
         yield IntegerField::new('places');

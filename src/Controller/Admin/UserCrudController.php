@@ -52,7 +52,8 @@ class UserCrudController extends AbstractCrudController
                 ->setBasePath('')
                 ->setUploadDir('public/images')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false),
+                ->setRequired(false)
+                ->hideOnForm(),
                 
             // Add the description field
             TextareaField::new('informations')

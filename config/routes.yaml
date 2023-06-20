@@ -23,3 +23,9 @@ app_login:
 app_logout:
     path: /logout
 
+not_found:
+    path: /{url}
+    controller: App\Controller\ErrorController::notFound
+    requirements:
+        url: .*
+

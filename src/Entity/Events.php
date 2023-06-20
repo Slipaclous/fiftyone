@@ -32,6 +32,9 @@ class Events
     #[ORM\OneToMany(mappedBy: 'events', targetEntity: Images::class, cascade: ['persist', 'remove'])]
     private Collection $images;
 
+    #[ORM\Column(length: 255)]
+    private ?string $cover = null;
+
 
     public function __construct()
     {
@@ -117,6 +120,18 @@ class Events
                 $image->setEvents(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }
