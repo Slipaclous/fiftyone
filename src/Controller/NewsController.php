@@ -10,9 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NewsController extends AbstractController
 {
-    /**
-     * @Route("/news", name="news_index")
-     */
+    
+      #[Route("/news", name:"news_index")]
+     
     public function index(NewsRepository $newsRepository): Response
     {
         $news = $newsRepository->findAll();
@@ -22,20 +22,21 @@ class NewsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/news/{id}", name="news_show")
-     */
-    public function show(int $id, NewsRepository $newsRepository): Response
-    {
-        $news = $newsRepository->find($id);
+    
+    #[Route("/news/{slug}", name:"news_show")]
 
-        if (!$news) {
-            throw $this->createNotFoundException('News not found');
-        }
+    
+    public function show(string $slug, NewsRepository $newsRepository): Response
+{
+    $news = $newsRepository->findOneBy(['slug' => $slug]);
 
-        return $this->render('news/show.html.twig', [
-            'news' => $news,
-        ]);
+    if (!$news) {
+        throw $this->createNotFoundException('News not found');
     }
+
+    return $this->render('news/show.html.twig', [
+        'news' => $news,
+    ]);
+}
 }
 

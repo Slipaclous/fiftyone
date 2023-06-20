@@ -52,8 +52,8 @@ class UserCrudController extends AbstractCrudController
                 ->setBasePath('')
                 ->setUploadDir('public/images')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
-                ->setRequired(false)
-                ->hideOnForm(),
+                ->setRequired(false),
+                
             // Add the description field
             TextareaField::new('informations')
                 ->setLabel('Description'),
@@ -63,7 +63,7 @@ class UserCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->setChoices([
                     'Admin' => 'ROLE_ADMIN',
-                    'User' => 'ROLE_USER',
+                    'User' => 'ROLE_MEMBER',
                 ])
                 ->allowMultipleChoices(),
 
@@ -72,23 +72,22 @@ class UserCrudController extends AbstractCrudController
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        // Only allow admins to create users
-        if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('Access Denied.');
-        }
-
-        $request = Request::createFromGlobals();
-        $newPassword = $request->request->get('newPassword');
-
-        if (!empty($newPassword)) {
-            // Hash the new password before persisting the entity
-            $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
-            $entityInstance->setPassword($hashedPassword);
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
+{
+    // Only allow admins to create users
+    if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        throw new AccessDeniedException('Access Denied.');
     }
+
+    $newPassword = $entityInstance->getPassword();
+
+    if (!empty($newPassword)) {
+        // Hash the new password before persisting the entity
+        $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
+        $entityInstance->setPassword($hashedPassword);
+    }
+
+    parent::persistEntity($entityManager, $entityInstance);
+}
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {

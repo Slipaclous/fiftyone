@@ -25,9 +25,15 @@ class NewsCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('titre');
+        yield ImageField::new('cover')
+            ->setBasePath('')
+            ->setUploadDir('public/images')
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired(false);
         yield TextField::new('SousTitre');
         yield TextEditorField::new('description');
         yield DateField::new('date');
+
 
         yield CollectionField::new('images')
             ->hideOnIndex()

@@ -7,6 +7,8 @@ parameters:
     server_upload_default_path: '%kernel.project_dir%/public/images'
     server_upload_image_path: '%kernel.project_dir%/public/images'
     avatar_directory: '%kernel.project_dir%/public/images'
+    
+    public_directory: '%kernel.project_dir%/public'
 
 services:
     App\Controller\Admin\DashboardController:

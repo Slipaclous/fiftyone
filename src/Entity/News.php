@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\NewsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\NewsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: NewsRepository::class)]
 class News
@@ -19,6 +20,9 @@ class News
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $soustitre = null;
 
@@ -30,6 +34,9 @@ class News
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $cover = null;
 
 
     public function __construct()
@@ -51,7 +58,15 @@ class News
     {
         $this->titre = $titre;
 
+        // Generate the slug from the title
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($titre);
+
         return $this;
+    }
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
     public function getSoustitre(): ?string
@@ -117,6 +132,18 @@ class News
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }

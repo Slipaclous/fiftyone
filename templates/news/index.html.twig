@@ -12,7 +12,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ news.getTitre }}</h5>
           <p class="card-text">{{ news.getDescription|slice(0, 100) ~ '...' }}</p>
-          <a href="{{ path('news_show', { 'id': news.getId }) }}" class="btn btn-primary">Read More</a>
+          <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="btn btn-primary">Read More</a>
         </div>
       </div>
     </div>
