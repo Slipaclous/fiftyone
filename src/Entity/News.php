@@ -25,11 +25,12 @@ class News
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'news', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'news', targetEntity: Images::class, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
+
 
     public function __construct()
     {
@@ -119,4 +120,6 @@ class News
 
         return $this;
     }
+
+
 }

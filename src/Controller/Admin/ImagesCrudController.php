@@ -21,7 +21,6 @@ class ImagesCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('url');
-        yield AssociationField::new('news');
         yield Field::new('imageFile')->setFormType(ImageUploadType::class)->setLabel('Image');
     }
 }

@@ -1,0 +1,12 @@
+{# templates/bundles/EasyAdminBundle/_menu.html.twig #}
+{% extends '@EasyAdmin/default/_menu.html.twig' %}
+
+{% block menu_user_avatar %}
+    {% if app.user and app.user.getAvatar() %}
+        <a href="{{ path('admin_edit', {'entity': 'User', 'id': app.user.getId()}) }}">
+            <img src="{{ asset(app.user.getAvatar().getUrl()) }}" alt="Avatar" class="avatar">
+        </a>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

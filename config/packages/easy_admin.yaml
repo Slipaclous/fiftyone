@@ -8,3 +8,14 @@ easy_admin:
             class: App\Entity\News
             controller_name: App\Controller\Admin\NewsCrudController
             # ...
+
+        User:
+            class: App\Entity\User
+            controller: App\Controller\Admin\UserCrudController
+            edit:
+        # ...
+            fields:
+                - email
+                - { property: 'avatar', type: 'image' } # Ensure the type is 'image'
+                - informations
+

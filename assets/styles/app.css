@@ -148,5 +148,21 @@ header {
     max-height: 400px;
     object-fit: cover;
   }
+  .info-user{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* position to the rigth of the div */
+    
+    
+   
+  }
   
-  
+  .dropdown-menu a{
+    color: black;
+    text-decoration: none;
+  }
+  li{
+    list-style: none;
+  }

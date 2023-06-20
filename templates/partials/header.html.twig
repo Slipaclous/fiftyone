@@ -2,13 +2,34 @@
   <div class="menu">
     <div class="top-menu">
         <div class="container-top">
-      <h1 class="site-title">Fifty-one club Enghien</h1>
-      <a href="#" class="login-link">Se connecter</a>
+            <h1 class="site-title">Fifty-one club Enghien</h1>
+            {% if app.user %}
+              <div class="info-user">
+              <li class="nav-item dropdown text-white">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+              id="accountDropdownLink">
+              {{app.user.email}}
+              <img src="{{app.user.avatar}}" alt="avatar" class="avatar" heigth="50" width="50">
+
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+              <a href="{{path('admin')}}" class="dropdown-item">Tableau d'administration du site</a>
+              <div class="dropdown-divider"></div>
+              <a href="{{path('profile')}}" class="dropdown-item">Mon compte</a>
+              <a href="{{path('edit')}}" class="dropdown-item">Modifier mon profil</a>
+              <div class="dropdown-divider"></div>
+              <a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a>
+            </div>
+          </li>
+              </div>               
+            {% else %}
+                <a href="{{ path('app_login') }}" class="login-link">Se connecter</a>
+            {% endif %}
         </div>
     </div>
     <nav>
       <ul class="site-links">
-        <li><a href="{{path('home')}}">Accueil</a></li>
+        <li><a href="{{ path('home') }}">Accueil</a></li>
         <li><a href="#">Présentation</a></li>
         <li><a href="#">Membres</a></li>
         <li><a href="#">Evenements</a></li>
@@ -16,4 +37,8 @@
       </ul>
     </nav>
   </div>
+  {% block javascripts %}
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 </header>

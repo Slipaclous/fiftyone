@@ -6,6 +6,7 @@
 parameters:
     server_upload_default_path: '%kernel.project_dir%/public/images'
     server_upload_image_path: '%kernel.project_dir%/public/images'
+    avatar_directory: '%kernel.project_dir%/public/images'
 
 services:
     App\Controller\Admin\DashboardController:
@@ -13,13 +14,27 @@ services:
         public: true
         autowire: true
     
-
+    App\Controller\Admin\UserCrudController:
+        tags:
+            - { name: 'controller.service_arguments' }
     App\:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    App\Controller\ProfileController:
+        arguments:
+            $entityManager: '@doctrine.orm.default_entity_manager'
+        tags: ['controller.service_arguments']
+
+    App\EventListener\VisitListener:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@request_stack'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
 
     
 

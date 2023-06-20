@@ -1,7 +1,20 @@
-{% extends '@EasyAdmin/default/layout.html.twig' %}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    <h1>Welcome to the Admin Dashboard!</h1>
-    <p>This is your customized dashboard page.</p>
+    <div class="content">
+        <h1>Statistiques</h1>
+
+        <div class="statistics">
+           <ul>
+    <li>Nombres d'utilisateurs : {{ totalUsers }}</li>
+    <li>Nombres d'actualités : {{ totalNews }}</li>
+    <li>Nombres de visites : {{ totalVisits }}</li>
+    <li>Visiteurs des 7 derniers jours : {{ visitorsLast7Days }}</li>
+    <li>Visiteurs du dernier mois : {{ visitorsLastMonth }}</li>
+    <li>Visiteurs uniques : {{ totalUniqueVisitors }}</li>
+</ul>
+        </div>
+
+        {{ parent() }}
+    </div>
 {% endblock %}
- 

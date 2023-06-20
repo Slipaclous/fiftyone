@@ -25,6 +25,14 @@ class Images
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Events $events = null;
+
+    #[ORM\OneToOne(mappedBy: 'avatar', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+
+
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -69,9 +77,54 @@ class Images
         return $this;
     }
 
+    
+
+    public function getEvents(): ?Events
+    {
+        return $this->events;
+    }
+
+    public function setEvents(?Events $events): static
+    {
+        $this->events = $events;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
-        return $this->getUrl();
+        $url = $this->getUrl();
+    
+        if ($url === null) {
+            error_log('URL is null for Images entity with ID: ' . $this->getId());
+        }
+    
+        return $url ?? '';
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setAvatar(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getAvatar() !== $this) {
+            $user->setAvatar($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+
+    
 }
 
