@@ -23,9 +23,15 @@ app_login:
 app_logout:
     path: /logout
 
-not_found:
-    path: /{url}
-    controller: App\Controller\ErrorController::notFound
-    requirements:
-        url: .*
+# not_found:
+#     path: /{url}
+#     controller: App\Controller\ErrorController::notFound
+
+# config/routes.yaml
+
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::showContactForm
+    methods: ['GET', 'POST']
+
 

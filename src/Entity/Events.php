@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Images;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventsRepository;
@@ -19,6 +20,9 @@ class Events
 
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
@@ -51,12 +55,22 @@ class Events
         return $this->titre;
     }
 
-    public function setTitre(string $titre): static
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
+        // Generate the slug from the title
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($titre);
+
         return $this;
     }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
 
     public function getDate(): ?\DateTimeInterface
     {

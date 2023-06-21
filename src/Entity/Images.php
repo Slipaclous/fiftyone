@@ -28,8 +28,7 @@ class Images
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Events $events = null;
 
-    #[ORM\OneToOne(mappedBy: 'avatar', cascade: ['persist', 'remove'])]
-    private ?User $user = null;
+ 
 
 
 
@@ -102,27 +101,6 @@ class Images
         return $url ?? '';
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
-            $this->user->setAvatar(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($user !== null && $user->getAvatar() !== $this) {
-            $user->setAvatar($this);
-        }
-
-        $this->user = $user;
-
-        return $this;
-    }
 
 
     

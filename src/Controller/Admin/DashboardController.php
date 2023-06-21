@@ -33,7 +33,7 @@ class DashboardController extends AbstractDashboardController
     {
         if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MEMBER')) {
             // Redirect the user to the 403 page
-            return new Response($this->renderView('error/403.html.twig'), Response::HTTP_FORBIDDEN);
+            return new Response($this->renderView('bundles/TwigBundle/Exception/error403.html.twig'), Response::HTTP_FORBIDDEN);
         }
         $totalUsers = $this->getTotalUsers($entityManager);
         $totalNews = $this->getTotalNews($entityManager);

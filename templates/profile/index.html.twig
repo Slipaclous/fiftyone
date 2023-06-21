@@ -7,7 +7,7 @@
         <div class="row align-items-center">
             <div class="col-3 text-center">
                 {% if user.avatar %}
-                    <img src="{{user.avatar.url}}" alt="Avatar de {{user.email}}" class="avatar mb-3">
+                    <img src="{{user.avatar}}" height="300" width='300'  alt="Avatar de {{user.email}}" class="avatar mb-3">
                 {% else %}
                     <img src="https://picsum.photos/300/300" alt="Avatar de {{user.email}}" class="avatar mb-3">     
                 {% endif %}
@@ -19,7 +19,7 @@
                 <div class="mt-3">
                      <a href="{{path('edit')}}" class="btn btn-primary mb-2">Modifier mes informations</a>
                         <a href="{{path('change_password')}}" class="btn btn-warning mb-2">Modifier mon mot de passe</a>
-                        <a href="" class="btn btn-primary mb-2">Modifier mon avatar</a>
+                        <a href="{{path('account_modifimg')}}" class="btn btn-primary mb-2">Modifier mon avatar</a>
                         <a href="" class="btn btn-danger mb-2">Supprimer mon avatar</a>
                     </div>
                 {% endif %}

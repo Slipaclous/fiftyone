@@ -28,15 +28,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Images $avatar = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $informations = null;
 
     private ?string $currentPassword = null;
 
     private ?string $newPassword = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar = null;
+
 
     public function getId(): ?int
     {
@@ -108,17 +109,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAvatar(): ?Images
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?Images $avatar): static
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
 
     public function getInformations(): ?string
     {
@@ -154,4 +144,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): static
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+
 }

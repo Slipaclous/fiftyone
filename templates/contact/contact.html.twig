@@ -1,0 +1,14 @@
+{# templates/contact.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Contactez nous</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.message) }}
+
+        <button type="submit">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}
