@@ -69,13 +69,10 @@ class Images
         return $this->url;
     }
 
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
+    public function setUrl(?string $url): void
+{
+    $this->url = $url;
+}
     
 
     public function getEvents(): ?Events

@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Routing\Annotation\Route;
 
 class EventsCrudController extends AbstractCrudController
 {
@@ -21,13 +22,14 @@ class EventsCrudController extends AbstractCrudController
     {
         return Events::class;
     }
+    #[Route('/admin/events', name: 'admin_events')]
     #[Security ('is_granted("ROLE_ADMIN","ROLE_MEMBER")')]
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('titre');
         yield ImageField::new('cover')
-            ->setBasePath('')
+            ->setBasePath('/images')
             ->setUploadDir('public/images')
             ->setUploadedFileNamePattern('[randomhash].[extension]')
             ->setRequired(false);

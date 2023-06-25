@@ -5,15 +5,46 @@
         <h1>Statistiques</h1>
 
         <div class="statistics">
-           <ul>
-    <li>Nombres d'utilisateurs : {{ totalUsers }}</li>
-    <li>Nombres d'actualités : {{ totalNews }}</li>
-    <li>Nombres de visites : {{ totalVisits }}</li>
-    <li>Visiteurs des 7 derniers jours : {{ visitorsLast7Days }}</li>
-    <li>Visiteurs du dernier mois : {{ visitorsLastMonth }}</li>
-    <li>Visiteurs uniques : {{ totalUniqueVisitors }}</li>
-</ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Utilisateurs
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Nombre d'utilisateurs: {{ totalUsers }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Actualités
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Nombre d'actualités: {{ totalNews }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Visites
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Nombre de visites: {{ totalVisits }}</p>
+                            <p class="card-text">Visiteurs des 7 derniers jours: {{ visitorsLast7Days }}</p>
+                            <p class="card-text">Visiteurs du dernier mois: {{ visitorsLastMonth }}</p>
+                            <p class="card-text">Visiteurs uniques: {{ totalUniqueVisitors }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
         {{ parent() }}
     </div>

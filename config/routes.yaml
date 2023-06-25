@@ -34,4 +34,3 @@ contact:
     controller: App\Controller\ContactController::showContactForm
     methods: ['GET', 'POST']
 
-

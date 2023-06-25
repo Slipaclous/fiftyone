@@ -35,11 +35,11 @@ class AppFixtures extends Fixture
         $news->setSoustitre($faker->sentence(6));
         $news->setDescription($faker->paragraph(4));
         $news->setDate($faker->dateTimeBetween('-1 year', 'now'));
-        $news->setCover('https://picsum.photos/200/200');
+        $news->setCover('logo3.gif');
 
         for ($j = 0; $j < 3; $j++) {
             $image = new Images();
-            $image->setUrl('https://picsum.photos/200/200');
+            $image->setUrl('raclette.jpg');
             $news->addImage($image);
             $manager->persist($image);
         }

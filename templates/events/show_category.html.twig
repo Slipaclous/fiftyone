@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NewsController!{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    {% for news in news %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <img src="{{ news.getImages.first.url }}" class="card-img-top" alt="News Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ news.getTitre }}</h5>
+          <p class="card-text">{{ news.getDescription|slice(0, 100) ~ '...' }}</p>
+          <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

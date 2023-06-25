@@ -6,6 +6,10 @@ use App\Entity\News;
 use App\Entity\User;
 use App\Entity\Visit;
 use App\Entity\Events;
+use App\Entity\Contact;
+use App\Entity\Carousel;
+use App\Entity\Comments;
+use App\Entity\Categories;
 use App\Repository\VisitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +19,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -106,6 +110,8 @@ private function getVisitorsLastMonth(): int
             MenuItem::linkToCrud('Ajouter une actualité', 'fas fa-plus', News::class)->setAction('new'),
         ]);
 
+        yield MenuItem::linkToCrud('Images Slider', 'fas fa-images', Carousel::class);
+
         yield MenuItem::subMenu('Evènements', 'fas fa-bars')->setSubItems([
             MenuItem::linkToCrud('Liste des évènements', 'fas fa-list', Events::class),
             MenuItem::linkToCrud('Ajouter un évènement', 'fas fa-plus', Events::class)->setAction('new'),
@@ -115,6 +121,15 @@ private function getVisitorsLastMonth(): int
             MenuItem::linkToCrud('Liste des utilisateurs', 'fas fa-list', User::class),
             MenuItem::linkToCrud('Ajouter un utilisateur', 'fas fa-plus', User::class)->setAction('new'),
         ]);
+
+        yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', Contact::class);
+
+        yield MenuItem::subMenu('Categories', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Liste des catégories', 'fas fa-list', Categories::class),
+            MenuItem::linkToCrud('Ajouter une catégorie', 'fas fa-plus', Categories::class)->setAction('new'),
+        ]);
+
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comments::class);
 
        ;
     }

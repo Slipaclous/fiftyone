@@ -48,6 +48,33 @@ class NewsRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByKeywordAndCategory($keyword, $categoryId)
+{
+    $queryBuilder = $this->createQueryBuilder('n');
+
+    if (!empty($keyword)) {
+        $queryBuilder->andWhere('n.titre LIKE :keyword OR n.description LIKE :keyword')
+            ->setParameter('keyword', '%' . $keyword . '%');
+    }
+
+    if (!empty($categoryId)) {
+        $queryBuilder->andWhere('n.categorie_id = :categoryId')
+            ->setParameter('categoryId', $categoryId);
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
+public function findByCategory(?string $category): array
+{
+    $qb = $this->createQueryBuilder('n')
+        ->leftJoin('n.categorie', 'c')
+        ->andWhere('c.slug = :category')
+        ->setParameter('category', $category);
+
+    return $qb->getQuery()->getResult();
+}
+
 //    /**
 //     * @return News[] Returns an array of News objects
 //     */

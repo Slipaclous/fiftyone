@@ -61,8 +61,10 @@
         {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{ newsItem.titre }}</h5>
-          <p class="card-text">{{ newsItem.description|slice(0, 100) ~ '...' }}</p>
-          <a href="" class="btn btn-primary">Read More</a>
+          <p class="card-text">{{ newsItem.description|striptags|slice(0, 100) ~ '...'|raw }}</p>
+          <div class="bout">
+              <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="bouton-voir">Voir l'actualité</a>
+            </div>
         </div>
       </div>
     </div>
@@ -102,8 +104,7 @@
 
   setTimeout(showTitle, 400); // Delay of 0.5 seconds (500 milliseconds)
 
-
- function handleScroll() {
+function handleScroll() {
   var textPresentation = document.querySelector('.text-presentation');
   var logoPresentation = document.querySelector('.logo-presentation');
 
@@ -111,19 +112,22 @@
   var scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
 
   // Calculate the offset value for the logo animation
-  var logoOffset = Math.min(scrollProgress * 150, 100);
+  var logoOffset = Math.min(scrollProgress * 110, 100);
   logoPresentation.style.transform = 'translateY(' + (100 - logoOffset) + '%)';
   logoPresentation.style.opacity = (logoOffset / 100);
 
   // Calculate the offset value for the text animation
-  var textOffset = Math.min(scrollProgress * 150, 100);
+  var textOffset = Math.min(scrollProgress * 110, 100);
   textPresentation.style.transform = 'translateY(' + (-100 + textOffset) + '%)';
   textPresentation.style.opacity = (textOffset / 100);
+
+  // Adjust the scroll progress to end the animation earlier
+  var adjustedScrollProgress = Math.min(scrollProgress * 3, 1);
+  logoPresentation.style.transform = 'translateY(' + (100 - (adjustedScrollProgress * 100)) + '%)';
+  logoPresentation.style.opacity = (adjustedScrollProgress);
+  textPresentation.style.transform = 'translateY(' + (-100 + (adjustedScrollProgress * 100)) + '%)';
+  textPresentation.style.opacity = (adjustedScrollProgress);
 }
-
-window.addEventListener('scroll', handleScroll);
-handleScroll();
-
 
 window.addEventListener('scroll', handleScroll);
 handleScroll();

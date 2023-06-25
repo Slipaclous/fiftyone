@@ -5,20 +5,44 @@
 {% block body %}
 <div class="container">
   <div class="row">
+  <h1>Nos actualités</h1>
+    <form action="{{ path('news_index') }}" method="GET">
+    <div class="form-group filtrage">
+        <label for="category">Filtrer par catégories:</label>
+        <select id="category" name="category" class="form-control">
+            <option value="">Toutes catégories</option>
+            {% for category in categories %}
+                <option value="{{ category.getSlug() }}" {% if selectedCategory and selectedCategory.getId() == category.getId() %}selected{% endif %}>{{ category.getNom() }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="bouton-voir filtre">Filter</button>
+</form>
+
+
+
+</ul>
+
+
+    
     {% for news in news %}
-    <div class="col-md-4">
-      <div class="card mb-4">
-        <img src="{{ news.getImages.first.url }}" class="card-img-top" alt="News Image">
-        <div class="card-body">
-          <h5 class="card-title">{{ news.getTitre }}</h5>
-          <p class="card-text">{{ news.getDescription|slice(0, 100) ~ '...' }}</p>
-          <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="btn btn-primary">Read More</a>
+      <div class="col-md-12 mx-auto">
+        <div class="card mb-4">
+          <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ news.getTitre() }}</h5>
+            <p class="card-text">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
+            <div class="bout">
+              <a href="{{ path('news_show', { 'slug': news.getSlug() }) }}" class="bouton-voir">Voir l'actualité</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     {% endfor %}
   </div>
+ <div class="pagination">
+    {{ knp_pagination_render(news) }}
+</div>
 </div>
 {% endblock %}
-
 

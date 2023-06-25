@@ -1,27 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ news.Titre }} - News{% endblock %}
+{% block title %}{{ event.Titre }} - News{% endblock %}
 
 {% block body %}
   <div class="container">
-    <h1>{{ news.Titre }}</h1>
-    <div class="imgcover">
-      <img src="/images/{{news.getCover}}" alt="image" class="cover">
-    </div>
-    <h3>{{ news.soustitre }}</h3>
-    <p>{{ news.description }}</p>
-    <p>Date: {{ news.date|date('Y-m-d') }}</p>
+    <h1>{{ event.Titre }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date|date('Y-m-d') }}</p>
     <h3>Images:</h3>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <ol class="carousel-indicators">
-        {% for image in news.getImages() %}
+        {% for image in event.getImages() %}
           <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
         {% endfor %}
       </ol>
       <div class="carousel-inner">
-        {% for image in news.getImages() %}
+        {% for image in event.getImages() %}
           <div class="carousel-item {% if loop.first %}active{% endif %}">
-            <img src="/images/{{ image.Url }}" class="d-block w-100 carousel-img" alt="Image">
+            <img src="/images/{{ image.url }}" class="d-block w-100 carousel-img" alt="Image">
           </div>
         {% endfor %}
       </div>
@@ -35,27 +31,6 @@
       </a>
     </div>
 
-    <h3>Commentaires:</h3>
-    <ul>
-      {% for comment in comments %}
-        <li>
-        <div class="commentaires">
-        <h4>{{ comment.pseudo }}</h4>
-        {{ comment.dateUpload|date('d-m-Y') }}
-        <div class="commentaire-contenu">
-          {{ comment.contenu }}
-          
-        </div>
-        </div>
-        </li>
-      {% endfor %}
-    </ul>
-
-    <h3>Ajoutez un commentaire:</h3>
-    {{ form_start(commentForm) }}
-    {{ form_widget(commentForm) }}
-    <button class=" submit-btn " type="submit">Envoyer</button>
-    {{ form_end(commentForm) }}
 
   </div>
 {% endblock %}

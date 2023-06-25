@@ -11,8 +11,8 @@ class CarouselImageFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $images = [
-            ['image' => 'fond1.jpg', 'title' => 'Image 1 Title'],
-            ['image' => 'fond2.jpg', 'title' => 'Image 2 Title'],
+            ['image' => 'carou1.jpg', 'title' => 'Image 1 Title'],
+            ['image' => 'raclette.jpg', 'title' => 'Image 2 Title'],
         ];
 
         foreach ($images as $imageData) {

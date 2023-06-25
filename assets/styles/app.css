@@ -157,9 +157,6 @@ header {
     justify-content: space-around;
     align-items: center;
     /* position to the rigth of the div */
-    
-    
-   
   }
   
   .dropdown-menu a{
@@ -248,3 +245,121 @@ header {
     color: #2D3B6F;
     border: 2px solid #2D3B6F;
   }
+  .commentaire-contenu{
+    width: 80%;
+    height: 5vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: rgb(24, 24, 24);
+  }
+  .carousel-item img{
+    height:60vh;
+    object-fit: cover;
+  }
+  .logo-menu{
+    height: 6.5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .menu-main{
+    display: flex;
+    align-items: center;
+  }
+  .cover{
+    height: 20vh;
+    text-align: center;
+  }
+  .imgcover{
+width: 100%;
+text-align: center;
+  }
+  .container h3{
+    text-align: center;
+    margin: 50px;
+  }
+  .container h1{
+    text-align: center;
+    margin: 50px 0;
+  }
+  .container h5{
+    text-align: center;
+    margin: 15px 0;
+  }
+  .submit-btn{
+    background-color: #2D3B6F;
+    border: 2px solid #2D3B6F;
+    border-radius: 0px;
+    color: white;
+    padding: 10px;
+    margin: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+    
+  }
+  .submit-btn:hover{
+    background-color: #F4F4F4;
+    color: #2D3B6F;
+  }
+  .card-img-top{
+    height: 10vh;
+    object-fit: contain;
+    margin: 20px 0;
+  }
+  .bouton-voir{
+    background-color: #2D3B6F;
+    border: 2px solid #2D3B6F;
+    border-radius: 0px;
+    color: white;
+    padding: 10px;
+    margin: 20px 0;
+    width: 100%;
+    text-decoration: none;
+    align-self: center;
+  }
+  .bouton-voir:hover{
+    background-color: #F4F4F4;
+    color: #2D3B6F;
+  }
+  .bout{
+    width: 100%;
+    text-align: center;
+  }
+  .right-button{
+    left: 50%;
+  }
+  .filtrage{
+    width: 20%;
+  }
+  .filtre{
+    width: 20%;
+  }
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .pagination li {
+    margin: 0 5px;
+  }
+  
+  .pagination a {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .pagination a:hover,
+  .pagination .current {
+    background: #2D3B6F;
+    color: white;
+    padding: 5px 10px;
+  }
+
+  
