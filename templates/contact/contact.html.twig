@@ -1,14 +1,21 @@
 {# templates/contact.html.twig #}
 
 {% extends 'base.html.twig' %}
-
+{% block title %}Contact{% endblock %}
 {% block body %}
     <h1>Contactez nous</h1>
 
+    <div class="contact">
+    
     {{ form_start(form) }}
         {{ form_row(form.email) }}
         {{ form_row(form.message) }}
 
-        <button type="submit">Envoyer</button>
+        <button type="submit" class="bouton-voir">Envoyer</button>
     {{ form_end(form) }}
+    </div>
+
+    <div class="supp">
+            Pour toute autres demande veuillez contacter l'administrateur de la page directemment à l'adresse suivante : <a href="mailto:admin@admin.be">admin@admin.be</a>
+    </div>
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ event.Titre }} - News{% endblock %}
+{% block title %}{{ event.Titre }}{% endblock %}
 
 {% block body %}
   <div class="container">
     <h1>{{ event.Titre }}</h1>
-    <p>{{ event.description }}</p>
+    <p>{{ event.description|raw }}</p>
     <p>Date: {{ event.date|date('Y-m-d') }}</p>
     <h3>Images:</h3>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">

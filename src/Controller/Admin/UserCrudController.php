@@ -48,6 +48,8 @@ class UserCrudController extends AbstractCrudController
         return [
             TextField::new('email'),
             // Show the avatar image
+            TextField::new('firstName'),
+            TextField::new('lastName'),
             ImageField::new('avatar')
                 ->setBasePath('')
                 ->setUploadDir('public/images')

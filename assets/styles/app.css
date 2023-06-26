@@ -73,6 +73,15 @@ header {
   background-color: white;
   font-weight: bolder;
   }
+
+  .footer{
+    display: flex;
+    justify-content:space-around ;
+    align-items: center;
+  }
+  .footer a{
+    color: #F4F4F4;
+  }
   
   .site-title {
     font-size: 28px;
@@ -148,17 +157,23 @@ header {
   }
   .carousel-img {
     max-height: 400px;
-    object-fit: cover;
+    object-fit: contain;
   }
   
   .info-user{
-    width: 20%;
     display: flex;
-    justify-content: space-around;
     align-items: center;
     /* position to the rigth of the div */
   }
-  
+  .avatar{
+    margin: 0 15px;
+  }
+  .nav-item{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
   .dropdown-menu a{
     color: black;
     text-decoration: none;
@@ -341,6 +356,7 @@ text-align: center;
     justify-content: center;
     list-style: none;
     padding: 0;
+    margin: 20px;
   }
   
   .pagination li {
@@ -361,5 +377,59 @@ text-align: center;
     color: white;
     padding: 5px 10px;
   }
+  .card-home{
+    min-height: 45vh;
+    background-color: white;
+    padding: 40px;
+    margin: 20px 0;
+  }
+
+  .contact{
+    width: 80%;
+    margin: 0 auto;
+  }
+  h1{
+    text-align: center;
+    margin: 50px 0;
+  }
+  .supp{
+    text-align: center;
+  }
+  .principe {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    min-height: 75vh;
+}
+
+.image {
+    width: 45%;
+    background-color: #f2f2f2;
+}
+
+.text {
+    width: 45%;
+    background-color: #e6e6e6;
+}
+
+.principe:nth-child(even) .image {
+    order: 2;
+}
+
+.principe:nth-child(odd) .text {
+    order: 2;
+}
+.logo-pres{
+  height: 50vh;
+}
+.card .cate{
+  text-align:center;
+  color: #2D3B6F;
+  font-weight: bolder;
+}
+.carousel{
+  margin-bottom: 50px;
+}
 
   

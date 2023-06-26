@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NewsController!{% endblock %}
+{% block title %}ÉVENEMENTS{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -11,7 +11,7 @@
           <img src="/images/{{ events.cover }}" class="card-img-top" alt="News Image">
           <div class="card-body">
             <h5 class="card-title">{{ events.getTitre() }}</h5>
-            <p class="card-text">{{ events.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
+            <p class="card-text">{{ events.getDescription()|striptags|raw  }}</p>
             <div class="bout">
               <a href="{{ path('app_events_show', { 'slug': events.getSlug() }) }}" class="bouton-voir">Voir l'actualité</a>
             </div>

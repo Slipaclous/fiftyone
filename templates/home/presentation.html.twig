@@ -1,1 +1,67 @@
 {% extends "base.html.twig" %}
+
+{% block title %}Présentation{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1>Le fifty one club d'enghien</h1>
+
+        <div class="principe">
+        <div class="image">
+            <img src="images/logo3.gif" class="logo-pres" alt="Image 1">
+        </div>
+        <div class="text">
+            <h2>Principe 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+    <div class="principe">
+        <div class="text">
+            <h2>Principe 2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="image">
+            <img src="images/logo2.jpg"class="logo-pres" alt="Image 2">
+        </div>
+    </div>
+    <div class="principe">
+        <div class="image">
+            <img src="images/logo3.gif"class="logo-pres" alt="Image 3">
+        </div>
+        <div class="text">
+            <h2>Principe 3</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </div>
+    <div class="principe">
+        <div class="text">
+            <h2>Principe 4</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="image">
+            <img src="images/logo2.jpg"class="logo-pres" alt="Image 4">
+        </div>
+    </div>
+    </div>
+
+    {% block javascripts %} 
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+    // Initialize ScrollReveal
+    const sr = ScrollReveal({
+        duration: 1000, // Animation duration (in milliseconds)
+        delay: 200, // Delay between item animations (in milliseconds)
+        distance: '300px', // Distance of the animation
+        origin: 'bottom', // Origin of the animation
+    });
+
+    // Define the blocks to animate
+    const blocks = document.querySelectorAll('.principe');
+
+    // Apply the animation to each block
+    blocks.forEach((block) => {
+        sr.reveal(block);
+    });
+</script>
+
+    {% endblock %}
+{% endblock %}

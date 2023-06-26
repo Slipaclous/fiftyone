@@ -13,19 +13,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use Symfony\Component\Routing\Annotation\Route;
 
 
 class NewsCrudController extends AbstractCrudController
 {
-   
+
     public static function getEntityFqcn(): string
     {
         return News::class;
     }
 
-   
-    #[Route('/admin/news', name: 'admin_news')]
+
     public function configureFields(string $pageName): iterable
     {
         // ...
@@ -45,8 +43,7 @@ class NewsCrudController extends AbstractCrudController
             'class' => Categories::class,
             'choice_label' => 'nom',
         ])
-        ->setRequired(true);
-          
+        ->setRequired(true); 
         yield CollectionField::new('images')
             ->hideOnIndex()
             ->setEntryType(ImageUploadType::class);

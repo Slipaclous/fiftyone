@@ -18,7 +18,7 @@ services:
     
 
     App\Controller\Admin\NewsCrudController:
-        tags: [ { name: 'controller.service_arguments' }, { name: 'admin' } ]
+        tags: [ { name: 'controller.service_arguments' },  name: 'admin'  ]
         public: true
         autowire: true
 

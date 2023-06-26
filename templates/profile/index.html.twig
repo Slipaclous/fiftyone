@@ -19,12 +19,13 @@
                 <div class="mt-3">
                      <a href="{{path('edit')}}" class="btn btn-primary mb-2">Modifier mes informations</a>
                         <a href="{{path('change_password')}}" class="btn btn-warning mb-2">Modifier mon mot de passe</a>
-                        <a href="{{path('account_modifimg')}}" class="btn btn-primary mb-2">Modifier mon avatar</a>>
+                        <a href="{{path('account_modifimg')}}" class="btn btn-primary mb-2">Modifier mon avatar</a>
                     </div>
                 {% endif %}
             </div>
         </div>
         <div class="col-12 my-5">
+        <h5>Informations:</h5>
             {{user.informations | raw | nl2br }}
         </div>
         <hr>

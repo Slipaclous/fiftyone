@@ -3,11 +3,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Edit Profile</h1>
-
+    <h1>Modification de votre profil</h1>
+    <div class="contact">
     {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="bouton-voir">Sauvegarder mes informations</button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

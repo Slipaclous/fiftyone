@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NewsController!{% endblock %}
+{% block title %}{% if selectedCategory is not null and selectedCategory.id == categories[0].id %}
+        {{ categories[0].nom|upper }}
+    {% else %}
+       Actualités
+    {% endif %}{% endblock %}
 
 {% block body %}
 <div class="container">
   <div class="row">
-  <h1>Nos actualités</h1>
+  <h1>
+    <h1>
+    {% if selectedCategory is not null and selectedCategory.id == categories[0].id %}
+        CATÉGORIE : {{ categories[0].nom|upper }}
+    {% else %}
+        NOS ACTUALITÉS
+    {% endif %}
+</h1>
+
+</h1>
+
     <form action="{{ path('news_index') }}" method="GET">
     <div class="form-group filtrage">
         <label for="category">Filtrer par catégories:</label>
@@ -29,6 +43,9 @@
       <div class="col-md-12 mx-auto">
         <div class="card mb-4">
           <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
+          {% if news.categorie != null %}
+            <a href="{{ path('news_index', { 'category': news.categorie.getSlug() }) }}" class="cate">{{ news.categorie.nom }}</a>
+          {% endif %}
           <div class="card-body">
             <h5 class="card-title">{{ news.getTitre() }}</h5>
             <p class="card-text">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
