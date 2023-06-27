@@ -16,11 +16,11 @@
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+      <span class="sr-only"></span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+      <span class="sr-only"></span>
     </a>
   </div>
 </div>
@@ -93,7 +93,9 @@ Les membres du Fifty-One Club d’Enghien.
       var title = document.getElementById("title");
       title.style.opacity = "1";
     }
-
+      if(window.innerWidth >= 768) {
+        window.addEventListener("scroll", handleScroll);
+      }
     setTimeout(showTitle, 400); // Delay of 0.5 seconds (500 milliseconds)
 
     function handleScroll() {
@@ -121,7 +123,6 @@ Les membres du Fifty-One Club d’Enghien.
       textPresentation.style.opacity = adjustedScrollProgress;
     }
 
-    window.addEventListener('scroll', handleScroll);
     handleScroll();
   }
 </script>

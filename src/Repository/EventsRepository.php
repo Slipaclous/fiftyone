@@ -38,6 +38,16 @@ class EventsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findBySearchQuery(string $searchQuery): array
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->where('e.titre LIKE :query')
+            ->orWhere('e.description LIKE :query')
+            ->setParameter('query', '%' . $searchQuery . '%')
+            ->orderBy('e.date', 'DESC');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Events[] Returns an array of Events objects

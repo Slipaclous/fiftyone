@@ -403,26 +403,48 @@ text-align: center;
     margin-bottom: 20px;
     min-height: 75vh;
 }
-
-.image {
-    width: 45%;
-    background-color: #f2f2f2;
+#menu-toggle{
+  display: none;
 }
 
-.text {
-    width: 45%;
-    background-color: #e6e6e6;
+.card-text{
+  text-align: center;
 }
 
-.principe:nth-child(even) .image {
+.date-show{
+  margin: 20px;
+}
+
+.text-pres {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.text-pres h2{
+  margin: 20px 0;
+  font-size: 35px;
+}
+
+.principe:nth-child(even) .image-pres {
     order: 2;
 }
 
-.principe:nth-child(odd) .text {
+.principe:nth-child(odd) .text-pres {
     order: 2;
+}
+.logo-presa{
+  height: 30vh;
 }
 .logo-pres{
   height: 50vh;
+}
+.image-pres{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .card .cate{
   text-align:center;
@@ -438,7 +460,15 @@ text-align: center;
     font-size: 20px;
     
   }
-  
+  .principe{
+    flex-direction: column;
+  }
+  .image-pres{
+    width: 100%;
+  }
+  .text-pres{
+    width: 100%;
+  }
   .site-links {
     width: 100%;
     padding: 0;
@@ -467,11 +497,9 @@ text-align: center;
   .menu-main {
     flex-basis: 100%;
     text-align: center;
-    position: absolute;
     left: 25%;
   }
   .info-user{
-    position: absolute;
     right: 0;
     margin: 5px;
   }
@@ -500,11 +528,23 @@ text-align: center;
   .site-links {
     width: 50%;
   }
-  
+  .text-presentation{
+    transform: translateY(0);
+  }
+  .logo-presentation{
+    transform: translateY(0);
+    opacity: 1;
+  }
   .top-menu {
     height: auto;
   }
-  
+  .principe:nth-child(odd) .text-pres {
+    order: 2;
+}
+
+.principe:nth-child(even) .image-pres {
+  order: 2;
+}
   .login-link {
     margin: 0;
     padding: 10px;
@@ -537,6 +577,14 @@ text-align: center;
   .carousel-item{
     height: 30vh;
 
+  }
+  .text-presentation{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .logo-presentation{
+    transform: translateY(0);
+    opacity: 1;
   }
   .info-user .nav-item{
     
