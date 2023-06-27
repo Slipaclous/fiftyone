@@ -572,7 +572,11 @@ text-align: center;
     font-size: 12px;
     margin-left: 20px;
   }
-  .info-user a{
+  .info-user {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .login-link {
     font-size: 10px;
     font-weight: 400;
   }
