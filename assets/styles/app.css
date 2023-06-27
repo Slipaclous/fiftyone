@@ -421,6 +421,7 @@ text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .text-pres h2{
   margin: 20px 0;
