@@ -9,6 +9,13 @@
 {% block body %}
 <div class="container">
   <div class="row">
+
+  <form action="{{ path('news_index') }}" method="GET">
+    <div class="form-group">
+        <input type="text" name="search" placeholder="Chercher une actualité ..." class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+</form>
   <h1>
     <h1>
     {% if selectedCategory is not null and selectedCategory.id == categories[0].id %}

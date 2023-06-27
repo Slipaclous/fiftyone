@@ -41,13 +41,13 @@ class UserCrudController extends AbstractCrudController
             ->hideOnIndex();
 
         if ($pageName === Crud::PAGE_EDIT) {
-            // Hide the password field in the edit form
+            // Masquer le champ de mot de passe dans le formulaire d'édition
             $passwordField->setFormTypeOption('disabled', true);
         }
 
         return [
             TextField::new('email'),
-            // Show the avatar image
+            // Afficher l'image d'avatar
             TextField::new('firstName'),
             TextField::new('lastName'),
             ImageField::new('avatar')
@@ -57,11 +57,11 @@ class UserCrudController extends AbstractCrudController
                 ->setRequired(false)
                 ->hideOnForm(),
                 
-            // Add the description field
+            // Ajouter le champ de description
             TextareaField::new('informations')
                 ->setLabel('Description'),
 
-            // Add the role field
+            // Ajouter le champ de rôle
             ChoiceField::new('roles')
                 ->allowMultipleChoices()
                 ->setChoices([
@@ -75,37 +75,36 @@ class UserCrudController extends AbstractCrudController
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-{
-    // Only allow admins to create users
-    if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-        throw new AccessDeniedException('Access Denied.');
+    {
+        // Autoriser uniquement les administrateurs à créer des utilisateurs
+        if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Accès refusé.');
+        }
+
+        $newPassword = $entityInstance->getPassword();
+
+        if (!empty($newPassword)) {
+            // Hasher le nouveau mot de passe avant de persister l'entité
+            $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
+            $entityInstance->setPassword($hashedPassword);
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
     }
-
-    $newPassword = $entityInstance->getPassword();
-
-    if (!empty($newPassword)) {
-        // Hash the new password before persisting the entity
-        $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
-        $entityInstance->setPassword($hashedPassword);
-    }
-
-    parent::persistEntity($entityManager, $entityInstance);
-}
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        // Only allow admins to edit users
+        // Autoriser uniquement les administrateurs à modifier les utilisateurs
         if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('Access Denied.');
+            throw new AccessDeniedException('Accès refusé.');
         }
 
-        // Remove the password field from the request to prevent it from being updated
+        // Supprimer le champ de mot de passe de la requête pour empêcher sa mise à jour
         $request = Request::createFromGlobals();
         $request->request->remove('password');
 
         parent::updateEntity($entityManager, $entityInstance);
     }
-
 
     public function configureActions(Actions $actions): Actions
     {

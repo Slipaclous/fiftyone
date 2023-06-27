@@ -75,6 +75,17 @@ public function findByCategory(?string $category): array
     return $qb->getQuery()->getResult();
 }
 
+public function findBySearchQuery(string $searchQuery): array
+{
+    $queryBuilder = $this->createQueryBuilder('n')
+        ->where('n.titre LIKE :query')
+        ->orWhere('n.description LIKE :query')
+        ->setParameter('query', '%' . $searchQuery . '%')
+        ->orderBy('n.date', 'DESC');
+
+    return $queryBuilder->getQuery()->getResult();
+}
+
 //    /**
 //     * @return News[] Returns an array of News objects
 //     */

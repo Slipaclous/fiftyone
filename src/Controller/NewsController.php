@@ -24,90 +24,91 @@ class NewsController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+
+    // Page d'index des news
     #[Route("/news", name: "news_index")]
-public function index(NewsRepository $newsRepository, CategoriesRepository $categoriesRepository, Request $request, PaginatorInterface $paginator): Response
-{
-    $selectedCategorySlug = $request->query->get('category');
-    $selectedCategory = null;
+    public function index(NewsRepository $newsRepository, CategoriesRepository $categoriesRepository, Request $request, PaginatorInterface $paginator): Response
+    {
+        $selectedCategorySlug = $request->query->get('category');
+        $selectedCategory = null;
+        $searchQuery = $request->query->get('search');
 
-    if ($selectedCategorySlug) {
-        $selectedCategory = $categoriesRepository->findOneBy(['slug' => $selectedCategorySlug]);
-        $newsQuery = $newsRepository->createQueryBuilder('n')
-            ->where('n.categorie = :category')
-            ->setParameter('category', $selectedCategory)
-            ->orderBy('n.date', 'DESC')
-            ->getQuery();
-    } else {
-        $newsQuery = $newsRepository->createQueryBuilder('n')
-            ->orderBy('n.date', 'DESC')
-            ->getQuery();
+        // Création de la requête pour récupérer les news
+        $newsQueryBuilder = $newsRepository->createQueryBuilder('n')
+            ->orderBy('n.date', 'DESC');
+
+        if ($selectedCategorySlug) {
+            $selectedCategory = $categoriesRepository->findOneBy(['slug' => $selectedCategorySlug]);
+            $newsQueryBuilder->andWhere('n.categorie = :category')
+                ->setParameter('category', $selectedCategory);
+        }
+
+        if ($searchQuery) {
+            $newsQueryBuilder->andWhere('n.titre LIKE :searchQuery OR n.description LIKE :searchQuery')
+                ->setParameter('searchQuery', '%' . $searchQuery . '%');
+        }
+
+        $newsQuery = $newsQueryBuilder->getQuery();
+
+        // Récupération de la page courante depuis les paramètres de la requête
+        $page = $request->query->getInt('page', 1);
+        $perPage = 5; // Ajuster le nombre d'éléments par page selon les besoins
+        $pagination = $paginator->paginate($newsQuery, $page, $perPage);
+
+        $categories = $categoriesRepository->findAll();
+
+        return $this->render('news/index.html.twig', [
+            'news' => $pagination,
+            'categories' => $categories,
+            'selectedCategory' => $selectedCategory,
+        ]);
     }
 
-    // Get the current page from the query parameters
-    $page = $request->query->getInt('page', 1);
-    $perPage = 5; // Adjust the number of items per page as needed
-    $pagination = $paginator->paginate($newsQuery, $page, $perPage);
-
-    $categories = $categoriesRepository->findAll();
-
-    return $this->render('news/index.html.twig', [
-        'news' => $pagination,
-        'categories' => $categories,
-        'selectedCategory' => $selectedCategory,
-    ]);
-}
-    
-
-    
-
+    // Affichage d'une news spécifique avec ses commentaires
     #[Route("/news/{slug}", name: "news_show")]
-public function show(string $slug, NewsRepository $newsRepository, CommentsRepository $commentsRepository, Request $request): Response
-{
-    $news = $newsRepository->findOneBy(['slug' => $slug]);
+    public function show(string $slug, NewsRepository $newsRepository, CommentsRepository $commentsRepository, Request $request): Response
+    {
+        $news = $newsRepository->findOneBy(['slug' => $slug]);
 
-    if (!$news) {
-        throw $this->createNotFoundException('News not found');
+        if (!$news) {
+            throw $this->createNotFoundException('News not found');
+        }
+
+        // Création d'une nouvelle instance de l'entité Comment
+        $comment = new Comments();
+        $comment->setNews($news);
+        $comment->setDateUpload(new \DateTime()); // Définition automatique de la date
+
+        // Création du formulaire de commentaire
+        $form = $this->createForm(CommentsType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Persister le commentaire en base de données
+            $this->entityManager->persist($comment);
+            $this->entityManager->flush();
+
+                        // Redirection vers la même page de news pour éviter la soumission multiple
+            return $this->redirectToRoute('news_show', ['slug' => $slug]);
+        }
+
+        // Récupération de la liste des commentaires associés à la news
+        $comments = $commentsRepository->findByNews($news);
+
+        return $this->render('news/show.html.twig', [
+            'news' => $news,
+            'comments' => $comments,
+            'commentForm' => $form->createView(),
+        ]);
     }
 
-    // Create a new instance of the Comment entity
-    $comment = new Comments();
-    $comment->setNews($news);
-    $comment->setDateUpload(new \DateTime()); // Set the date automatically
+    // Suppression d'un commentaire
+    #[Route("/delete-comment/{id}", name: "delete_comment", methods: ["POST"])]
+    public function deleteComment(string $id, string $slug, Comments $comment, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($comment);
+        $entityManager->flush();
 
-    // Create the comment form
-    $form = $this->createForm(CommentsType::class, $comment);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Persist the comment to the database
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
-
-        // Redirect to the same news page to avoid resubmission
         return $this->redirectToRoute('news_show', ['slug' => $slug]);
     }
-
-    // Fetch the list of comments associated with the news
-    $comments = $commentsRepository->findByNews($news);
-
-    return $this->render('news/show.html.twig', [
-        'news' => $news,
-        'comments' => $comments,
-        'commentForm' => $form->createView(),
-    ]);
 }
-#[Route("/delete-comment/{id}", name: "delete_comment", methods: ["POST"])]
-
-public function deleteComment(string $id, string $slug, Comments $comment, EntityManagerInterface $entityManager): Response
-{
-    $entityManager->remove($comment);
-    $entityManager->flush();
-
-    return $this->redirectToRoute('news_show', ['slug' => $slug]);
-}
-
-}
-
-
-
-
