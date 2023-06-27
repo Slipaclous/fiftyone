@@ -26,22 +26,17 @@
 </div>
 
 <div class="container-presentation">
-  <h2>Lorem ipsum dolor sit.</h2>
+  <h2>Qui sommes nous ?</h2>
   <div class="wrapper">
     <div class="logo-presentation">
       <img src="images/logo2.jpg" alt="logo">
     </div>
     <div class="text-presentation">
-      <h2>Lorem ipsum dolor sit.</h2>
       <div class="textpres">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, corporis amet. Recusandae vitae iste nostrum
-        saepe hic. Voluptates ex nulla sed in deserunt porro quia neque, assumenda quos maxime facilis vel architecto,
-        recusandae quod laborum fugit, fugiat deleniti voluptate? Dolores?
-      </div>
-      <div class="textpres">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, corporis amet. Recusandae vitae iste nostrum
-        saepe hic. Voluptates ex nulla sed in deserunt porro quia neque, assumenda quos maxime facilis vel architecto,
-        recusandae quod laborum fugit, fugiat deleniti voluptate? Dolores?
+        Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service Club dans notre entité d’Enghien, nous avons développé trois activés pouvant toucher des publics différents. Vous trouverez ces organisations dans la page "Actualités".
+Grâce aux bénéfices récoltés chaque année lors de ces trois activités, nous pouvons aider financièrement via notre service à la communauté les différents demandeurs et ce principalement dans l’entité d’Enghien et son environnement immédiat. A titre d’exemples nous avons aidé : l’Ermitage à Silly, L’école à l’hôpital et à domicile, l’ONE d’Enghien, les Scouts d’Enghien, le club de Karaté, le Patro d’Enghien, …
+Un grand merci à toutes les personnes qui nous soutiennent et qui participent à nos activités.
+Les membres du Fifty-One Club d’Enghien.
       </div>
     </div>
   </div>
@@ -54,8 +49,8 @@
     {% for newsItem in news %}
     <div class="col-md-4">
       <div class="card-home">
-        {% if newsItem.images|length > 0 %}
-        <img src="images/{{ newsItem.cover }}" class="card-img-top" alt="News Image">
+        {% if newsItem.cover %}
+        <img src="/images/{{ newsItem.cover }}" class="card-img-top" alt="News Image">
         {% else %}
         <!-- Handle case when no image is available -->
         <img src="path/to/default/image.jpg" class="card-img-top" alt="Default Image">

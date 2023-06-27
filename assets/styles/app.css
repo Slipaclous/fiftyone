@@ -541,6 +541,10 @@ text-align: center;
   .info-user .nav-item{
     
   }
+  /* Put the link to the right without position absolute */
+  .login-link{
+    
+  }
   header h1{
     font-size: 15px;
   }
