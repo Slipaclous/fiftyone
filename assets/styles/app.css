@@ -138,10 +138,11 @@ header {
   }
   
   #title {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
     text-align: center;
     margin: 50px;
+  }
+  footer p{
+    margin: 0;
   }
   
   .blocks {
