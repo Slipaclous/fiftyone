@@ -572,6 +572,9 @@ text-align: center;
     font-size: 12px;
     margin-left: 20px;
   }
+  .top-menu {
+    height: 10vh;
+  }
   .info-user {
     font-size: 10px;
     font-weight: 400;
