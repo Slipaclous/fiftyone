@@ -14,9 +14,11 @@ class Carousel
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type(type: 'string', message: 'Le titre doit être une chaîne de caractères.')]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type(type: 'string', message: 'L\'image doit être une chaîne de caractères.')]
     private ?string $image = null;
 
     public function getId(): ?int
@@ -29,6 +31,7 @@ class Carousel
         return $this->title;
     }
 
+   
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -41,6 +44,7 @@ class Carousel
         return $this->image;
     }
 
+    
     public function setImage(string $image): self
     {
         $this->image = $image;

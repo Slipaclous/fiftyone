@@ -19,24 +19,30 @@ class Events
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le titre ne peut pas être vide')]
+    #[Assert\Length(max: 255, maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères')]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'La date ne peut pas être vide')]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'La description ne peut pas être vide')]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive(message: 'Le nombre de places doit être un nombre positif')]
     private ?int $places = null;
 
     #[ORM\OneToMany(mappedBy: 'events', targetEntity: Images::class, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'La couverture ne peut pas être vide')]
     private ?string $cover = null;
 
 

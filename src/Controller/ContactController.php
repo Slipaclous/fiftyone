@@ -32,20 +32,20 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Send email to the administrator
+            // Envoyer un e-mail à l'administrateur
             $email = (new Email())
                 ->from($contact->getEmail())
                 ->to('gauthier.minor@gmail.com')
-                ->subject('New Contact Message')
+                ->subject('Nouveau message de contact')
                 ->text($contact->getMessage());
 
             $mailer->send($email);
 
-            // Save the contact message and email to the database
+            // Sauvegarder le message de contact et l'e-mail dans la base de données
             $this->entityManager->persist($contact);
             $this->entityManager->flush();
 
-            // Redirect to a success page or display a success message
+            // Rediriger vers une page de succès ou afficher un message de succès
             return $this->redirectToRoute('contact_success');
         }
 
@@ -59,7 +59,7 @@ class ContactController extends AbstractController
      */
     public function contactSuccess(): Response
     {
-        $this->addFlash('success', 'Your message has been sent successfully.');
+        $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
         return $this->redirectToRoute('app_home');
     }

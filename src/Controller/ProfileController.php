@@ -32,101 +32,109 @@ class ProfileController extends AbstractController
             'user' => $this->getUser(),
         ]);
     }
-     #[Route("/profile/edit", name:"edit")]
-     
-     public function editAction(Request $request): Response
-     {
-         $user = $this->getUser();
-     
-         // Create a form to edit the user's profile
-         $form = $this->createForm(UserType::class, $user);
-         $form->handleRequest($request);
-     
-     
-             $this->entityManager->persist($user);
-             $this->entityManager->flush();
-     
-             $this->addFlash('success', 'Profile updated successfully.');
-     
-             // redirect if form issubmùitted
-                if($form->isSubmitted()){
-                    return $this->redirectToRoute('profile');
-                }
-     
-            
-         
-     
-         return $this->render('profile/edit.html.twig', [
-             'form' => $form->createView(),
-         ]);
-     }
-     
 
-     #[Route("/account/imgmodify", name: "account_modifimg")]
-public function imgModify(Request $request, EntityManagerInterface $manager): Response
-{
-    $imgModify = new UserImgModify();
-    $user = $this->getUser();
-    $form = $this->createForm(ImgModifyType::class, $imgModify);
-    $form->handleRequest($request);
+    /**
+     * Modification du profil
+     *
+     * @param Request $request
+     * @return Response
+     */
+    #[Route("/profile/edit", name:"edit")]
+    public function editAction(Request $request): Response
+    {
+        $user = $this->getUser();
 
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Remove the old avatar file if it exists
-        $oldAvatarUrl = $user->getAvatar();
-        if ($oldAvatarUrl !== null) {
-            $this->removeOldAvatar($oldAvatarUrl);
+        // Créer un formulaire pour modifier le profil de l'utilisateur
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        $this->addFlash('success', 'Profil mis à jour avec succès.');
+
+        // Rediriger si le formulaire est soumis
+        if ($form->isSubmitted()) {
+            return $this->redirectToRoute('profile');
         }
 
-        $file = $form['newPicture']->getData();
-        if (!empty($file)) {
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-            $newFilename = $safeFilename . "-" . uniqid() . "." . $file->guessExtension();
-            try {
-                $file->move(
-                    $this->getParameter('uploads_directory'),
-                    $newFilename
-                );
-            } catch (FileException $e) {
-                return $e->getMessage();
+        return $this->render('profile/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Modification de l'image de profil
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
+    #[Route("/account/imgmodify", name: "account_modifimg")]
+    public function imgModify(Request $request, EntityManagerInterface $manager): Response
+    {
+        $imgModify = new UserImgModify();
+        $user = $this->getUser();
+        $form = $this->createForm(ImgModifyType::class, $imgModify);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Supprimer l'ancien fichier d'avatar s'il existe
+            $oldAvatarUrl = $user->getAvatar();
+            if ($oldAvatarUrl !== null) {
+                $this->removeOldAvatar($oldAvatarUrl);
             }
 
-            // Set the new URL as the user's avatar
-            $user->setAvatar('images/' . $newFilename);
-        } else {
-            // If no new file is uploaded, set the avatar to null
-            $user->setAvatar(null);
+            $file = $form['newPicture']->getData();
+            if (!empty($file)) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . "-" . uniqid() . "." . $file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    return $e->getMessage();
+                }
+
+                // Définir la nouvelle URL comme avatar de l'utilisateur
+                $user->setAvatar('images/' . $newFilename);
+            } else {
+                // Si aucun nouveau fichier n'est téléchargé, définir l'avatar sur null
+                $user->setAvatar(null);
+            }
+
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre avatar a bien été modifié'
+            );
+
+            return $this->redirectToRoute('profile');
         }
 
-        $manager->persist($user);
-        $manager->flush();
-
-        $this->addFlash(
-            'success',
-            'Votre avatar a bien été modifié'
-        );
-
-        return $this->redirectToRoute('profile');
+        return $this->render("profile/imgModify.html.twig", [
+            'myform' => $form->createView()
+        ]);
     }
 
-    return $this->render("profile/imgModify.html.twig", [
-        'myform' => $form->createView()
-    ]);
-}
+    /**
+     * Supprimer l'ancien avatar de l'utilisateur
+     * @param string|null $avatarUrl The URL of the old avatar file
+     */
+    private function removeOldAvatar(?string $avatarUrl): void
+    {
+        if ($avatarUrl !== null) {
+            $path = $this->getParameter('uploads_directory') . '/' . $avatarUrl;
 
-private function removeOldAvatar(?string $avatarUrl): void
-{
-    if ($avatarUrl !== null) {
-        $path = $this->getParameter('uploads_directory') . '/' . $avatarUrl;
-
-        if (file_exists($path)) {
-            unlink($path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
     }
 }
-
-     
-     
-}
-
 

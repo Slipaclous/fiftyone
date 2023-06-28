@@ -19,13 +19,14 @@ class Comments
     private ?News $news = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le contenu ne peut pas être vide')]
     private ?string $contenu = null;
-
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateUpload = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le pseudo ne peut pas être vide')]
     private ?string $pseudo = null;
 
     public function getId(): ?int

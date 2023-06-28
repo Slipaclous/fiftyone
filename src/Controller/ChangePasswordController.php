@@ -22,9 +22,9 @@ class ChangePasswordController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Check if the password matches the current password
+            // Vérifie si le password correspond à celui actuel
             if (!password_verify($passwordUpdate->getOldPassword(), $user->getPassword())) {
-                // Add a form error if the password is incorrect
+                // Affiche une erreur si le password ne correspond pas
                 $form->get('oldPassword')->addError(new FormError("Le mot de passe que vous avez tapé n'est pas votre mot de passe actuel"));
             } else {
                 $newPassword = $passwordUpdate->getNewPassword();

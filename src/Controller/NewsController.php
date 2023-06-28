@@ -63,8 +63,15 @@ class NewsController extends AbstractController
             'selectedCategory' => $selectedCategory,
         ]);
     }
-
-    // Affichage d'une news spécifique avec ses commentaires
+    /**
+     * Affichage d'une news et de ses commentaires
+     *
+     * @param string $slug
+     * @param NewsRepository $newsRepository
+     * @param CommentsRepository $commentsRepository
+     * @param Request $request
+     * @return Response
+     */
     #[Route("/news/{slug}", name: "news_show")]
     public function show(string $slug, NewsRepository $newsRepository, CommentsRepository $commentsRepository, Request $request): Response
     {
@@ -102,7 +109,16 @@ class NewsController extends AbstractController
         ]);
     }
 
-    // Suppression d'un commentaire
+    
+    /**
+     * Suppression d'un commentaire
+     *
+     * @param string $id
+     * @param string $slug
+     * @param Comments $comment
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route("/delete-comment/{id}", name: "delete_comment", methods: ["POST"])]
     public function deleteComment(string $id, string $slug, Comments $comment, EntityManagerInterface $entityManager): Response
     {
