@@ -49,8 +49,9 @@
     {% for news in news %}
       <div class="col-md-12 mx-auto">
         <div class="card mb-4">
-        <p class="date-show">Le {{news.getDate|date('d-m-Y')}}</p>
+        
           <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
+        <p class="date-show">Le {{news.getDate|date('d-m-Y')}}</p>
           {% if news.categorie != null %}
             <a href="{{ path('news_index', { 'category': news.categorie.getSlug() }) }}" class="cate">{{ news.categorie.nom }}</a>
           {% endif %}

@@ -16,10 +16,13 @@ class HomeController extends AbstractController
         
         // Retrieve the third last news
         $news = $newsRepository->findThirdLastNews();
+        // Retrieve the next three news
+        $newsi = $newsRepository->findNextThreeNews();
 
         return $this->render('home/index.html.twig', [
             'carouselImages' => $carouselImages,
             'news' => $news,
+            'newsi' => $newsi,
         ]);
     }
     #[Route('/presentation', name: 'app_presentation')]

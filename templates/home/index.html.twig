@@ -8,10 +8,10 @@
     <div class="carousel-inner">
       {% set active = true %}
       {% for carouselItem in carouselImages %}
-        <div class="carousel-item{% if active %} active{% endif %}">
-          <img class="d-block w-100" src="{{ asset('images/' ~ carouselItem.image) }}" alt="{{ carouselItem.title }}">
-        </div>
-        {% set active = false %}
+      <div class="carousel-item{% if active %} active{% endif %}">
+        <img class="d-block w-100" src="{{ asset('images/' ~ carouselItem.image) }}" alt="{{ carouselItem.title }}">
+      </div>
+      {% set active = false %}
       {% endfor %}
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -33,10 +33,15 @@
     </div>
     <div class="text-presentation">
       <div class="textpres">
-        Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service Club dans notre entité d’Enghien, nous avons développé trois activés pouvant toucher des publics différents. Vous trouverez ces organisations dans la page "Actualités".
-Grâce aux bénéfices récoltés chaque année lors de ces trois activités, nous pouvons aider financièrement via notre service à la communauté les différents demandeurs et ce principalement dans l’entité d’Enghien et son environnement immédiat. A titre d’exemples nous avons aidé : l’Ermitage à Silly, L’école à l’hôpital et à domicile, l’ONE d’Enghien, les Scouts d’Enghien, le club de Karaté, le Patro d’Enghien, …
-Un grand merci à toutes les personnes qui nous soutiennent et qui participent à nos activités.
-Les membres du Fifty-One Club d’Enghien.
+        Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service
+        Club dans notre entité d’Enghien, nous avons développé trois activés pouvant toucher des publics différents.
+        Vous trouverez ces organisations dans la page "Actualités".
+        Grâce aux bénéfices récoltés chaque année lors de ces trois activités, nous pouvons aider financièrement via
+        notre service à la communauté les différents demandeurs et ce principalement dans l’entité d’Enghien et son
+        environnement immédiat. A titre d’exemples nous avons aidé : l’Ermitage à Silly, L’école à l’hôpital et à
+        domicile, l’ONE d’Enghien, les Scouts d’Enghien, le club de Karaté, le Patro d’Enghien, …
+        Un grand merci à toutes les personnes qui nous soutiennent et qui participent à nos activités.
+        Les membres du Fifty-One Club d’Enghien.
       </div>
     </div>
   </div>
@@ -44,28 +49,92 @@ Les membres du Fifty-One Club d’Enghien.
 </div>
 
 <div class="container">
-  <h2 id="title">Nos dernières Actualités</h2>
+  <h2 id="title"><svg width="32" height="32" viewBox="0 0 32 32" class="news-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_121_5309)">
+  <path d="M24 11.6667H29.3334V28H2.66669V4H24V24.6667" stroke="currentColor" stroke-width="2"></path>
+  <path d="M7.33331 14.6666V9.33331H19.3333V14.6666H7.33331Z" stroke="currentColor" stroke-width="2"></path>
+  <path d="M6.33331 21.3333H20.3333" stroke="currentColor" stroke-width="2"></path>
+</g>
+<defs>
+  <clipPath id="clip0_121_5309">
+    <rect width="32" height="32" fill="white"></rect>
+  </clipPath>
+</defs>
+  </svg>  Nos dernières Actualités</h2>
   <div class="row">
     {% for newsItem in news %}
-    <div class="col-md-4">
+    <div class="col-md-6">
+    <a class="linked" href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}">
       <div class="card-home">
-        {% if newsItem.cover %}
-        <img src="/images/{{ newsItem.cover }}" class="card-img-top" alt="News Image">
-        {% else %}
-        <!-- Handle case when no image is available -->
-        <img src="path/to/default/image.jpg" class="card-img-top" alt="Default Image">
-        {% endif %}
+        <div class="card-img">
+          {% if newsItem.cover %}
+          <img src="/images/{{ newsItem.cover }}" class="card-img-top" alt="News Image">
+          {% else %}
+          <!-- Handle case when no image is available -->
+          <img src="path/to/default/image.jpg" class="card-img-top" alt="Default Image">
+          {% endif %}
+        </div>
         <div class="card-body">
+          <p class="card-date">{{newsItem.getDate|date('d-m-Y')}}</p>
           <h5 class="card-title">{{ newsItem.titre }}</h5>
           <p class="card-text">{{ newsItem.description|striptags|slice(0, 100) ~
           '...'|raw }}</p>
           <div class="bout">
-              <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="bouton-voir">Voir l'actualité</a>
-            </div>
+            <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="view-actu"> Voir l'actualité 
+            <svg width="24" height="24" viewBox="0 0 32 32" class="arrow" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_118_4063)">
+                  <path d="M1.33331 16H29.3333" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M21.3333 8L29.3333 16L21.3333 24" stroke="currentColor" stroke-width="2"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_118_4063">
+                    <rect width="32" height="32" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+  {% for news in newsi %}
+    
+    <div class="col-md-4">
+      <div class="card-home2">
+        <div class="card-img">
+          {% if news.cover %}
+          <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
+          {% else %}
+          <!-- Handle case when no image is available -->
+          <img src="path/to/default/image.jpg" class="card-img-top" alt="Default Image">
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <p class="card-date">{{news.getDate|date('d-m-Y')}}</p>
+          <h5 class="card-title">{{ news.titre }}</h5>
+          <p class="card-text">{{ news.description|striptags|slice(0, 100) ~
+          '...'|raw }}</p>
+          <div class="bout">
+            <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="view-actu"> Voir l'actualité 
+            <svg width="24" height="24" viewBox="0 0 32 32" class="arrow" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_118_4063)">
+                  <path d="M1.33331 16H29.3333" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M21.3333 8L29.3333 16L21.3333 24" stroke="currentColor" stroke-width="2"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_118_4063">
+                    <rect width="32" height="32" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </svg></a>
+          </div>
         </div>
       </div>
     </div>
-    {% endfor %}
+  {% endfor %}
   </div>
 </div>
 
@@ -93,9 +162,9 @@ Les membres du Fifty-One Club d’Enghien.
       var title = document.getElementById("title");
       title.style.opacity = "1";
     }
-      if(window.innerWidth >= 768) {
-        window.addEventListener("scroll", handleScroll);
-      }
+    if (window.innerWidth >= 768) {
+      window.addEventListener("scroll", handleScroll);
+    }
     setTimeout(showTitle, 400); // Delay of 0.5 seconds (500 milliseconds)
 
     function handleScroll() {

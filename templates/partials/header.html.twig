@@ -3,8 +3,8 @@
     <div class="top-menu">
       <div class="container-top">
         <div class="menu-main">
-          <a href="{{ path('home') }}"><img class="logo-menu" src="/images/logo3.gif" alt=""></a>
-          <h1 class="site-title">FIFTY-ONE CLUB ENGHIEN</h1>
+          
+         
         </div>
         
         {% if app.user %}
@@ -49,6 +49,7 @@
       </label>
       
       <ul class="site-links">
+        <li><a href="{{ path('home') }}"><img class="logo-menu" src="/images/logo3.gif" alt=""></a></li>
         <li><a href="{{ path('home') }}">Accueil</a></li>
         <li><a href="{{ path('app_presentation') }}">Présentation</a></li>
         <li><a href="{{ path('app_events') }}">Evenements</a></li>

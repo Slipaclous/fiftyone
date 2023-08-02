@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope&family=Roboto&display=swap');
   @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Manrope', sans-serif;
 }
 body {
     background-color: #F4F4F4;
@@ -16,12 +16,18 @@ body {
   font-size: 50px;
   color: #F4F4F4;
 }
+
+
+
+/* header and footer CSS */
 .menu{
   color: #F4F4F4;
   width: 100%;
   margin: 0;
   padding: 0;
+  border-bottom:1px solid rgb(206, 179, 25) ;
 }
+
 .site-title {
   margin: 0;
   text-align: center;
@@ -39,7 +45,7 @@ body {
 }
 .top-menu{
   width: 100%;
-  height:7.5vh;
+  height: 5vh;
   background-color: #2D3B6F;
   display: flex;
   justify-content: center;
@@ -94,7 +100,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 30%;
+    width: 50%;
     margin: auto;
     text-align: center;
 
@@ -111,36 +117,44 @@ header {
   
   .site-links li a {
     text-decoration: none;
-    color: #555;
+    color: #2D3B6F;
     font-size: 1.1rem;
     position: relative;
     padding: 5px 10px;
   }
   
   .site-links li a:hover {
-    text-decoration: none;
-    color: #2D3B6F;
+    text-decoration:none;
+    color: rgb(206, 179, 25);
+    transition-duration:0.3s ;
+    
+    
   }
   
-  .site-links li a:hover::after {
+  .site-links li a::after {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -9px;
+    bottom: -25px;
     width: 150%;
     height: 4px;
-    background-color: #2D3B6F;
-  }
+    background-color: transparent;
+    transition-duration:0.5s ;
+  } 
+  .site-links li a:hover::after {
+    background-color: #2D3B6F; /* Change the background color on hover */
+}
+
+
+
+
   .presentation {
     text-align: center;
     margin-top: 50px;
   }
   
-  #title {
-    text-align: center;
-    margin: 50px;
-  }
+  
   footer p{
     margin: 0;
   }
@@ -187,6 +201,7 @@ header {
     width: 100%;
     z-index: 100;
   }
+  /* HOMEPAGE PRESENTATION */
   .container-presentation {
     position: relative;
     min-height: 80vh;
@@ -261,6 +276,8 @@ header {
     color: #2D3B6F;
     border: 2px solid #2D3B6F;
   }
+
+  
   .commentaire-contenu{
     width: 80%;
     height: 5vh;
@@ -270,6 +287,118 @@ header {
     padding: 15px;
     color: rgb(24, 24, 24);
   }
+  /* NEWS HOMEPAGE */ 
+  .card-home{
+    min-height: 25vh;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px;
+    padding: 0;
+    color: rgb(146, 141, 141);
+    border-radius: 3%;
+    border: 0.5px solid rgb(232, 231, 231);
+  }
+  .linked{
+    text-decoration: none;
+    color: rgb(146, 141, 141);
+  }
+  .card-home2{
+    min-height: 60vh;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px;
+    padding: 0;
+    color: rgb(146, 141, 141);
+    border-radius: 3%;
+    border: 0.5px solid rgb(232, 231, 231);
+  }
+  .card-home2 .card-title{
+    font-size: 1.5rem;
+  }
+  .card-img-top::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px; /* Adjust the height of the gradient as per your preference */
+    background: linear-gradient(to bottom, transparent,#2D3B6F ); /* Replace your_color_here with the color you want */
+    z-index: 3000; /* Adjust the z-index if needed to control the stacking order */
+  }
+  .card-img{
+    min-height: 25vh;
+    width: 100%;
+    object-fit: contain;
+    text-align: center;
+  }
+  .card-home2 .card-img{
+    max-height: 10vh;
+  }
+  .card-title{
+    font-size: 1.8rem;
+    margin: 20px;
+    color: #2D3B6F;
+  }
+  .card-home2 .card-img .card-img-top{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius:2% ;
+    border-top-right-radius:2% ;
+  }
+  .card-img .card-img-top{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-top-left-radius:2% ;
+    border-top-right-radius:2% ;
+  }
+  .card-date{
+    font-size: 0.8rem;
+    margin: 20px;
+  }
+  .card-text{
+   margin: 20px;
+  }
+
+a.view-actu {
+  display: inline-flex;
+  align-items: center;
+  justify-self: flex-end;
+  padding: 10px;
+  text-decoration: none;
+  color: #2D3B6F;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+.view-actu:hover {
+   
+    background-color: #f2efef;
+    color: #4458a0;
+    transition-duration: 0.5s;
+}
+.view-actu:hover .arrow{
+  color: gold;
+  transition-duration: 0.5s;
+}
+
+.arrow{
+  margin-left: 10px;
+  color: rgb(206, 179, 25);
+}
+#title {
+  margin: 15px;
+  margin-bottom: 5rem;
+  border-bottom: 1px solid rgb(206, 179, 25);
+  padding-bottom: 20px;
+  font-weight: bolder;
+  color: #2D3B6F;
+}
+.new-icon{
+  color: #2D3B6F;
+}
   .carousel-item img{
     height:60vh;
     object-fit: cover;
@@ -300,10 +429,6 @@ text-align: center;
     text-align: center;
     margin: 50px 0;
   }
-  .container h5{
-    text-align: center;
-    margin: 15px 0;
-  }
   .submit-btn{
     background-color: #2D3B6F;
     border: 2px solid #2D3B6F;
@@ -319,11 +444,7 @@ text-align: center;
     background-color: #F4F4F4;
     color: #2D3B6F;
   }
-  .card-img-top{
-    height: 10vh;
-    object-fit: contain;
-    margin: 20px 0;
-  }
+ 
   .bouton-voir{
     background-color: #2D3B6F;
     border: 2px solid #2D3B6F;
@@ -341,7 +462,8 @@ text-align: center;
   }
   .bout{
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: flex-end;
   }
   .right-button{
     left: 50%;
@@ -379,12 +501,7 @@ text-align: center;
     color: white;
     padding: 5px 10px;
   }
-  .card-home{
-    min-height: 45vh;
-    background-color: white;
-    padding: 40px;
-    margin: 20px 0;
-  }
+
 
   .contact{
     width: 80%;
@@ -408,9 +525,7 @@ text-align: center;
   display: none;
 }
 
-.card-text{
-  text-align: center;
-}
+
 
 .date-show{
   margin: 20px;

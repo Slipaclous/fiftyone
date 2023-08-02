@@ -33,7 +33,16 @@ class NewsRepository extends ServiceEntityRepository
 {
     return $this->createQueryBuilder('n')
         ->orderBy('n.date', 'DESC')
-        ->setMaxResults(3)
+        ->setMaxResults(2)
+        ->getQuery()
+        ->getResult();
+}
+public function findNextThreeNews()
+{
+    return $this->createQueryBuilder('n')
+        ->orderBy('n.date', 'DESC')
+        ->setFirstResult(2) // Skip the first two news items
+        ->setMaxResults(3) // Get the next three news items after the first two
         ->getQuery()
         ->getResult();
 }
