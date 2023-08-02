@@ -1,8 +1,7 @@
 {
-  "build/app.css": "http://localhost:8080/build/app.css",
-  "build/app.js": "http://localhost:8080/build/app.js",
-  "build/runtime.js": "http://localhost:8080/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.css": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.css",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-e6ff8c.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-e6ff8c.js"
+  "build/app.css": "/build/app.58ff27d3.css",
+  "build/app.js": "/build/app.76b31e30.js",
+  "build/runtime.js": "/build/runtime.9a71ee5d.js",
+  "build/461.c2279e19.css": "/build/461.c2279e19.css",
+  "build/461.363c20aa.js": "/build/461.363c20aa.js"
 }
