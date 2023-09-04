@@ -11,11 +11,33 @@
   <div class="row">
 
   <h1>
-    <h1>
+    <h1 class="actus-title">
     {% if selectedCategory is not null and selectedCategory.id == categories[0].id %}
-        CATÉGORIE : {{ categories[0].nom|upper }}
+       <svg width="32" height="32" viewBox="0 0 32 32" class="news-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_121_5309)">
+  <path d="M24 11.6667H29.3334V28H2.66669V4H24V24.6667" stroke="currentColor" stroke-width="2"></path>
+  <path d="M7.33331 14.6666V9.33331H19.3333V14.6666H7.33331Z" stroke="currentColor" stroke-width="2"></path>
+  <path d="M6.33331 21.3333H20.3333" stroke="currentColor" stroke-width="2"></path>
+</g>
+<defs>
+  <clipPath id="clip0_121_5309">
+    <rect width="32" height="32" fill="white"></rect>
+  </clipPath>
+</defs>
+  </svg> CATÉGORIE : {{ categories[0].nom|upper }}
     {% else %}
-        NOS ACTUALITÉS
+       <svg width="32" height="32" viewBox="0 0 32 32" class="news-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_121_5309)">
+  <path d="M24 11.6667H29.3334V28H2.66669V4H24V24.6667" stroke="currentColor" stroke-width="2"></path>
+  <path d="M7.33331 14.6666V9.33331H19.3333V14.6666H7.33331Z" stroke="currentColor" stroke-width="2"></path>
+  <path d="M6.33331 21.3333H20.3333" stroke="currentColor" stroke-width="2"></path>
+</g>
+<defs>
+  <clipPath id="clip0_121_5309">
+    <rect width="32" height="32" fill="white"></rect>
+  </clipPath>
+</defs>
+  </svg>  Nos dernières Actualités
     {% endif %}
 </h1>
 
@@ -47,20 +69,28 @@
 
     
     {% for news in news %}
-      <div class="col-md-12 mx-auto">
-        <div class="card mb-4">
+      <div class="col-md-6 mx-auto">
+        <div class="card-home mb-4">
         
           <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
         <p class="date-show">Le {{news.getDate|date('d-m-Y')}}</p>
-          {% if news.categorie != null %}
-            <a href="{{ path('news_index', { 'category': news.categorie.getSlug() }) }}" class="cate">{{ news.categorie.nom }}</a>
-          {% endif %}
           <div class="card-body">
             <h5 class="card-title">{{ news.getTitre() }}</h5>
             <p class="card-text">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
             <div class="bout">
-              <a href="{{ path('news_show', { 'slug': news.getSlug() }) }}" class="bouton-voir">Voir l'actualité</a>
-            </div>
+            <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="view-actu"> Voir l'actualité 
+            <svg width="24" height="24" viewBox="0 0 32 32" class="arrow" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_118_4063)">
+                  <path d="M1.33331 16H29.3333" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M21.3333 8L29.3333 16L21.3333 24" stroke="currentColor" stroke-width="2"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_118_4063">
+                    <rect width="32" height="32" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </svg></a>
+          </div>
           </div>
         </div>
       </div>

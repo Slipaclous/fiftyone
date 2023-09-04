@@ -3,15 +3,15 @@
 {% block title %}{{ news.Titre }} {% endblock %}
 
 {% block body %}
-  <div class="container">
-    <h1>{{ news.Titre }}</h1>
+  <div class="container-actu">
     <div class="imgcover">
       <img src="/images/{{news.getCover}}" alt="image" class="cover">
     </div>
-    <h3>{{ news.soustitre }}</h3>
+    <p class="date-show">Date: {{ news.date|date('Y-m-d') }}</p>
+    <h1 class="actu-title-show">{{ news.Titre }}</h1>
+    <h3 class="subtitle-actu">{{ news.soustitre }}</h3>
     <p>{{ news.description|raw }}</p>
-    <p>Date: {{ news.date|date('Y-m-d') }}</p>
-    <h3>Images:</h3>
+    <h3 class="subtitle-actu">Images:</h3>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <ol class="carousel-indicators">
         {% for image in news.getImages() %}
@@ -35,7 +35,7 @@
       </a>
     </div>
 
-    <h3>Commentaires:</h3>
+    <h3 class="subtitle-actu">Commentaires:</h3>
     <ul>
       {% for comment in comments %}
         <li>
@@ -51,7 +51,7 @@
       {% endfor %}
     </ul>
 
-    <h3>Ajoutez un commentaire:</h3>
+    <h3 class="subtitle-actu">Ajoutez un commentaire:</h3>
     {{ form_start(commentForm) }}
     {{ form_widget(commentForm) }}
     <button class=" submit-btn " type="submit">Envoyer</button>

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participate in the Event{% endblock %}
+
+{% block body %}
+    <h1>Participate in the Event</h1>
+
+    <form method="POST" action="{{ path('app_participate', {'id': event.id}) }}">
+        {{ form_start(participantForm) }}
+
+        <div id="event_participant_guests" data-prototype="{{ form_widget(participantForm.guests.vars.prototype)|e('html_attr') }}">
+            {% for guestForm in participantForm.guests %}
+                {{ form_row(guestForm) }}
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-guest">Add a Guest</button>
+
+        <div class="mb-3">
+            {{ form_label(participantForm.comment, 'Note') }}
+            {{ form_widget(participantForm.comment) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        {{ form_end(participantForm) }}
+    </form>
+{% block javascripts %}
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+        const guestsContainer = $('#event_participant_guests');
+        const addGuestButton = $('#add-guest');
+        let guestCounter = guestsContainer.children().length;
+
+        addGuestButton.on('click', function () {
+            if (!addGuestButton.prop('disabled')) {
+                addGuestButton.prop('disabled', true); // Disable the button
+
+                const prototype = guestsContainer.data('prototype');
+                console.log("hello");
+
+                const newForm = prototype.replace(/__name__/g, guestCounter);
+                guestsContainer.append(newForm);
+                guestCounter++; // Increment the counter
+
+                // Re-enable the button after a brief delay (e.g., 1 second)
+                setTimeout(function () {
+                    addGuestButton.prop('disabled', false);
+                }, 1000); // Adjust the delay as needed
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

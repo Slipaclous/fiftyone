@@ -1,44 +1,5 @@
 <header>
   <div class="menu">
-    <div class="top-menu">
-      <div class="container-top">
-        <div class="menu-main">
-          
-         
-        </div>
-        
-        {% if app.user %}
-          <div class="info-user">
-            <li class="nav-item dropdown text-white">
-              {% if app.user.firstName and app.user.lastName %}
-                {{ app.user.firstName }} {{ app.user.lastName }}
-              {% else %}
-                {{ app.user.email }}
-              {% endif %}
-              
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink"></a>
-              
-              {% if app.user.avatar %}
-                <img src="{{ asset(app.user.avatar) }}" alt="avatar" class="avatar" height="50" width="50">
-              {% else %}
-                <img src="{{ asset('images/avatar.png') }}" class="avatar" height="50" width="50" alt="avatar">
-              {% endif %}
-              
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
-                <a href="{{ path('admin') }}" class="dropdown-item">Tableau d'administration du site</a>
-                <div class="dropdown-divider"></div>
-                <a href="{{ path('profile') }}" class="dropdown-item">Mon compte</a>
-                <a href="{{ path('edit') }}" class="dropdown-item">Modifier mon profil</a>
-                <div class="dropdown-divider"></div>
-                <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
-              </div>
-            </li>
-          </div>
-        {% else %}
-          <a href="{{ path('app_login') }}" class="login-link">Se connecter</a>
-        {% endif %}
-      </div>
-    </div>
     
     <nav>
       <input type="checkbox" id="menu-toggle" />
@@ -55,7 +16,39 @@
         <li><a href="{{ path('app_events') }}">Evenements</a></li>
         <li><a href="{{ path('news_index') }}">Actualités</a></li>
         <li><a href="{{ path('contact') }}">Contact</a></li>
+        <li></li>
       </ul>
+      {% if app.user %}
+          <div class="info-user">
+            <li class="nav-item dropdown">
+              {% if app.user.firstName and app.user.lastName %}
+                {{ app.user.firstName }} {{ app.user.lastName }}
+              {% else %}
+                {{ app.user.email }}
+              {% endif %}
+              
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink"></a>
+              
+              {% if app.user.avatar %}
+                <img src="{{ asset(app.user.avatar) }}" alt="avatar" class="avatar" height="50" width="50">
+              {% else %}
+                <img src="{{ asset('images/avatar.png') }}" class="avatar" height="50" width="50" alt="avatar">
+              {% endif %}
+              
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                <a href="{{ path('admin') }}" class="dropdown-item">Tableau d'administration du site</a>
+                <a href="{{ path('member_area') }}" class="dropdown-item">Espace membres</a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ path('profile') }}" class="dropdown-item">Mon compte</a>
+                <a href="{{ path('edit') }}" class="dropdown-item">Modifier mon profil</a>
+                <div class="dropdown-divider"></div>
+                <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
+              </div>
+            </li>
+          </div>
+        {% else %}
+          <a href="{{ path('app_login') }}" class="login-link">Se connecter</a>
+        {% endif %}
     </nav>
   </div>
   

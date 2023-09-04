@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ event.titre }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date|date('Y-m-d') }}</p>
+    <p>Available places: {{ event.places }}</p>
+    {% if not participant %}
+    <form action="{{ path('app_participate', {'id': event.id}) }}" method="post">
+        <button type="submit">Participate</button>
+    </form>
+{% else %}
+    <p>Vous participez déjà à cet évènement.</p>
+    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="btn btn-primary">Modifier mes guests</a>
+    <form action="{{ path('app_cancel_participation', {'id': participant.id}) }}" method="post">
+        <button type="submit" class="btn btn-danger">Annuler ma participation</button>
+    </form>
+{% endif %}
+    <h2>Participants</h2>
+    <ul>
+        {% for participant in participants %}
+            <li>
+                {% if participant.participant.firstName and participant.participant.lastName %}
+                    - {{ participant.participant.firstName }} {{ participant.participant.lastName }}
+                {% else %}
+                    - {{ participant.participant.email }}
+                {% endif %}
+                <ul>
+                    {% for guest in participant.guests %}
+                        <li>
+                            {% if guest.prenom and guest.nom %}
+                                Guest: {{ guest.prenom }} {{ guest.nom }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

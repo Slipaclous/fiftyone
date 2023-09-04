@@ -16,6 +16,11 @@ services:
         public: true
         autowire: true
     
+    App\Form\EventType:
+        tags: ['form.type']
+        
+    App\Controller\Member\MemberEventController:
+        public: true
 
     App\Controller\Admin\NewsCrudController:
         tags: [ { name: 'controller.service_arguments' },  name: 'admin'  ]

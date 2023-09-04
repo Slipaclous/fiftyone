@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Edit Guest List</h1>
+    <form method="post" id="guests-form">
+        {{ form_start(form) }}
+        <div id="guests-list" data-prototype="{{ form_widget(form.guests.vars.prototype)|e('html_attr') }}">
+    {{ form_errors(form.guests) }}
+    {% for guestForm in form.guests %}
+        <div class="guest-form">
+            {{ form_row(guestForm.prenom) }}
+            {{ form_row(guestForm.nom) }}
+            <a href="{{ path('app_delete_guest', {'id': guestForm.vars.value.id}) }}" class="btn btn-danger mx-2">Supprimer ce guest</a>
+        </div>
+    {% endfor %}
+</div>
+        <button type="button" class="btn btn-success" id="add-guest">Add Guest</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+        {{ form_end(form) }}
+    </form>
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            // public/js/guest-list.js
+            $(document).ready(function () {
+                const guestsContainer = $('#guests-list');
+                const addGuestButton = $('#add-guest');
+                let guestCounter = guestsContainer.children().length;
+
+                // Add new guest form
+                addGuestButton.on('click', function (e) {
+                    if (!addGuestButton.prop('disabled')) {
+                        addGuestButton.prop('disabled', true); // Disable the button
+
+                        const prototype = guestsContainer.data('prototype');
+                        const newForm = prototype.replace(/__name__/g, guestCounter);
+                        guestsContainer.append(newForm);
+                        guestCounter++; // Increment the counter
+
+                        // Add a remove button for the newly added guest
+                        const $newGuest = guestsContainer.children().last();
+                        const $removeButton = $('<button type="button" class="btn btn-danger remove-guest">Remove Guest</button>');
+                        $newGuest.append($removeButton);
+                    }
+                });
+
+                // Event delegation for remove buttons
+                guestsContainer.on('click', '.remove-guest', function () {
+                    $(this).closest('.guest-form').remove();
+                });
+
+                // Re-enable the button after a brief delay (e.g., 1 second)
+                setTimeout(function () {
+                    addGuestButton.prop('disabled', false);
+                }, 1000); // Adjust the delay as needed
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

@@ -1,7 +1,9 @@
 security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_ADMIN]
+        ROLE_MEMBER: [ROLE_MEMBER]
     providers:
         app_user_provider:
             entity:

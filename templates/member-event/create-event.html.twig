@@ -1,0 +1,11 @@
+{# templates/member_area/create_event.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Create Event</h2>
+    {{ form_start(event_form) }}
+    {{ form_widget(event_form) }}
+    <button type="submit">Create Event</button>
+    {{ form_end(event_form) }}
+{% endblock %}

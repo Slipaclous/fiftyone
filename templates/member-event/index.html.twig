@@ -1,0 +1,16 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Events</h1>
+
+    {% for event in events %}
+            <li>
+                <h2>{{ event.titre }}</h2>
+                <p>{{ event.description }}</p>
+                <p>Date: {{ event.date|date('Y-m-d') }}</p>
+                <p>Available places: {{ event.places }}</p>
+                <a href="{{ path('app_member_event_details', {'id': event.id}) }}" class="btn btn-primary">Details</a>
+            </li>
+        {% endfor %}
+{% endblock %}
