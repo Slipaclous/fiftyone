@@ -31,6 +31,9 @@ class MemberEvents
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventParticipant::class, orphanRemoval: true)]
     private Collection $eventParticipants;
 
+    #[ORM\OneToOne(inversedBy: 'memberEvents', cascade: ['persist', 'remove'])]
+    private ?Images $cover = null;
+
     public function __construct()
     {
         $this->eventParticipants = new ArrayCollection();
@@ -115,6 +118,18 @@ class MemberEvents
                 $eventParticipant->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCover(): ?Images
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?Images $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }

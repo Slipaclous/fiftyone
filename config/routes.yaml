@@ -26,9 +26,11 @@ delete_guest:
     path: /delete-guest/{id}
     controller: App\Controller\YourController::deleteGuest
     methods: ['DELETE']
+
 create_event:
-    path: /create-event
-    controller: App\Controller\Member\MemberAreaController::createEventForm
+    path: '/member/create-event'
+    controller: 'App\Controller\Member\MemberEventController::createEventForm'
+    methods: ['GET', 'POST']
 
 app_login:
     path: /login

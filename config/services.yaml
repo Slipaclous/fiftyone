@@ -19,6 +19,12 @@ services:
     App\Form\EventType:
         tags: ['form.type']
         
+    reservation_email_sender:
+        class: App\Service\ReservationEmailSender
+        arguments:
+            - '@mailer'
+            - '@twig' # Use the Twig\Environment service
+
     App\Controller\Member\MemberEventController:
         public: true
 

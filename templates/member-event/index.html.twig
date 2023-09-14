@@ -3,7 +3,7 @@
 
 {% block body %}
     <h1>Events</h1>
-
+     <a href="{{ path('create_event') }}" class="btn btn-success">Create</a>
     {% for event in events %}
             <li>
                 <h2>{{ event.titre }}</h2>

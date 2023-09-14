@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation Confirmation</title>
+</head>
+<body>
+    <h1>Reservation Confirmation</h1>
+    <p>Thank you for making a reservation for the event "{{ event.getTitre() }}".</p>
+    <p>Your reservation details:</p>
+    <ul>
+        <li>Reservation Number: {{ reservation.getReservationNumber() }}</li>
+        <li>Event Name: {{ event.getTitre() }}</li>
+        <li>Date: {{ event.getDate()|date('Y-m-d H:i') }}</li>
+        <li>Number of People: {{ reservation.getNumberOfPeople() }}</li>
+    </ul>
+    <p>Enjoy the event!</p>
+</body>
+</html>

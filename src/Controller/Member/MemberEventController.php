@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use App\Repository\EventParticipantRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Vich\UploaderBundle\Handler\UploadHandler;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -192,26 +193,31 @@ public function cancelParticipation(EventParticipant $eventParticipant, EntityMa
 
     return $this->redirectToRoute('app_member_event');
 }
-    #[Route('/member/create-event', name: 'create_event')]
-    public function createEventForm(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $event = new MemberEvents();
-        $form = $this->createForm(MemberEventType::class, $event);
+#[Route('/member/create-event', name: 'create_event')]
+public function createEventForm(Request $request, EntityManagerInterface $entityManager, UploadHandler $uploadHandler): Response
+{
+    $event = new MemberEvents();
+    $form = $this->createForm(MemberEventType::class, $event);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($event);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Event created successfully!');
-
-            // Redirect to the event list page with a success message
-            return $this->redirectToRoute('app_member_event');
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Handle the event cover image upload
+        if ($event->getCover()) {
+            $uploadHandler->upload($event->getCover(), 'imageFile'); // Handle the upload for the associated image
         }
 
-        return $this->render('member-event/create-event.html.twig', [
-            'event_form' => $form->createView(),
-        ]);
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Event created successfully!');
+
+        // Redirect to the event list page with a success message
+        return $this->redirectToRoute('app_member_event');
     }
+
+    return $this->render('member-event/create-event.html.twig', [
+        'event_form' => $form->createView(),
+    ]);
+}
 }
 

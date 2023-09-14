@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventsRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventsRepository::class)]
 class Events
@@ -45,10 +46,14 @@ class Events
     #[Assert\NotBlank(message: 'La couverture ne peut pas être vide')]
     private ?string $cover = null;
 
+    #[ORM\OneToMany(mappedBy: 'Event', targetEntity: Reservation::class, orphanRemoval: true)]
+    private Collection $reservations;
+
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +119,27 @@ class Events
         return $this;
     }
 
+    public function decrementAvailability(int $numberOfPeople): void
+{
+    $availablePlaces = $this->getAvailablePlaces();
+    $updatedAvailability = $availablePlaces - $numberOfPeople;
+
+    // Ensure the availability doesn't go below zero
+    $this->places = max(0, $updatedAvailability);
+}
+
+public function getAvailablePlaces(): int
+{
+    // Calculate and return the available places for the event
+    $reservedPlaces = 0;
+    
+    foreach ($this->reservations as $reservation) {
+        $reservedPlaces += $reservation->getNumberOfPeople();
+    }
+
+    return max(0, $this->places - $reservedPlaces);
+}
+
     /**
      * @return Collection<int, images>
      */
@@ -152,6 +178,36 @@ class Events
     public function setCover(string $cover): static
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getEvent() === $this) {
+                $reservation->setEvent(null);
+            }
+        }
 
         return $this;
     }

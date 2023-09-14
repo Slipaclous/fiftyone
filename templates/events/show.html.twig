@@ -6,7 +6,7 @@
   <div class="container">
     <h1>{{ event.Titre }}</h1>
     <div class="imgcover">
-    <img src="/images/{{event.getCover}}" class="cover" alt="dsfqsd">
+    <img src="/images/{{ event.getCover }}" class="cover" alt="dsfqsd">
     </div>
     <h3>qsdqsd</h3>
     <p>{{ event.description|raw }}</p>
@@ -34,7 +34,11 @@
         <span class="visually-hidden">Next</span>
       </a>
     </div>
+    <!-- Add the reservation button -->
+    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Make a Reservation</a>
 
+    <!-- Add the reservation modification link -->
+    <a href="{{ path('app_events_reservation_edit_input', {'slug': event.getSlug()}) }}" class="btn btn-primary">Modify Reservation</a>
 
   </div>
 {% endblock %}
