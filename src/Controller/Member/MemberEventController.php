@@ -19,6 +19,7 @@ use Vich\UploaderBundle\Handler\UploadHandler;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MemberEventController extends AbstractController
@@ -194,7 +195,7 @@ public function cancelParticipation(EventParticipant $eventParticipant, EntityMa
     return $this->redirectToRoute('app_member_event');
 }
 #[Route('/member/create-event', name: 'create_event')]
-public function createEventForm(Request $request, EntityManagerInterface $entityManager, UploadHandler $uploadHandler): Response
+public function createEventForm(Request $request, EntityManagerInterface $manager): Response
 {
     $event = new MemberEvents();
     $form = $this->createForm(MemberEventType::class, $event);
@@ -202,22 +203,33 @@ public function createEventForm(Request $request, EntityManagerInterface $entity
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         // Handle the event cover image upload
-        if ($event->getCover()) {
-            $uploadHandler->upload($event->getCover(), 'imageFile'); // Handle the upload for the associated image
+        $file = $form['imageFile']->getData();
+       if(!empty($file)){
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+        try{
+            $file->move(
+                $this->getParameter('uploads_directory'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+            return $e->getMessage();
         }
-
-        $entityManager->persist($event);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Event created successfully!');
+        $event->setCover('images/',$newFilename);
+        } else {
+            $event->setCover(null);
+        }
+        $manager->persist($event);
+        $manager->flush();
 
         // Redirect to the event list page with a success message
         return $this->redirectToRoute('app_member_event');
     }
-
     return $this->render('member-event/create-event.html.twig', [
         'event_form' => $form->createView(),
     ]);
 }
 }
+
 

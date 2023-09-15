@@ -35,10 +35,10 @@
       </a>
     </div>
     <!-- Add the reservation button -->
-    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Make a Reservation</a>
+    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Faire une réservation</a>
 
     <!-- Add the reservation modification link -->
-    <a href="{{ path('app_events_reservation_edit_input', {'slug': event.getSlug()}) }}" class="btn btn-primary">Modify Reservation</a>
+    <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Modifier ma réservation</a>
 
   </div>
 {% endblock %}

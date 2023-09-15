@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Events;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Form\ModifyReservationType;
 use App\Repository\EventsRepository;
 use App\Service\ReservationEmailSender;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventsController extends AbstractController
@@ -105,109 +107,59 @@ class EventsController extends AbstractController
             'event' => $event,
         ]);
     }
+
+
+    #[Route('/events/modify', name: 'app_modify_reservation')]
+    public function modifyReservation(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('reservationNumber', TextType::class, [
+                'label' => 'Reservation Number',
+                'attr' => ['placeholder' => 'Enter your reservation number'],
+            ])
+            ->getForm();
     
-
-// Controller: Edit Reservation
-
-#[Route('/events/{slug}/reservation/edit/{reservationNumber}', name: 'app_events_reservation_edit')]
-public function editReservation(Request $request, Events $event, string $reservationNumber): Response
-{
-    // Load the reservation from the database using $reservationNumber
-    $reservation = $this->loadReservationByNumber($reservationNumber);
-
-    if (!$reservation) {
-        // Handle the case where the reservation with the provided number does not exist
-        $this->addFlash('error', 'Reservation not found.');
-        return $this->redirectToRoute('app_events_reservation_edit_input', [
-            'slug' => $event->getSlug(),
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reservationNumber = $form->getData()['reservationNumber'];
+    
+            $reservation = $entityManager->getRepository(Reservation::class)->findOneBy(['reservationNumber' => $reservationNumber]);
+    
+            if ($reservation) {
+                return $this->redirectToRoute('app_modify_reservation_form', ['id' => $reservation->getId()]);
+            } else {
+                $this->addFlash('error', 'No reservation found with the provided reservation number.');
+            }
+        }
+    
+        return $this->render('events/modify.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
-
-    // Create a form for modifying the reservation
-    $form = $this->createForm(ReservationModificationType::class, $reservation);
-
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Update the reservation in the database
-        $this->updateReservation($reservation);
-
-        // Redirect to a success page or any other desired action
-        $this->addFlash('success', 'Reservation updated successfully.');
-        return $this->redirectToRoute('app_events_show', ['slug' => $event->getSlug()]);
-    }
-
-    return $this->render('reservation/edit_reservation.html.twig', [
-        'event' => $event,
-        'reservation' => $reservation,
-        'form' => $form->createView(),
-    ]);
-}
-
-
-#[Route('/events/{slug}/reservation/edit/input', name: 'app_events_reservation_edit_input')]
-public function editReservationInput(Request $request, Events $event): Response
-{
-    if ($request->isMethod('POST')) {
-        $reservationNumber = $request->request->get('reservationNumber');
-
-        // Validate the reservation number
-        if ($this->isValidReservationNumber($reservationNumber)) {
-            return $this->redirectToRoute('app_events_reservation_edit', [
-                'slug' => $event->getSlug(),
-                'reservationNumber' => $reservationNumber,
-            ]);
-        } else {
-            $this->addFlash('error', 'Invalid reservation number. Please try again.');
+    
+    #[Route('/reservation/{id}/modify', name: 'app_modify_reservation_form')]
+    public function modifyReservationForm(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ModifyReservationType::class, $reservation);
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+    
+            $this->addFlash('success', 'Reservation updated successfully.');
+    
+            return $this->redirectToRoute('app_events_show', ['slug' => $reservation->getEvent()->getSlug()]);
         }
+    
+        return $this->render('events/modify_form.html.twig', [
+            'form' => $form->createView(),
+            'reservation' => $reservation,
+        ]);
     }
-
-    return $this->render('reservation/edit_reservation_input.html.twig', [
-        'event' => $event,
-    ]);
-}
-
-
-
-// Helper methods for loading and updating reservations
-
-private function loadReservationByNumber(EntityManagerInterface $entityManager, string $reservationNumber): ?Reservation
-{
-    // Create a query builder for your Reservation entity
-    $queryBuilder = $entityManager->getRepository(Reservation::class)->createQueryBuilder('r');
-
-    // Add a condition to select the reservation with the given reservation number
-    $queryBuilder->where('r.reservationNumber = :reservationNumber')
-                 ->setParameter('reservationNumber', $reservationNumber);
-
-    // Execute the query
-    $reservation = $queryBuilder->getQuery()->getOneOrNullResult();
-
-    return $reservation;
-}
-
-
-private function isValidReservationNumber(ReservationRepository $reservationRepository, string $reservationNumber): bool
-{
-    // Implement your validation logic here
-    $reservation = $reservationRepository->findOneBy(['reservationNumber' => $reservationNumber]);
-
-    // Check if a reservation with the given number exists
-    return $reservation !== null;
-}
-private function updateReservation(EntityManagerInterface $entityManager, Reservation $reservation): void
-{
-    // Persist the updated reservation
-    $entityManager->persist($reservation);
-
-    // Flush changes to the database
-    $entityManager->flush();
-}
-
-
-
-
-
+    
     /**
      * Affiche un événement
      *

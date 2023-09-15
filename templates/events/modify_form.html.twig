@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modify Reservation{% endblock %}
+
+{% block body %}
+    <h1>Modify Reservation</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.numberOfPeople) }}
+
+    <button type="submit" class="btn btn-primary">Update Reservation</button>
+    {{ form_end(form) }}
+{% endblock %}

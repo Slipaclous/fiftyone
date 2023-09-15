@@ -28,8 +28,6 @@ class Images
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Events $events = null;
 
-    #[ORM\OneToOne(mappedBy: 'cover', cascade: ['persist', 'remove'])]
-    private ?MemberEvents $memberEvents = null;
 
  
 
@@ -101,28 +99,7 @@ class Images
         return $url ?? '';
     }
 
-    public function getMemberEvents(): ?MemberEvents
-    {
-        return $this->memberEvents;
-    }
-
-    public function setMemberEvents(?MemberEvents $memberEvents): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($memberEvents === null && $this->memberEvents !== null) {
-            $this->memberEvents->setCover(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($memberEvents !== null && $memberEvents->getCover() !== $this) {
-            $memberEvents->setCover($this);
-        }
-
-        $this->memberEvents = $memberEvents;
-
-        return $this;
-    }
-
+   
 
 
     

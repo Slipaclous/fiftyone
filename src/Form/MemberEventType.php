@@ -23,9 +23,11 @@ class MemberEventType extends AbstractType
             ->add('date', DateType::class) // Corrected type declaration
             ->add('description', TextareaType::class)
             ->add('places', IntegerType::class)
-            ->add('cover', FileType::class, [
+            // add image upload by the UploadImageType form
+            ->add('imageFile', FileType::class, [
+                'label' => 'Image (jpg, png, gif)',
                 'required' => false,
-                'label' => 'Event Cover Image',
+                'mapped' => false,
             ])
         ;
     }
