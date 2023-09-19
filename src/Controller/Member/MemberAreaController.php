@@ -22,16 +22,22 @@ class MemberAreaController extends AbstractController
 {
     #[Route('/member/area', name: 'member_area')]
     #[IsGranted('ROLE_USER')]
-    public function index(MemberEventsRepository $eventsRepository,MettingRepository $meetingRepository): Response
+    public function index(MemberEventsRepository $eventsRepository, MeetingSummaryRepository $meetingSummaryRepository, MettingRepository $meetingRepository): Response
     {
         // Get the next event
         $nextEvent = $eventsRepository->findNextEvent();
+        
+        // Get the next meeting
         $nextMeeting = $meetingRepository->findNextMeeting();
+        
+        // Get the most recent meeting summary
+        $mostRecentMeetingSummary = $meetingSummaryRepository->findMostRecentMeetingSummary();
 
         return $this->render('member/index.html.twig', [
             'controller_name' => 'MemberAreaController',
             'event' => $nextEvent,
             'meeting' => $nextMeeting,
+            'most_recent_meeting_summary' => $mostRecentMeetingSummary,
         ]);
     }
 

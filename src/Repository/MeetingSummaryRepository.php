@@ -20,6 +20,14 @@ class MeetingSummaryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, MeetingSummary::class);
     }
+    public function findMostRecentMeetingSummary(): ?MeetingSummary
+    {
+        return $this->createQueryBuilder('ms')
+            ->orderBy('ms.date', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
 //    /**
 //     * @return MeetingSummary[] Returns an array of MeetingSummary objects
