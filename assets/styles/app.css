@@ -257,6 +257,9 @@ header {
         transition: opacity 0.5s ease, transform 0.5s ease;
         width: 50%;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       
       .text-presentation.active {
@@ -830,6 +833,99 @@ text-align: center;
   #menu-toggle:checked ~ .menu-icon span:nth-child(3) {
     transform: rotate(-45deg) translate(27px, 25px);
   }
+}
+
+/* Espace membres */
+.member-title{
+  text-align: center;
+  padding-top: 45px;
+  color: #2D3B6F;
+}
+.container-member{
+  background-color: #d9d9d9;
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+.events-member{
+  background-color: #F4F4F4;
+  width: 45vw;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-around;
+  border-radius: 15px;
+}
+.upcoming-event a{
+  text-decoration: none;
+  color:#2D3B6F;
+  font-weight: 800;
+  border-radius: 5px;
+  text-align: center;
+  width: 80%;
+  border: solid 1px rgb(206, 179, 25);
+}
+.upcoming-event a:hover{
+  background-color: #2D3B6F;
+  color: white;
+  transition-duration: 0.3s;
+}
+.upcoming-event{
+  display: flex;
+  flex-direction: column;
+}
+.conti{
+  background-color:#d9d9d9
+}
+.other-events{
+  background-color: #2D3B6F;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid rgb(206, 179, 25) ;
+}
+.other-events:hover{
+  color: #2D3B6F;
+  background-color: white;
+  transition-duration: 0.3s;
+  font-weight: 800;
+}
+
+.meetings-member{
+  background-color: #F4F4F4;
+  width: 25vw;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 15px;
+}
+.next-meeting{
+  display: flex;
+}
+.meetings-member p{
+  font-weight: 800;
+  color: #2D3B6F;
+  font-size: larger;
+  margin-bottom: 20px;
+}
+.meeting-button{
+  background-color: #2D3B6F;
+  padding: 8px;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  border:1px solid rgb(206, 179, 25);
+  margin-top: 20px;
+}
+.meeting-button:hover{
+  color: #2D3B6F;
+  background-color: white;
+  transition-duration: 0.3s;
+  font-weight: 800;
 }
 
   

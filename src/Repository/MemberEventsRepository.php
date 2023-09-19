@@ -38,6 +38,16 @@ class MemberEventsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findNextEvent()
+    {
+        return $this->createQueryBuilder('me')
+            ->andWhere('me.date >= :currentDate')
+            ->setParameter('currentDate', new \DateTime('now'))
+            ->orderBy('me.date', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
 //    /**
 //     * @return MemberEvents[] Returns an array of MemberEvents objects

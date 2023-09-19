@@ -1,0 +1,17 @@
+{# templates/member/create_meeting.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Create a New Meeting{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-4">Create a New Meeting</h2>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-primary">Create Meeting</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

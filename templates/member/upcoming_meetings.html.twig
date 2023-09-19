@@ -1,0 +1,30 @@
+{# templates/member/upcoming_meetings.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Upcoming Meetings{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-4">Calendrier des réunions</h2>
+        <a href="{{ path('create_meeting') }}" class="btn btn-success">Ajouter une nouvelle réunion</a>
+    
+        {% if upcoming_meetings %}
+            {% set currentMonth = null %}
+            {% for meeting in upcoming_meetings %}
+                {% set meetingMonth = meeting.date|date('F Y') %}
+                {% if meetingMonth != currentMonth %}
+                    <h3 class="mt-4">{{ meeting.date|date('F Y') }}</h3>
+                {% endif %}
+                <ul class="list-group mt-2">
+                    <li class="list-group-item">
+                        Meeting Date: {{ meeting.date|date('Y-m-d') }}
+                    </li>
+                </ul>
+                {% set currentMonth = meetingMonth %}
+            {% endfor %}
+        {% else %}
+            <p>No upcoming meetings.</p>
+        {% endif %}
+    </div>
+{% endblock %}
