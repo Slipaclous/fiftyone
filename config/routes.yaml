@@ -43,6 +43,11 @@ app_edit_guest_list:
     path: /edit-guest-list/{id}
     controller: App\Controller\Member\MemberEventController::editGuestList
 
+pdf_display:
+    path: '/pdf-display/{pdf}'
+    controller: 'App\Controller\Member\MemberAreaController::displayPdf'
+    requirements:
+        pdfUrl: '.*\.pdf'
 # not_found:
 #     path: /{url}
 #     controller: App\Controller\ErrorController::notFound

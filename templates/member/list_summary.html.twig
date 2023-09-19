@@ -1,0 +1,26 @@
+{# templates/meeting_summary/list.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Meeting Summaries{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-4">Meeting Summaries</h2>
+
+        <ul>
+            {% for summary in summaries %}
+                <li>
+                    <strong>Date:</strong> {{ summary.date|date('d-m-Y') }}
+                    <br>
+                    {% if summary.pdf %}
+                        <strong>PDF URL:</strong> 
+                        <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">View PDF</a>
+                    {% else %}
+                        <em>No PDF uploaded</em>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

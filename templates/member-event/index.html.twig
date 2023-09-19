@@ -1,16 +1,48 @@
-
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Events</h1>
-     <a href="{{ path('create_event') }}" class="btn btn-success">Create</a>
-    {% for event in events %}
-            <li>
-                <h2>{{ event.titre }}</h2>
-                <p>{{ event.description }}</p>
-                <p>Date: {{ event.date|date('Y-m-d') }}</p>
-                <p>Available places: {{ event.places }}</p>
-                <a href="{{ path('app_member_event_details', {'id': event.id}) }}" class="btn btn-primary">Details</a>
-            </li>
-        {% endfor %}
+	<a href="{{ path('member_area') }}" class="area-back">Retour à l'espace membre</a>
+	<h1 class="title-area">
+		<svg
+			width="75" height="75" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><!-- SVG Path for the title -->
+		</svg>
+		Évènements
+	</h1>
+	<a href="{{ path('create_event') }}" class="btn btn-success">Ajouter un Évènement</a>
+
+	<div class="container py-5">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for event in events %}
+					<div class="col">
+				<a href="{{ path('app_member_event_details', {'id': event.id}) }}">
+						<div class="cardi h-100" style="position: relative">
+							<div class="bottom-right">{{ event.date|format_date('none', 'd MMMM Y', null, 'gregorian', 'fr') }}</div>
+							<div class="top-right">
+								<div class="tags-list mb-2"></div>
+							</div>
+							<div class="image-container">
+								<div class="bottom-left">
+									<div class="thumbnail" style="background-color: #ffa5009e">
+										<div class="thumbnail-date">
+											<span class="thumbnail-date-day">{{ event.date|format_date('none', 'd', null, 'gregorian', 'fr') }}</span>
+											<span class="thumbnail-date-month">{{ event.date|format_date('none', 'MMMM', null, 'gregorian', 'fr') }}</span>
+										</div>
+									</div>
+								</div>
+								
+									<img src="{{ event.getCover }}" class="card-img-top" alt="Event Image"/>
+								
+								<div class="image-overlay text-over text-center d-flex justify-content-center align-items-center text-uppercase">
+									<div>
+										{{ event.titre }}
+									</div>
+								</div>
+							</div>
+						</div>
+				</a>
+				    </div>
+			{% endfor %}
+		</div>
+	</div>
+
 {% endblock %}

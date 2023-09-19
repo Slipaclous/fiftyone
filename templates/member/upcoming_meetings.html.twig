@@ -5,6 +5,7 @@
 {% block title %}Upcoming Meetings{% endblock %}
 
 {% block body %}
+    <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <div class="container">
         <h2 class="mt-4">Calendrier des réunions</h2>
         <a href="{{ path('create_meeting') }}" class="btn btn-success">Ajouter une nouvelle réunion</a>
@@ -12,19 +13,19 @@
         {% if upcoming_meetings %}
             {% set currentMonth = null %}
             {% for meeting in upcoming_meetings %}
-                {% set meetingMonth = meeting.date|date('F Y') %}
+                {% set meetingMonth = meeting.date|format_date('none', 'MMMM Y', null, 'gregorian', 'fr') %}
                 {% if meetingMonth != currentMonth %}
-                    <h3 class="mt-4">{{ meeting.date|date('F Y') }}</h3>
+                    <h3 class="mt-4">{{ meeting.date|format_date('none', 'MMMM Y', null, 'gregorian', 'fr') }}</h3>
                 {% endif %}
                 <ul class="list-group mt-2">
-                    <li class="list-group-item">
-                        Meeting Date: {{ meeting.date|date('Y-m-d') }}
-                    </li>
+                    
+                        {{ meeting.date|date('d-m-Y') }}
+                    
                 </ul>
                 {% set currentMonth = meetingMonth %}
             {% endfor %}
         {% else %}
-            <p>No upcoming meetings.</p>
+            <p>Pas d'évènements à venir.</p>
         {% endif %}
     </div>
 {% endblock %}

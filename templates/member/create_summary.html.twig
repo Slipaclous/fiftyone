@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create Meeting Summary{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="mt-4">Create Meeting Summary</h2>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Create Summary</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

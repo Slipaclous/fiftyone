@@ -216,7 +216,7 @@ public function createEventForm(Request $request, EntityManagerInterface $manage
         } catch (FileException $e) {
             return $e->getMessage();
         }
-        $event->setCover('images/',$newFilename);
+        $event->setCover('images/'.$newFilename);
         } else {
             $event->setCover(null);
         }
