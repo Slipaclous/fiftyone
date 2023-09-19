@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Entity\Guests;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ class EventParticipant
 
     #[ORM\ManyToOne(inversedBy: 'eventParticipants')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $participant = null;
+    private ?User $participant = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventParticipants')]
     #[ORM\JoinColumn(nullable: false)]
@@ -40,12 +41,12 @@ class EventParticipant
         return $this->id;
     }
 
-    public function getParticipant(): ?user
+    public function getParticipant(): ?User
     {
         return $this->participant;
     }
 
-    public function setParticipant(?user $participant): self
+    public function setParticipant(?User $participant): self
     {
         $this->participant = $participant;
 
