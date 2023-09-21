@@ -2,6 +2,7 @@
 
 namespace App\Controller\Member;
 
+// Importation des entités et des formulaires
 use App\Entity\Metting;
 use App\Form\MeetingType;
 use App\Entity\MeetingSummary;
@@ -20,19 +21,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MemberAreaController extends AbstractController
 {
+    // Action pour afficher la page d'accueil de l'espace membre
     #[Route('/member/area', name: 'member_area')]
     #[IsGranted('ROLE_USER')]
     public function index(MemberEventsRepository $eventsRepository, MeetingSummaryRepository $meetingSummaryRepository, MettingRepository $meetingRepository): Response
     {
-        // Get the next event
+        // Récupérer le prochain événement
         $nextEvent = $eventsRepository->findNextEvent();
         
-        // Get the next meeting
+        // Récupérer la prochaine réunion
         $nextMeeting = $meetingRepository->findNextMeeting();
         
-        // Get the most recent meeting summary
+        // Récupérer le résumé de réunion le plus récent
         $mostRecentMeetingSummary = $meetingSummaryRepository->findMostRecentMeetingSummary();
 
+        // Afficher la page d'accueil avec les données récupérées
         return $this->render('member/index.html.twig', [
             'controller_name' => 'MemberAreaController',
             'event' => $nextEvent,
@@ -41,47 +44,53 @@ class MemberAreaController extends AbstractController
         ]);
     }
 
+    // Action pour afficher les réunions à venir
     #[Route('/upcoming-meetings', name: 'upcoming_meetings')]
     public function upcomingMeetings(MettingRepository $meetingRepository): Response
     {
+        // Récupérer les réunions à venir groupées par mois
         $upcomingMeetings = $meetingRepository->findUpcomingMeetingsGroupedByMonth();
     
+        // Afficher la page des réunions à venir
         return $this->render('member/upcoming_meetings.html.twig', [
             'upcoming_meetings' => $upcomingMeetings,
         ]);
     }
 
-#[Route('/create-meeting', name: 'create_meeting')]
-public function createMeetingForm(Request $request, EntityManagerInterface $entityManager): Response
-{
-    $meeting = new Metting();
-    $form = $this->createForm(MeetingType::class, $meeting);
+    // Action pour afficher le formulaire de création de réunion
+    #[Route('/create-meeting', name: 'create_meeting')]
+    public function createMeetingForm(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $meeting = new Metting();
+        $form = $this->createForm(MeetingType::class, $meeting);
 
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Handle the form submission and persist the meeting
-        $entityManager->persist($meeting);
-        $entityManager->flush();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Gérer la soumission du formulaire et persister la réunion
+            $entityManager->persist($meeting);
+            $entityManager->flush();
 
-        $this->addFlash('success', 'Meeting created successfully.');
+            $this->addFlash('success', 'Réunion créée avec succès.');
 
-        // Redirect to the page showing all upcoming meetings
-        return $this->redirectToRoute('upcoming_meetings');
+            // Rediriger vers la page affichant toutes les réunions à venir
+            return $this->redirectToRoute('upcoming_meetings');
+        }
+
+        return $this->render('member/create_meeting.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
-    return $this->render('member/create_meeting.html.twig', [
-        'form' => $form->createView(),
-    ]);
-}
-#[Route('/create-summary', name:'create_summary')]
-public function createMeetingSummary(Request $request, EntityManagerInterface $entityManager): Response
+    // Action pour créer un résumé de réunion
+    #[Route('/create-summary', name:'create_summary')]
+    public function createMeetingSummary(Request $request, EntityManagerInterface $entityManager): Response
     {
         $summary = new MeetingSummary();
         $form = $this->createForm(MeetingSummaryType::class, $summary);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle file upload (PDF)
+            // Gérer le téléchargement du fichier (PDF)
             $pdfFile = $form->get('pdf')->getData();
             if ($pdfFile) {
                 $pdfFileName = uniqid().'.'.$pdfFile->guessExtension();
@@ -92,10 +101,10 @@ public function createMeetingSummary(Request $request, EntityManagerInterface $e
                 $summary->setPdf($pdfFileName);
             }
 
-            // Set the last meeting date
+            // Définir la date de la dernière réunion
             $summary->setDate($form->get('date')->getData());
 
-            // Save to the database
+            // Enregistrer dans la base de données
             $entityManager->persist($summary);
             $entityManager->flush();
 
@@ -107,6 +116,7 @@ public function createMeetingSummary(Request $request, EntityManagerInterface $e
         ]);
     }
 
+    // Action pour afficher la liste des résumés de réunion
     #[Route("/summary-list", name:"summary_list")]
     public function showSummaryList(MeetingSummaryRepository $summaryRepository): Response
     {
@@ -117,23 +127,23 @@ public function createMeetingSummary(Request $request, EntityManagerInterface $e
         ]);
     }
 
-     
+    // Action pour afficher un fichier PDF
     #[Route("/pdf-display/{pdf}", name:"pdf_display")]
-public function displayPdf(string $pdf): Response
-{
-    $pdfPath = $this->getParameter('uploads_directory').'/'.$pdf;
+    public function displayPdf(string $pdf): Response
+    {
+        $pdfPath = $this->getParameter('uploads_directory').'/'.$pdf;
 
-    // Check if the file exists
-    if (!file_exists($pdfPath)) {
-        throw $this->createNotFoundException('The PDF file does not exist.');
+        // Vérifier si le fichier existe
+        if (!file_exists($pdfPath)) {
+            throw $this->createNotFoundException('Le fichier PDF n\'existe pas.');
+        }
+
+        // Créer une réponse de fichier binaire
+        $response = new BinaryFileResponse($pdfPath);
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE);
+
+        return $response;
     }
-
-    // Create a BinaryFileResponse
-    $response = new BinaryFileResponse($pdfPath);
-    $response->headers->set('Content-Type', 'application/pdf');
-    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE);
-
-    return $response;
 }
 
-}

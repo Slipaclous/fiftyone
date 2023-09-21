@@ -846,7 +846,10 @@ text-align: center;
   width: 75%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  color: #2D3B6F;
+  gap: 50px;
+
 }
 .events-member{
   background-color: #F4F4F4;
@@ -858,7 +861,7 @@ text-align: center;
   justify-content: space-around;
   border-radius: 15px;
 }
-.upcoming-event a{
+.single-event{
   text-decoration: none;
   color:#2D3B6F;
   font-weight: 800;
@@ -867,7 +870,7 @@ text-align: center;
   width: 80%;
   border: solid 1px rgb(206, 179, 25);
 }
-.upcoming-event a:hover{
+.single-event:hover{
   background-color: #2D3B6F;
   color: white;
   transition-duration: 0.3s;
@@ -886,12 +889,14 @@ text-align: center;
   text-decoration: none;
   border-radius: 10px;
   border: 1px solid rgb(206, 179, 25) ;
+  width: 80%;
+  text-align: center;
 }
 .other-events:hover{
   color: #2D3B6F;
   background-color: white;
   transition-duration: 0.3s;
-  font-weight: 800;
+  text-align: center;
 }
 
 .meetings-member{
@@ -899,9 +904,11 @@ text-align: center;
   width: 25vw;
   height: 25vh;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
   border-radius: 15px;
+
 }
 .next-meeting{
   display: flex;
@@ -925,7 +932,6 @@ text-align: center;
   color: #2D3B6F;
   background-color: white;
   transition-duration: 0.3s;
-  font-weight: 800;
 }
 
 .area-back{
@@ -958,14 +964,6 @@ a {
 .thumbnail-date-month {
   color: rgb(255, 255, 255);
 }
-
-
-
-/* div,
-span {
-   box-sizing: initial;
-  line-height: 1;
-} */
 
 .thumbnail {
   -webkit-touch-callout: none;
@@ -1100,3 +1098,34 @@ span {
 .tags-list span {
   font-size: 14px !important;
 } 
+
+.summary{
+  width: 20vw;
+  min-height:25vh;
+  background-color:white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 30px;
+}
+.last-summary{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width:100%;
+  flex-direction: column;
+}
+.summary p{
+  margin: 0;
+}
+.summary-link{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}

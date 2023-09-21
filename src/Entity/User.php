@@ -51,13 +51,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'participant', targetEntity: EventParticipant::class, orphanRemoval: true)]
     private Collection $eventParticipants;
 
-    #[ORM\OneToMany(mappedBy: 'guestfrom', targetEntity: Guests::class, orphanRemoval: true)]
-    private Collection $guests;
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $messages;
+
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Message::class, orphanRemoval: true)]
+    private Collection $messageur;
+
+    
 
     public function __construct()
     {
         $this->eventParticipants = new ArrayCollection();
-        $this->guests = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->messageur = new ArrayCollection();
     }
 
 
@@ -227,6 +233,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($eventParticipant->getParticipant() === $this) {
                 $eventParticipant->setParticipant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getSender() === $this) {
+                $message->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessageur(): Collection
+    {
+        return $this->messageur;
+    }
+
+    public function addMessageur(Message $messageur): static
+    {
+        if (!$this->messageur->contains($messageur)) {
+            $this->messageur->add($messageur);
+            $messageur->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageur(Message $messageur): static
+    {
+        if ($this->messageur->removeElement($messageur)) {
+            // set the owning side to null (unless already changed)
+            if ($messageur->getReceiver() === $this) {
+                $messageur->setReceiver(null);
             }
         }
 

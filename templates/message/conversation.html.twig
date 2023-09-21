@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Conversation</h2>
+    <ul>
+        {% for message in messages %}
+            <li>
+                {{ message.content }} - {{ message.createdAt|date('Y-m-d H:i:s') }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
