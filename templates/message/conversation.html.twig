@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Conversation</h2>
+    <h2>Conversation with {{ conversationUser.firstName }} {{ conversationUser.lastName }}</h2>
     <ul>
         {% for message in messages %}
             <li>
@@ -9,4 +9,5 @@
             </li>
         {% endfor %}
     </ul>
+    {{ render(controller('App\\Controller\\MessageController::reply', { 'receiver': conversationUser })) }}
 {% endblock %}

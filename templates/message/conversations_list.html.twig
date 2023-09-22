@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Users with Conversations</h2>
+    <ul>
+        {% for user in usersWithConversations %}
+            <li>
+                <a href="{{ path('message_show_conversation', {'id': user.id}) }}">{{ user.firstName }} {{ user.lastName }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

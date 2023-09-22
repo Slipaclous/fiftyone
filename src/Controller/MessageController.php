@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use DateTimeZone;
 use App\Entity\User;
+use DateTimeImmutable;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Repository\UserRepository;
@@ -43,7 +45,9 @@ class MessageController extends AbstractController
 
             // Set the sender and current datetime
             $message->setSender($sender);
-            $message->setCreatedAt(new \DateTime());
+            $createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
+            $message->setCreatedAt($createdAt);
+            // Populate other fields (e.g., content, receiver) based on your requirements
 
             // Handle saving the message
             $entityManager->persist($message);
@@ -57,34 +61,76 @@ class MessageController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+public function reply(Request $request, EntityManagerInterface $entityManager, User $receiver): Response
+{
+    $message = new Message();
+    $message->setReceiver($receiver);
+
+    // Populate the form with receiver as default
+    $form = $this->createForm(MessageType::class, $message);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Get the current logged-in user as the sender
+        $sender = $this->getUser();
+
+        // Set the sender and current datetime
+        $message->setSender($sender);
+        $createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
+        $message->setCreatedAt($createdAt);
+        // Populate other fields (e.g., content) based on your requirements
+
+        // Handle saving the message
+        $entityManager->persist($message);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Message sent successfully!');
+        return $this->redirectToRoute('message_show_conversation', ['id' => $receiver->getId()]);
+    }
+
+    return $this->render('message/reply.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
     #[Route('message/conversations', name: 'message_conversations')]
     public function showConversations(MessageRepository $messageRepository): Response
     {
-        // Get the current logged-in user
-        $user = $this->getUser();
+    // Get the current logged-in user
+    $user = $this->getUser();
 
-        // Fetch conversations for the current user
-        $conversations = $messageRepository->findConversationsForUser($user);
+    // Fetch conversations for the current user
+    $conversations = $messageRepository->findConversationsForUser($user);
 
-        return $this->render('message/conversations.html.twig', [
-            'conversations' => $conversations,
-        ]);
+    // Extract users from conversations
+    $usersWithConversations = [];
+    foreach ($conversations as $conversation) {
+        $usersWithConversations[] = $conversation['user'];
     }
-    #[Route('/conversation/{id}', name: 'message_show_conversation')]
-public function showConversation(Message $message,MessageRepository $messageRepository): Response
-{
-    // Get the sender and receiver from the message
-    $sender = $message->getSender();
-    $receiver = $message->getReceiver();
 
-    // Assuming the conversation is between the sender and receiver
+    return $this->render('message/conversations_list.html.twig', [
+        'usersWithConversations' => $usersWithConversations,
+    ]);
+}
+#[Route('/conversation/{id}', name: 'message_show_conversation')]
+public function showConversation(int $id, MessageRepository $messageRepository, EntityManagerInterface $entityManager): Response
+{
+    // Get the current logged-in user
+    $user = $this->getUser();
+
+    // Fetch the user with whom the conversation is to be displayed
+    $conversationUser = $entityManager->getRepository(User::class)->find($id);
+
     // Fetch messages for the given conversation
-    $messages = $messageRepository->findMessagesForConversation($sender, $receiver);
+    $messages = $messageRepository->findMessagesForConversation($user, $conversationUser);
 
     return $this->render('message/conversation.html.twig', [
         'messages' => $messages,
+        'conversationUser' => $conversationUser,
     ]);
 }
+
 }
 
 

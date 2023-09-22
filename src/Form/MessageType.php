@@ -23,14 +23,14 @@ class MessageType extends AbstractType
             ->add('receiver', null, [
                 'label' => 'Recipient',
                 'choice_label' => 'email', // Adjust based on how you want to display the receiver
-            ])
-            ->add('created_at', DateTimeType::class, [
-                'data' => new \DateTime(), // Set the default value to the current datetime
-                'widget' => 'single_text',
-                'html5' => false,
-                'format' => 'yyyy-MM-dd HH:mm', // Adjust the format to your preference
-                'attr' => ['class' => 'js-datetimepicker'], // Optional: you can add a CSS class for a datetime picker
             ]);
+            // ->add('created_at', DateTimeType::class, [
+            //     'data' => new \DateTime('now', new \DateTimeZone('Europe/Paris')), // Set the default value to the current datetime in your time zone
+
+            //     'widget' => 'single_text',
+            //     'attr' => ['class' => 'js-datetimepicker'], // Optional: you can add a CSS class for a datetime picker
+                
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
