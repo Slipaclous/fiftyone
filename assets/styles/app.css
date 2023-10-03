@@ -11,6 +11,12 @@
 }
 body {
     background-color: #F4F4F4;
+    display: flex;
+    flex-direction: column;
+
+}
+.main-content {
+  flex: 1; /* This will push the footer to the bottom */
 }
 .hello{
   font-size: 50px;
@@ -30,6 +36,12 @@ body {
 
 .carousel-container{
   filter: brightness(65%);
+  height: 100%;
+  background-color: white;
+  
+}
+#carouselExampleControls{
+  margin: 0 !important;
 }
 .site-title {
   margin: 0;
@@ -70,7 +82,6 @@ nav{
  justify-content: center;
 }
 .login-link {
-  margin-left: auto;
   padding: 20px;
 }
 .login-link a{
@@ -87,6 +98,7 @@ header {
     display: flex;
     justify-content:space-around ;
     align-items: center;
+    flex-shrink: 0; /* Don't shrink the footer */
   }
   .footer a{
     color: #F4F4F4;
@@ -101,12 +113,11 @@ header {
     height: 100%;
     list-style: none;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    margin: auto;
-    text-align: center;
-
+    justify-content: space-between; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+    width: 50%; /* Adjust the width to take the full width of the header */
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
   }
   
   .site-links li {
@@ -213,23 +224,41 @@ header {
 
 
   /* HOMEPAGE PRESENTATION */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-on-scroll.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
       .container-presentation {
         position: relative;
         min-height: 80vh;
         background: white;
-        text-align: center;
+      }
+      .container-presentation h2{
+        width: 50%;
+        margin: 0 auto !important;
+        padding-top: 50px;
       }
       
-      .container-presentation h2 {
-        text-align: center;
-        padding: 50px;
-      }
       
       .wrapper {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 100%;
+        height: 70vh;
         width: 80%;
         margin: 0 auto;
       }
@@ -237,18 +266,24 @@ header {
       .logo-presentation {
         opacity: 0;
         width: 50%;
+        height: 100%; /* Set to 100% to take the height from the parent */
         transform: translateY(100%);
         transition: opacity 0.5s ease, transform 0.5s ease;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       
       .logo-presentation.active {
         opacity: 1;
         transform: translateY(0);
+        height: 100%; /* Adjust if needed */
       }
       
       .logo-presentation img {
-        height: 45vh;
+        height: 50vh;
       }
       
       .text-presentation {
@@ -256,7 +291,8 @@ header {
         transform: translateY(-100%);
         transition: opacity 0.5s ease, transform 0.5s ease;
         width: 50%;
-        text-align: center;
+        height: 100%; /* Set to 100% to take the height from the parent */
+        justify-content: center;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -265,12 +301,20 @@ header {
       .text-presentation.active {
         opacity: 1;
         transform: translateY(0);
+        width: 50%; /* Adjust if needed */
+        justify-items: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       
       .textpres {
         width: 80%;
         text-align: center;
         margin: 15px;
+      }
+      .textpres p{
+        
       }
 
 
@@ -281,17 +325,20 @@ header {
     padding: 20px;
     text-align: center;
   }
-  .btn-pres{
-    text-align: center;
-    margin: 5vh;
-    background-color: #2D3B6F;
-    border: none;
-    border-radius: 0px;
-  }
   .btn-pres:hover{
-    background-color: #F4F4F4;
+    text-align: center;
+    background-color: #2D3B6F;
+    box-sizing: border-box;
+    color: white;
+  }
+  .btn-pres{
+    background-color: white;
     color: #2D3B6F;
-    border: 2px solid #2D3B6F;
+    border: 1px solid #2D3B6F;
+    box-sizing: border-box;
+    margin-top: 30px;
+    padding: 8px;
+    transition-duration: 0.3s;
   }
 
   
@@ -307,30 +354,45 @@ header {
   /* NEWS HOMEPAGE */ 
         .card-home{
           min-height: 25vh;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
           margin: 15px;
           padding: 0;
           color: rgb(146, 141, 141);
           border-radius: 3%;
-          border: 0.5px solid rgb(232, 231, 231);
+          border: 0.5px solid rgb(206, 179, 25);
+          background-color: white;
+        }
+        .news-icon{
+          margin: 0 10px;
+
         }
         .linked{
           text-decoration: none;
           color: rgb(146, 141, 141);
         }
+        .cards-home{
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+        .cards-home2{
+         margin-bottom: 80px;
+         width: 100%;
+        }
         .card-home2{
-          min-height: 60vh;
+          min-height: 40vh;
           justify-content: space-around;
           align-items: center;
           margin: 5px;
           padding: 0;
           color: rgb(146, 141, 141);
           border-radius: 3%;
-          border: 0.5px solid rgb(232, 231, 231);
+          border: 0.5px solid rgb(206, 179, 25);
+          background-color: white;
         }
         .card-home2 .card-title{
-          font-size: 1.5rem;
+          font-size: 1.1rem;
         }
         
         .card-img{
@@ -338,23 +400,27 @@ header {
           object-fit: cover;
           text-align: center;
         }
-        .card-home2 .card-img{
-          
+        .card-img2{
+          min-height: 20vh;
+          object-fit: cover;
+          text-align: center;
         }
         .card-title{
           font-size: 1.8rem;
           margin: 20px;
           color: #2D3B6F;
         }
-        .card-home2 .card-img .card-img-top{
+        .card-img-top2{
           width: 100%;
-          object-fit: contain;
+          height: 20vh;
+          object-fit: cover;
           border-top-left-radius:2% ;
           border-top-right-radius:2% ;
         }
-        .card-img .card-img-top{
+        .card-img-top{
           width: 100%;
-          object-fit: contain;
+          height: 25vh;
+          object-fit: cover;
           border-top-left-radius:2% ;
           border-top-right-radius:2% ;
         }
@@ -393,8 +459,8 @@ header {
         margin-left: 10px;
         color: rgb(206, 179, 25);
       }
-      #title {
-        margin: 15px;
+      .title-home {
+        margin: 50px;
         margin-bottom: 5rem;
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
@@ -618,7 +684,8 @@ text-align: center;
 }
 
 /* Espace membres */
-  
+    
+
 /* End Espace membres */
 @media (max-width: 767px) {
   .site-title {
@@ -847,9 +914,7 @@ text-align: center;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  color: #2D3B6F;
-  gap: 50px;
-
+  justify-content: space-between;
 }
 .events-member{
   background-color: #F4F4F4;
@@ -867,10 +932,11 @@ text-align: center;
   font-weight: 800;
   border-radius: 5px;
   text-align: center;
-  width: 80%;
+  width: 100%;
+  margin-top: 15px;
   border: solid 1px rgb(206, 179, 25);
 }
-.single-event:hover{
+.upcoming-event a:hover{
   background-color: #2D3B6F;
   color: white;
   transition-duration: 0.3s;
@@ -889,14 +955,12 @@ text-align: center;
   text-decoration: none;
   border-radius: 10px;
   border: 1px solid rgb(206, 179, 25) ;
-  width: 80%;
-  text-align: center;
 }
 .other-events:hover{
   color: #2D3B6F;
   background-color: white;
   transition-duration: 0.3s;
-  text-align: center;
+  font-weight: 800;
 }
 
 .meetings-member{
@@ -904,11 +968,9 @@ text-align: center;
   width: 25vw;
   height: 25vh;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
   border-radius: 15px;
-
 }
 .next-meeting{
   display: flex;
@@ -932,6 +994,7 @@ text-align: center;
   color: #2D3B6F;
   background-color: white;
   transition-duration: 0.3s;
+  font-weight: 800;
 }
 
 .area-back{
@@ -940,6 +1003,38 @@ text-align: center;
 .area-back:hover{
     background-color: #e9e7e7;
     transition-duration: 0.3s;
+}
+.summary{
+  background-color: #F4F4F4;
+  width: 25vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 20vh;
+  border-radius: 15px;
+  margin-top: 25px;
+}
+.last-summary{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+
+}
+.messagerie{
+  display: flex;
+  background-color: #F4F4F4;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 25px;
+  width: 35vw;
+}
+.msg{
+  display: flex;
+  flex-direction: column;
 }
 .title-area{
   color: #2D3B6F;
@@ -964,6 +1059,14 @@ a {
 .thumbnail-date-month {
   color: rgb(255, 255, 255);
 }
+
+
+
+/* div,
+span {
+   box-sizing: initial;
+  line-height: 1;
+} */
 
 .thumbnail {
   -webkit-touch-callout: none;
@@ -1099,33 +1202,34 @@ a {
   font-size: 14px !important;
 } 
 
-.summary{
-  width: 20vw;
-  min-height:25vh;
-  background-color:white;
-  border-radius: 25px;
+/* Messagerie  */
+.conversation-container {
+  width: 80%; /* Adjust the width as needed */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  padding: 30px;
 }
-.last-summary{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width:100%;
-  flex-direction: column;
-}
-.summary p{
-  margin: 0;
-}
-.summary-link{
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 20px;
+  width: 40%;
+  border-radius: 15px;
 }
+
+.received {
+  background-color: lightgreen;
+  align-self: flex-start;
+}
+
+.sent {
+  background-color: lightblue;
+  align-self: flex-end;
+}
+
+.message-content {
+  margin-top: 5px;
+}
+

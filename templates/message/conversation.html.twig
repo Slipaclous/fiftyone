@@ -1,13 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Conversation with {{ conversationUser.firstName }} {{ conversationUser.lastName }}</h2>
-    <ul>
+       <h2 class="title-home">Conversation avec 
+        {% if conversationUser.firstName and conversationUser.lastName %}
+            {{ conversationUser.firstName }} {{ conversationUser.lastName }}
+        {% else %}
+            {{ conversationUser.email }}
+        {% endif %}
+    </h2>
+    <div class="conversation-container">
         {% for message in messages %}
-            <li>
-                {{ message.content }} - {{ message.createdAt|date('Y-m-d H:i:s') }}
-            </li>
+            <div class="message {% if message.sender == app.user %}sent{% else %}received{% endif %}">
+                <span class="message-sender">
+                    {% if message.sender == app.user %}
+                        Vous 
+                    {% else %}
+                        {{ message.sender.firstName }} {{ message.sender.lastName }} 
+                    {% endif %}
+                </span>
+                <span class="message-date"> {{ message.createdAt|date('Y-m-d H:i:s') }}</span>
+                <div class="message-content">{{ message.content }}</div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
     {{ render(controller('App\\Controller\\MessageController::reply', { 'receiver': conversationUser })) }}
+
 {% endblock %}

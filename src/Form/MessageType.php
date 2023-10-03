@@ -17,11 +17,10 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'label' => 'Message Content',
                 'attr' => ['rows' => 5], // Adjust as needed for the display
             ])
             ->add('receiver', null, [
-                'label' => 'Recipient',
+                'label' => 'Destinataire',
                 'choice_label' => 'email', // Adjust based on how you want to display the receiver
             ]);
             // ->add('created_at', DateTimeType::class, [

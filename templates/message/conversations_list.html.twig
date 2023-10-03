@@ -1,11 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Users with Conversations</h2>
+    <h2 class="title-home">Liste de vos conversations</h2>
     <ul>
         {% for user in usersWithConversations %}
             <li>
-                <a href="{{ path('message_show_conversation', {'id': user.id}) }}">{{ user.firstName }} {{ user.lastName }}</a>
+                <a href="{{ path('message_show_conversation', {'id': user.id}) }}">
+                    {% if user.firstName and user.lastName %}
+                        {{ user.firstName }} {{ user.lastName }}
+                        {{user.getAvatar}}
+                    {% else %}
+                        {{ user.email }}
+                        {{ user.getAvatar }}
+                    {% endif %}
+                </a>
             </li>
         {% endfor %}
     </ul>
