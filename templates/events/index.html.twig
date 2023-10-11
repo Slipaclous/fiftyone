@@ -13,27 +13,27 @@
    <div class="custom-carousel">
        
         <div class="carousel-slide">
-            <img src="/images/{{ events[1].cover }}" alt="Event Cover" class="carousel-image">
+            <img src="/images/{{ closestEvents[1].cover }}" alt="Event Cover" class="carousel-image">
             <div class="carousel-info">
-                <h3 class="title-carousel">{{ events[1].getTitre() }}</h3>
-                <p class="date-show">Le {{ events[1].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': events[1].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <h3 class="title-carousel">{{ closestEvents[1].getTitre() }}</h3>
+                <p class="date-show">Le {{ closestEvents[1].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[1].getSlug() }) }}" class="btn-pres">En savoir plus</a>
             </div>
         </div>
          <div class="carousel-slide">
-            <img src="/images/{{ events[0].cover }}" alt="Event Cover" class="carousel-image">
+            <img src="/images/{{ closestEvents[0].cover }}" alt="Event Cover" class="carousel-image">
             <div class="carousel-info">
-                <h3 class="title-carousel">{{ events[0].getTitre() }}</h3>
-                <p class="date-show">Le {{ events[0].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': events[0].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <h3 class="title-carousel">{{ closestEvents[0].getTitre() }}</h3>
+                <p class="date-show">Le {{ closestEvents[0].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[0].getSlug() }) }}" class="btn-pres">En savoir plus</a>
             </div>
         </div>
         <div class="carousel-slide">
-            <img src="/images/{{ events[2].cover }}" alt="Event Cover" class="carousel-image">
+            <img src="/images/{{ closestEvents[2].cover }}" alt="Event Cover" class="carousel-image">
             <div class="carousel-info">
-                <h3 class="title-carousel">{{ events[2].getTitre() }}</h3>
-                <p class="date-show">Le {{ events[2].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': events[2].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <h3 class="title-carousel">{{ closestEvents[2].getTitre() }}</h3>
+                <p class="date-show">Le {{ closestEvents[2].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[2].getSlug() }) }}" class="btn-pres">En savoir plus</a>
             </div>
         </div>
       <div class="controls">
