@@ -7,6 +7,41 @@
     {% endif %}{% endblock %}
 
 {% block body %}
+
+<div class="example"></div>
+<div class="last-news">
+<a href="{{ path('news_show', { 'slug': lastNews[0].getSlug }) }}">
+  <div class="latest">
+    <div class="image" style="background-image: url('/images/{{ lastNews[0].cover}}');"></div>
+    <div class="content-news">
+      <h3>{{ lastNews[0].titre }}</h3>
+      <p>{{ lastNews[0].date | date('d-m-Y') }}</p>
+      <p>{{ lastNews[0].description | striptags | slice(0, 100) ~ '...' | raw }}</p>
+    </div>
+  </div>
+  </a>
+  <div class="last-2">
+    <div class="first-last">
+  <a href="{{ path('news_show', { 'slug': lastNews[1].getSlug }) }}">
+      <div class="image" style="background-image: url('/images/{{ lastNews[1].cover }}');"></div>
+      <div class="content-news">
+        <h3>{{ lastNews[1].titre }}</h3>
+        <p>{{ lastNews[1].date | date('d-m-Y') }}</p>
+    </a>
+      </div>
+    </div>
+    <div class="second-last">
+    <a href="{{ path('news_show', { 'slug': lastNews[2].getSlug }) }}">
+      <div class="image" style="background-image: url('/images/{{ lastNews[2].cover }}');"></div>
+      <div class="content-news">
+        <h3>{{ lastNews[2].titre }}</h3>
+        <p>{{ lastNews[2].date | date('d-m-Y') }}</p>
+      <a/>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="row">
 

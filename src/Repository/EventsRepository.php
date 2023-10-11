@@ -48,6 +48,16 @@ class EventsRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+    public function findClosestEvents(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.date >= :currentDate')
+            ->setParameter('currentDate', new \DateTime())
+            ->orderBy('e.date', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Events[] Returns an array of Events objects

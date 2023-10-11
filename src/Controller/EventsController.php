@@ -30,6 +30,7 @@ class EventsController extends AbstractController
     public function index(EventsRepository $eventsRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $searchQuery = $request->query->get('search');
+        $closestEvents = $eventsRepository->findClosestEvents();
 
         // Crée le constructeur de requête pour récupérer les événements
         $eventsQueryBuilder = $eventsRepository->createQueryBuilder('e')
@@ -50,6 +51,7 @@ class EventsController extends AbstractController
 
         return $this->render('events/index.html.twig', [
             'events' => $pagination,
+            'closestEvents' => $closestEvents,
         ]);
     }
     //route

@@ -3,33 +3,144 @@
 {% block title %}ÉVENEMENTS{% endblock %}
 
 {% block body %}
-<div class="container">
-  <div class="row">
-  <form action="{{ path('app_events') }}" method="GET">
-    <div class="form-group">
-        <input type="text" name="search" placeholder="Chercher un évènement ..." class="form-control">
-    </div>
-    <button type="submit" class="bouton-voir">Rechercher</button>
-</form>
-    {% for events in events %}
-      <div class="col-md-12 mx-auto">
-        <div class="card mb-4">
-        <p class="date-show">Le {{events.getDate|date('d-m-Y')}}</p>
-          <img src="/images/{{ events.cover }}" class="card-img-top" alt="News Image">
-          <div class="card-body">
-            <h5 class="card-title">{{ events.getTitre() }}</h5>
-            <p class="card-text">{{ events.getDescription()|striptags|raw  }}</p>
-            <div class="bout">
-              <a href="{{ path('app_events_show', { 'slug': events.getSlug() }) }}" class="bouton-voir">Voir l'actualité</a>
+
+
+
+
+
+
+
+   <div class="custom-carousel">
+       
+        <div class="carousel-slide">
+            <img src="/images/{{ events[1].cover }}" alt="Event Cover" class="carousel-image">
+            <div class="carousel-info">
+                <h3 class="title-carousel">{{ events[1].getTitre() }}</h3>
+                <p class="date-show">Le {{ events[1].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': events[1].getSlug() }) }}" class="btn-pres">En savoir plus</a>
             </div>
-          </div>
         </div>
+         <div class="carousel-slide">
+            <img src="/images/{{ events[0].cover }}" alt="Event Cover" class="carousel-image">
+            <div class="carousel-info">
+                <h3 class="title-carousel">{{ events[0].getTitre() }}</h3>
+                <p class="date-show">Le {{ events[0].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': events[0].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+            </div>
+        </div>
+        <div class="carousel-slide">
+            <img src="/images/{{ events[2].cover }}" alt="Event Cover" class="carousel-image">
+            <div class="carousel-info">
+                <h3 class="title-carousel">{{ events[2].getTitre() }}</h3>
+                <p class="date-show">Le {{ events[2].getDate()|date('d-m-Y') }}</p>
+                <a href="{{ path('app_events_show', { 'slug': events[2].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+            </div>
+        </div>
+      <div class="controls">
+        <button class="carousel-control prev">&lt;</button>
+        <button class="carousel-control next">&gt;</button>
       </div>
-    {% endfor %}
+    </div> 
+<div class="container">
+
+
+
+<div class="container py-5">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			{% for events in events %}
+					<div class="col">
+            <a href="{{ path('app_events_show', { 'slug': events.getSlug() }) }}">
+						<div class="cardi parallax h-100" style="position: relative">
+							<div class="bottom-right">{{ events.date|format_date('none', 'd MMMM Y', null, 'gregorian', 'fr') }}</div>
+							<div class="top-right">
+								<div class="tags-list mb-2"></div>
+							</div>
+							<div class="image-container">
+								<div class="bottom-left">
+									<div class="thumbnail" style="background-color: rgb(206, 179, 25)">
+										<div class="thumbnail-date">
+											<span class="thumbnail-date-day">{{ events.date|format_date('none', 'd', null, 'gregorian', 'fr') }}</span>
+											<span class="thumbnail-date-month">{{ events.date|format_date('none', 'MMMM', null, 'gregorian', 'fr') }}</span>
+										</div>
+									</div>
+								</div>
+								
+									<img src="/images/{{ events.cover }}" class="card-img-top" alt="Event Image"/>
+								
+								<div class="image-overlay text-over text-center d-flex justify-content-center align-items-center text-uppercase">
+									<div>
+										{{ events.titre }}
+									</div>
+								</div>
+							</div>
+						</div>
+				</a>
+				    </div>
+			{% endfor %}
+		</div>
+	</div>
+    
     <div class="pagination">
     {{ knp_pagination_render(events) }}
 </div>
   </div>
 </div>
+{% block javascripts %}
+<script>
+const cards = document.querySelectorAll('.parallax');
+
+cards.forEach(card => {
+  card.addEventListener('mousemove', function(e) {
+    const rect = card.getBoundingClientRect();
+    const relX = e.clientX - rect.left;
+    const relY = e.clientY - rect.top;
+    const width = rect.width;
+    const height = rect.height;
+    const depth = 50; // Adjust this value for more or less movement
+    
+    const moveX = (relX - width / 2) / width * depth;
+    const moveY = (relY - height / 2) / height * depth;
+    
+    card.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+
+  card.addEventListener('mouseleave', function() {
+    card.style.transform = `translate(0px, 0px)`;
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
+
+  
+    let activeSlide = 1; // Set the middle slide as active
+
+    function updateSlides() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next');
+        });
+
+        slides[activeSlide].classList.add('active');
+        slides[(activeSlide + slides.length - 1) % slides.length].classList.add('prev');
+        slides[(activeSlide + 1) % slides.length].classList.add('next');
+    }
+
+    prevBtn.addEventListener('click', function() {
+        activeSlide = (activeSlide + slides.length - 1) % slides.length;
+        updateSlides();
+    });
+
+    nextBtn.addEventListener('click', function() {
+        activeSlide = (activeSlide + 1) % slides.length;
+        updateSlides();
+    });
+
+    updateSlides(); // Initialize
+});
+
+</script>
+{% endblock %}
+
 {% endblock %}
 

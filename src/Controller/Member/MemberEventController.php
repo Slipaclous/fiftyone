@@ -24,26 +24,33 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MemberEventController extends AbstractController
 {
+    // Action pour afficher la liste des événements
     #[Route('/member-events', name: 'app_member_event')]
     public function index(MemberEventsRepository $eventRepository, EventParticipantRepository $participantRepository, Security $security): Response
     {
+        // Récupérer l'utilisateur connecté
         $user = $security->getUser();
         $events = $eventRepository->findAll();
 
+        // Récupérer l'état de participation de l'utilisateur connecté
         $participationStatus = [];
 
+        // Si l'utilisateur est connecté, vérifier s'il a participé à chaque événement
         if ($user) {
             foreach ($events as $event) {
                 $participationStatus[$event->getId()] = $participantRepository->hasUserParticipated($user, $event);
             }
         }
 
+        // Afficher la liste des événements
         return $this->render('member-event/index.html.twig', [
             'events' => $events,
             'user' => $user,
             'participationStatus' => $participationStatus,
         ]);
     }
+
+    // Action pour afficher les détails d'un événement
     #[Route('/member-event/{id}', name: 'app_member_event_details')]
 public function showEventDetails(MemberEvents $event, EventParticipantRepository $participantRepository, Request $request, EntityManagerInterface $entityManager): Response
 {
@@ -68,16 +75,19 @@ public function showEventDetails(MemberEvents $event, EventParticipantRepository
         'participantForm' => $participantForm->createView(),
     ]);
 }
+
+// Edition de la liste des invités tous les commentaires en français ç partir d'ici
+
 #[Route('/edit-guest-list/{id}', name: 'app_edit_guest_list')]
 public function editGuestList(EventParticipant $eventParticipant, Request $request, EntityManagerInterface $entityManager): Response
 {
-    // Check if the current user has permission to edit this guest list
+    //
     if ($this->getUser() !== $eventParticipant->getParticipant()) {
         throw new AccessDeniedException('You do not have permission to edit this guest list.');
     }
 
     $form = $this->createForm(GuestListType::class, $eventParticipant);
-
+    //
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         // Get the submitted data

@@ -4,13 +4,18 @@
 
 {% block body %}
   <div class="container">
-    <h1>{{ event.Titre }}</h1>
+    <h1 class="title-home">{{ event.Titre }}</h1>
     <div class="imgcover">
     <img src="/images/{{ event.getCover }}" class="cover" alt="dsfqsd">
     </div>
-    <h3>qsdqsd</h3>
+    <h3 class="member-title">qsdqsd</h3>
     <p>{{ event.description|raw }}</p>
-    <p>Date: {{ event.date|date('Y-m-d') }}</p>
+    <p>{{ event.date|date('Y-m-d') }}</p>
+    <!-- Add the reservation button -->
+    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Faire une réservation</a>
+
+    <!-- Add the reservation modification link -->
+    <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Modifier ma réservation</a>
     <h3>Images:</h3>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <ol class="carousel-indicators">
@@ -34,11 +39,7 @@
         <span class="visually-hidden">Next</span>
       </a>
     </div>
-    <!-- Add the reservation button -->
-    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Faire une réservation</a>
-
-    <!-- Add the reservation modification link -->
-    <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Modifier ma réservation</a>
+    
     
 
   </div>

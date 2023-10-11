@@ -26,6 +26,10 @@ class MemberAreaController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(MemberEventsRepository $eventsRepository, MeetingSummaryRepository $meetingSummaryRepository, MettingRepository $meetingRepository): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MEMBER')) {
+            // Redirect the user to the 403 page
+            return new Response($this->renderView('bundles/TwigBundle/Exception/error403.html.twig'), Response::HTTP_FORBIDDEN);
+        }
         // Récupérer le prochain événement
         $nextEvent = $eventsRepository->findNextEvent();
         

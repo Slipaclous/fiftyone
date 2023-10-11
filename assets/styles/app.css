@@ -394,6 +394,10 @@ header {
         .card-home2 .card-title{
           font-size: 1.1rem;
         }
+        .title-news{
+          font-size: 2rem;
+          text-transform: uppercase;
+        }
         
         .card-img{
           min-height: 25vh;
@@ -470,6 +474,92 @@ header {
       .new-icon{
         color: #2D3B6F;
       }
+
+/* News index */
+.last-news {
+  display: flex;
+  height: 45vh;
+  width: 100%;
+  color: white;
+}
+.last-news a{
+  text-decoration: none;
+  color: white;
+}
+
+.latest {
+  width: 50vw;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* Hide overflowing content */
+  display: flex;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: center center;
+  background-size: 140%;
+  filter: brightness(55%);
+  transition: background-size 1s ease-in-out;
+}
+
+.latest:hover .image {
+  background-size: 150%;
+}
+
+.content-news {
+  position: relative; /* Ensure the text is positioned relative to .latest */
+  z-index: 1; /* Keep the text on top */
+  align-self: flex-end; /* Align the content-news div to the bottom */
+  margin-top: auto;
+  margin-left: 20px;
+}
+.content-news h3{
+  font-size: 1.8rem;
+}
+
+.last-2 {
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-last, .second-last {
+  position: relative;
+  height: 50%;
+  display: flex;
+}
+
+.first-last .image, .second-last .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: center center;
+  background-size: 100%;
+  filter: brightness(55%);
+  transition: background-size 1s ease;
+}
+
+.first-last:hover .image, .second-last:hover .image {
+  background-size: 110%;
+}
+
+.first-last .content-news, .second-last .content-news {
+  position: relative; /* Ensure the text is positioned relative to .latest */
+  z-index: 1; /* Keep the text on top */
+  align-self: flex-end; /* Align the content-news div to the bottom */
+  margin-top: auto;
+  margin-left: 20px;
+}
+
+
 
 
 /* Show actualités */
@@ -1047,6 +1137,45 @@ text-align: center;
 a {
   text-decoration: none;
 }
+@media only screen and (max-width: 768px) {
+  .container-member {
+    width: 90%;
+  }
+  .events-member {
+    width: 90%;
+    height: 30vh;
+  }
+  .meetings-member {
+    width: 90%;
+    height: 30vh;
+  }
+  .summary {
+    width: 90%;
+  }
+  .messagerie {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container-member {
+    width: 100%;
+  }
+  .events-member {
+    width: 100%;
+    height: 40vh;
+  }
+  .meetings-member {
+    width: 100%;
+    height: 40vh;
+  }
+  .summary {
+    width: 100%;
+  }
+  .messagerie {
+    width: 100%;
+  }
+}
 
 .container {
   max-width: 1020px !important;
@@ -1154,10 +1283,12 @@ span {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(0 0 0 / 57%);
+  background-color: rgb(0 0 0 / 47%);
   z-index: 1;
 }
-
+.cardi.parallax {
+  transition: transform 0.3s ease-out; /* smoothens the transition */
+}
 .image-container .card-img-top {
   position: relative;
   z-index: 0;
@@ -1232,4 +1363,115 @@ span {
 .message-content {
   margin-top: 5px;
 }
+/* Custom carousel styles */
+
+
+.custom-carousel {
+    position: relative;
+    width: 80%; /* Change to your preference */
+    margin:45px auto;
+    min-height: 55vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;  /* Adjust based on your desired carousel height */
+
+}
+
+.carousel-slide {
+    position: absolute;
+    width: 30%; /* Divided for three slides */
+    top: 0;
+    bottom: 0;
+    transition: all 0.3s;
+    opacity: 0.5; /* Make side slides less visible */
+    transform: scale(0.8);
+    border: 1px solid #2D3B6F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Give a shadow to make it look like a card */
+    background: #ffffff;  /* Background color for card */
+}
+.carousel-slide .active{
+  justify-content: space-between;
+}
+.carousel-info{
+  text-align: center;
+  margin: 20px;
+}
+.carousel-slide .carousel-info {
+    display: none; /* By default hide the carousel info */
+}
+
+/* Position for the central slide */
+.carousel-slide.active {
+    left: 33.33%;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-slide.active .carousel-info {
+    display: block; /* Show info for the central slide */
+}
+
+/* Position for the left slide */
+.carousel-slide.prev {
+    left: 0;
+}
+
+/* Position for the right slide */
+.carousel-slide.next {
+    left: 66.66%;
+}
+
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 48.5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translate(-50%,-400%);
+    
+    text-align: center;
+    
+}
+
+.carousel-control {
+    background-color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border: 1px solid #2D3B6F ;
+    border-radius: 35%;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bolder;
+}
+.carousel-control:hover{
+  background-color: #2D3B6F;
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 45%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.title-carousel{
+  color: #2D3B6F;
+  font-size: 1.6rem;
+  font-weight: bolder;
+  margin: 20px;
+  text-transform: uppercase;
+}
+.carousel-info .btn-pres {
+
+}
+
 

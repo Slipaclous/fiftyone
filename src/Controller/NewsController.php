@@ -32,6 +32,7 @@ class NewsController extends AbstractController
         $selectedCategorySlug = $request->query->get('category');
         $selectedCategory = null;
         $searchQuery = $request->query->get('search');
+        $lastnews = $newsRepository->findThirdLastNew();
 
         // Création de la requête pour récupérer les news
         $newsQueryBuilder = $newsRepository->createQueryBuilder('n')
@@ -61,6 +62,7 @@ class NewsController extends AbstractController
             'news' => $pagination,
             'categories' => $categories,
             'selectedCategory' => $selectedCategory,
+            'lastNews' => $lastnews,
         ]);
     }
     /**
