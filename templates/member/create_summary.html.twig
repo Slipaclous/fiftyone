@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Create Meeting Summary{% endblock %}
+{% block title %}Ajouter un PV{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2 class="mt-4">Create Meeting Summary</h2>
+        <h2 class="mt-4">Ajouter un PV</h2>
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Create Summary</button>
+        <button type="submit" class="btn btn-primary">Créer le PV</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -5,7 +5,7 @@
     <ul>
         {% for conversation in conversations %}
             <li>
-                <strong>Conversation with {{ conversation.user.firstName }} {{ conversation.user.lastName }}</strong>
+                <strong>Conversation avec {{ conversation.user.firstName }} {{ conversation.user.lastName }}</strong>
                 <ul>
                     {% for message in conversation.messages %}
                         <li>

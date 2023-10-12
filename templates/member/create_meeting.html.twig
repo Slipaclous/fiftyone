@@ -2,17 +2,17 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Create a New Meeting{% endblock %}
+{% block title %}Ajouter une réunion {% endblock %}
 
 {% block body %}
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <div class="container">
-        <h2 class="mt-4">Create a New Meeting</h2>
+        <h2 class="mt-4">Ajouter une réunion</h2>
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Create Meeting</button>
+        <button type="submit" class="btn btn-primary">Ajouter la réunion</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

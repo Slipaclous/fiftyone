@@ -5,14 +5,14 @@
     <h1>{{ event.titre }}</h1>
     <p>{{ event.description }}</p>
     <p>Date: {{ event.date|date('Y-m-d') }}</p>
-    <p>Available places: {{ event.places }}</p>
+    <p>Places disponible: {{ event.places }}</p>
     {% if not participant %}
     <form action="{{ path('app_participate', {'id': event.id}) }}" method="post">
-        <button type="submit">Participate</button>
+        <button type="submit">Participer</button>
     </form>
 {% else %}
     <p>Vous participez déjà à cet évènement.</p>
-    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="btn btn-primary">Modifier mes guests</a>
+    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="btn btn-primary">Modifier mes invités</a>
     <form action="{{ path('app_cancel_participation', {'id': participant.id}) }}" method="post">
         <button type="submit" class="btn btn-danger">Annuler ma participation</button>
     </form>

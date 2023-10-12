@@ -18,15 +18,15 @@
             <div class="upcoming-event">
                   <h4>Prochain évènement : </h4>
                   <p>{{ event.getTitre }} {{ event.date|date('d-m-Y') }}</p>
-                <a href="{{ path('app_member_event_details', {'id': event.id}) }}" class="single-event">
+                <a href="{{ path('app_member_event_details', {'id': event.id}) }}" class="single-event button">
                     Voir l'évènement
                 </a>
             {% else %}
-                <p>No upcoming events.</p>
+                <p>Pas d'évènements à venir.</p>
             {% endif %}
             </div>
               <div>
-            <a href="{{ path('app_member_event') }}" class="other-events" >Voir les évènements</a>
+            <a href="{{ path('app_member_event') }}" class="other-events button-2" >Voir les évènements</a>
               </div>
         </div>
         <div class="meetings-member">
@@ -86,7 +86,7 @@
                 <p>Aucune réunion à venir.</p>
                 
             {% endif %}
-            <a href="{{path("upcoming_meetings")}}"class="meeting-button">Prochaines réunions </a>
+            <a href="{{path("upcoming_meetings")}}"class="meeting-button button">Prochaines réunions </a>
             </div>
         </div>
 
@@ -127,11 +127,11 @@
                     <p>{{ most_recent_meeting_summary.getDate()|format_date('none', 'd-M-Y', null, 'gregorian', 'fr') }}</p>
             </div>
             <div class="summary-link">
-                    <a href="{{ path('pdf_display', {'pdf': most_recent_meeting_summary.getPdf()}) }}" target="_blank" class="single-event">Voir le PV</a>
+                    <a href="{{ path('pdf_display', {'pdf': most_recent_meeting_summary.getPdf()}) }}" target="_blank" class="other-events button-2">Voir le PV</a>
                 {% else %}
                     <p>Aucun PV disponible.</p>
                 {% endif %}
-                    <a href="{{path('summary_list')}}" class="other-events">Tous les pv </a>
+                    <a href="{{path('summary_list')}}" class="single-event button">Tous les pv </a>
             </div>
         </div>
 
@@ -140,8 +140,8 @@
                 <svg width="150px" height="150px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M896 192H128c-35.3 0-64 28.7-64 64v512c0 35.3 28.7 64 64 64h576.6l191.6 127.7L896 832c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64z" fill="#3D5AFE" /><path d="M640 512c0-125.4-51.5-238.7-134.5-320H128c-35.3 0-64 28.7-64 64v512c0 35.3 28.7 64 64 64h377.5c83-81.3 134.5-194.6 134.5-320z" fill="#536DFE" /><path d="M256 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#FFFF8D" /><path d="M512 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#FFFF00" /><path d="M768 512m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" fill="#FFEA00" /></svg>
             </div>
             <div class="msg">
-                <a href="{{ path('message_new') }}" class="other-events">Nouveau message</a>
-                <a href="{{ path('message_conversations')}}" class="single-event">Voir mes conversations</a>
+                <a href="{{ path('message_new') }}" class="other-events button-2">Nouveau message</a>
+                <a href="{{ path('message_conversations')}}" class="single-event button">Voir mes conversations</a>
             </div>
         
         </div>

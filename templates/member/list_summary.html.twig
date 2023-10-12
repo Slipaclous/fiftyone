@@ -2,22 +2,23 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Meeting Summaries{% endblock %}
+{% block title %}PV des réunions{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2 class="mt-4">Meeting Summaries</h2>
+        <h2 class="mt-4">PV des réunions</h2>
 
         <ul>
+                    <a href="{{path('create_summary')}}">Ajouter un PV</a>
             {% for summary in summaries %}
                 <li>
                     <strong>Date:</strong> {{ summary.date|date('d-m-Y') }}
                     <br>
                     {% if summary.pdf %}
-                        <strong>PDF URL:</strong> 
-                        <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">View PDF</a>
+                        <strong>PDf:</strong> 
+                        <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">Voir le PDF</a>
                     {% else %}
-                        <em>No PDF uploaded</em>
+                        <em>Pas de PV en ligne</em>
                     {% endif %}
                 </li>
             {% endfor %}

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Make a Reservation</h1>
+    <h1>Faire une réservation</h1>
 
     {{ form_start(form) }}
 
@@ -9,7 +9,7 @@
     {{ form_row(form.lastName, {'label': 'Last Name'}) }}
     {{ form_row(form.numberOfPeople, {'label': 'Number of People'}) }}
 
-    <button type="submit" class="btn btn-primary">Submit Reservation</button>
+    <button type="submit" class="btn btn-primary">Réserver</button>
 
     {{ form_end(form) }}
 {% endblock %}

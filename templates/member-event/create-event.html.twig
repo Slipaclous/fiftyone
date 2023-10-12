@@ -4,9 +4,9 @@
 
 {% block body %}
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
-    <h2>Create Event</h2>
+    <h2>Création d'évènements</h2>
     {{ form_start(event_form) }}
     {{ form_widget(event_form) }}
-    <button type="submit">Create Event</button>
+    <button type="submit">Créer l'évènement</button>
     {{ form_end(event_form) }}
 {% endblock %}

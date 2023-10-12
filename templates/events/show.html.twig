@@ -12,7 +12,7 @@
     <p>{{ event.description|raw }}</p>
     <p>{{ event.date|date('Y-m-d') }}</p>
     <!-- Add the reservation button -->
-    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="btn btn-primary">Faire une réservation</a>
+    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="button-2">Faire une réservation</a>
 
     <!-- Add the reservation modification link -->
     <div>
@@ -35,11 +35,11 @@
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Précédent</span>
       </a>
       <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Suivant</span>
       </a>
     </div>
     

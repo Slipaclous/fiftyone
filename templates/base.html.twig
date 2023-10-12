@@ -16,12 +16,23 @@
 
     </head>
     <body>{% include "partials/header.html.twig" %}
-        {% block body %}
         {% for flashMessage in app.flashes('success') %}
             <div class="alert alert-success" role="alert">
                 {{ flashMessage }}
             </div>
         {% endfor %}
+        {% for flashMessage in app.flashes('danger') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.flashes('alert') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flashMessage }}
+            </div>
+            
+        {% endfor %}
+        {% block body %}
         {% endblock %}
         {% include "partials/footer.html.twig" %}
          {{ encore_entry_script_tags('app') }}
