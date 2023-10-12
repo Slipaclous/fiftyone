@@ -10,7 +10,8 @@
     font-family: 'Manrope', sans-serif;
 }
 body {
-    background-color: #F4F4F4;
+  background: linear-gradient(#fff,#a8d1ff);
+
     display: flex;
     flex-direction: column;
 
@@ -24,7 +25,39 @@ body {
 }
 
 
+/*button  */ 
 
+.button {
+  position: relative;
+  color: #2D3B6F;
+  border: 3px solid #2D3B6F;
+  background: transparent;
+  overflow: hidden;
+  transition: color 0.5s ease-in, transform 0.5s ease-in-out;
+  padding: 10px;
+ 
+  
+}
+.button::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  
+  transform: translate(-10px, 33px);
+  transition: transform 0.45s ease-in;
+}
+.button:hover::before {
+  content: "";
+  transform: translate(-10px, -9px);
+  z-index: -1;
+}
+.button:hover {
+  color: white;
+}
+.button:active{
+ transform: scale(0.9);
+}
 /* header and footer CSS */
 .menu{
   color: #F4F4F4;
