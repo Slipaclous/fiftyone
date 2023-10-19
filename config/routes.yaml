@@ -21,6 +21,9 @@ admin_news:
     name_prefix: admin_
     methods: [GET, POST, PUT, DELETE]
 
+message_show_conversation:
+    path: /message/conversation/{id}
+    controller: App\Controller\MessageController::showConversation
 
 delete_guest:
     path: /delete-guest/{id}

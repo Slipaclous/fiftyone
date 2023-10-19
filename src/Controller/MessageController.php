@@ -32,7 +32,7 @@ class MessageController extends AbstractController
     public function newMessage(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
         $message = new Message();
-
+        $message->setIsRead(false); // Setting the value explicitly
         // Fetch users to populate the receiver dropdown
         $users = $userRepository->findAll();
 
@@ -105,17 +105,27 @@ public function reply(Message $message, Request $request, EntityManagerInterface
 
     #[Route('message/conversations', name: 'message_conversations')]
     public function showConversations(MessageRepository $messageRepository): Response
-    {
+{
     // Get the current logged-in user
     $user = $this->getUser();
+
+    // If the user is not logged in or not found, throw an appropriate exception or handle the case
+    if (!$user) {
+        throw $this->createNotFoundException('User not found');
+    }
 
     // Fetch conversations for the current user
     $conversations = $messageRepository->findConversationsForUser($user);
 
-    // Extract users from conversations
+    // Extract users from conversations and get unread count
     $usersWithConversations = [];
     foreach ($conversations as $conversation) {
-        $usersWithConversations[] = $conversation['user'];
+        $currentUser = $conversation['user'];
+        $unreadCount = $messageRepository->getUnreadCountForUserInConversation($user, $currentUser);
+        $usersWithConversations[] = [
+            'user' => $currentUser,
+            'unreadCount' => $unreadCount
+        ];
     }
 
     return $this->render('message/conversations_list.html.twig', [
@@ -133,6 +143,15 @@ public function showConversation(int $id, MessageRepository $messageRepository, 
 
     // Fetch messages for the given conversation
     $messages = $messageRepository->findMessagesForConversation($user, $conversationUser);
+
+    // Mark messages as read
+    foreach ($messages as $message) {
+        if (!$message->getIsRead() && $message->getReceiver() === $user) {
+            $message->setIsRead(true);
+            $entityManager->persist($message);
+        }
+    }
+    $entityManager->flush();
 
     return $this->render('message/conversation.html.twig', [
         'messages' => $messages,

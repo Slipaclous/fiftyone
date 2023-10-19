@@ -28,6 +28,9 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     private ?User $receiver = null;
 
+    #[ORM\Column]
+    private ?bool $isRead = false;
+
 
     public function getId(): ?int
     {
@@ -78,6 +81,18 @@ class Message
     public function setReceiver(?User $receiver): static
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getIsRead(): ?bool
+    {
+        return $this->isRead;
+    }
+
+    public function setIsRead(bool $isRead): self
+    {
+        $this->isRead = $isRead;
 
         return $this;
     }

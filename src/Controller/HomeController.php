@@ -15,7 +15,7 @@ class HomeController extends AbstractController
         $carouselImages = $carouselRepository->findAll();
         
         // Retrieve the third last news
-        $news = $newsRepository->findThirdLastNews();
+        $news = $newsRepository->findThirdLastNew();
         // Retrieve the next three news
         $newsi = $newsRepository->findNextThreeNews();
 

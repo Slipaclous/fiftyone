@@ -5,8 +5,10 @@
 {% block body %}
 
 
-
-  
+<div class="bandeau">
+  <img src="/images/bandoo.jpg" class="img-bandeau" alt="">
+  <h4>Évènements</h4>
+</div>
    <div class="custom-carousel">
        
         <div class="carousel-slide">
@@ -14,7 +16,7 @@
             <div class="carousel-info">
                 <h3 class="title-carousel">{{ closestEvents[1].getTitre() }}</h3>
                 <p class="date-show">Le {{ closestEvents[1].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': closestEvents[1].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[1].getSlug() }) }}" class="btn-pres button">En savoir plus</a>
             </div>
         </div>
          <div class="carousel-slide">
@@ -22,7 +24,7 @@
             <div class="carousel-info">
                 <h3 class="title-carousel">{{ closestEvents[0].getTitre() }}</h3>
                 <p class="date-show">Le {{ closestEvents[0].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': closestEvents[0].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[0].getSlug() }) }}" class="btn-pres button">En savoir plus</a>
             </div>
         </div>
         <div class="carousel-slide">
@@ -30,7 +32,7 @@
             <div class="carousel-info">
                 <h3 class="title-carousel">{{ closestEvents[2].getTitre() }}</h3>
                 <p class="date-show">Le {{ closestEvents[2].getDate()|date('d-m-Y') }}</p>
-                <a href="{{ path('app_events_show', { 'slug': closestEvents[2].getSlug() }) }}" class="btn-pres">En savoir plus</a>
+                <a href="{{ path('app_events_show', { 'slug': closestEvents[2].getSlug() }) }}" class="btn-pres button">En savoir plus</a>
             </div>
         </div>
       <div class="controls">
@@ -46,8 +48,8 @@
 <div class="container py-5">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			{% for events in events %}
-					<div class="col">
-            <a href="{{ path('app_events_show', { 'slug': events.getSlug() }) }}">
+					<div class="col ">
+            <a href="{{ path('app_events_show', { 'slug': events.getSlug() }) }}" class="events-cards">
 						<div class="cardi parallax h-100" style="position: relative">
 							<div class="bottom-right">{{ events.date|format_date('none', 'd MMMM Y', null, 'gregorian', 'fr') }}</div>
 							<div class="top-right">
@@ -55,7 +57,7 @@
 							</div>
 							<div class="image-container">
 								<div class="bottom-left">
-									<div class="thumbnail" style="background-color: rgb(206, 179, 25)">
+									<div class="thumbnail" style="background-color: #2D3B6F">
 										<div class="thumbnail-date">
 											<span class="thumbnail-date-day">{{ events.date|format_date('none', 'd', null, 'gregorian', 'fr') }}</span>
 											<span class="thumbnail-date-month">{{ events.date|format_date('none', 'MMMM', null, 'gregorian', 'fr') }}</span>

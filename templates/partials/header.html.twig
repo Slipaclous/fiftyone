@@ -9,9 +9,9 @@
         <span class="navicon"></span>
       </label>
       
+      <img src="/images/logo3.png" class="logo-tel" alt="logo fifty-one">
       <ul class="site-links">
-        <li><a href="{{ path('home') }}"><img class="logo-menu" src="/images/logo3.png" alt=""></a></li>
-        <li><a href="{{ path('home') }}">Accueil</a></li>
+        <li><a href="{{ path('home') }}"><img class="logo-menu" src="/images/logo3.png" alt="logo fifty-one"></a></li>
         <li><a href="{{ path('app_presentation') }}">Présentation</a></li>
         <li><a href="{{ path('app_events') }}">Évènements</a></li>
         <li><a href="{{ path('news_index') }}">Actualités</a></li>
@@ -20,20 +20,21 @@
       </ul>
       {% if app.user %}
           <div class="info-user">
+              
+              
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink">
             <li class="nav-item dropdown">
               {% if app.user.firstName and app.user.lastName %}
-                {{ app.user.firstName }} {{ app.user.lastName }}
+                <p class="users-p">{{ app.user.firstName }} {{ app.user.lastName }}</p>
               {% else %}
-                {{ app.user.email }}
+                <p class="users-p">{{ app.user.email }}</p>
               {% endif %}
-              
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink"></a>
-              
               {% if app.user.avatar %}
                 <img src="{{ asset(app.user.avatar) }}" alt="avatar" class="avatar" height="50" width="50">
               {% else %}
                 <img src="{{ asset('images/avatar.png') }}" class="avatar" height="50" width="50" alt="avatar">
               {% endif %}
+              </a>
               
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
                 <a href="{{ path('admin') }}" class="dropdown-item">Tableau d'administration du site</a>
@@ -54,5 +55,22 @@
   
   {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+     <script>
+    console.log('hello')
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('#menu-toggle');
+      const logoTel = document.querySelector('.logo-tel');
+    console.log('hello')
+      menuToggle.addEventListener('change', function() {
+        if (menuToggle.checked) {
+          logoTel.style.display = 'none';
+          console.log('checked');
+        } else {
+          logoTel.style.display = 'block';
+          console.log('not checked');
+        }
+      });
+    });
+  </script>
   {% endblock %}
 </header>

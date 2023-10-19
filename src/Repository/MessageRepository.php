@@ -69,6 +69,18 @@ class MessageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function getUnreadCountForUserInConversation(User $recipient, User $sender): int
+    {
+        return $this->createQueryBuilder('m')
+            ->select('COUNT(m.id)')
+            ->where('m.receiver = :receiver')
+            ->andWhere('m.sender = :sender')
+            ->andWhere('m.isRead = false') // Assuming 'isRead' is a boolean column
+            ->setParameter('receiver', $recipient)
+            ->setParameter('sender', $sender)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 
 //    /**
 //     * @return Message[] Returns an array of Message objects

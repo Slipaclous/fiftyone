@@ -3,16 +3,20 @@
 {% block body %}
     <h2 class="title-home">Liste de vos conversations</h2>
     <ul>
-        {% for user in usersWithConversations %}
+        {% for conversation in usersWithConversations %}
             <li>
-                <a href="{{ path('message_show_conversation', {'id': user.id}) }}">
-                    {% if user.firstName and user.lastName %}
-                        {{ user.firstName }} {{ user.lastName }}
-                        {{user.getAvatar}}
+                <a href="{{ path('message_show_conversation', {'id': conversation.user.id}) }}">
+                    {% if conversation.user.firstName and conversation.user.lastName %}
+                        {{ conversation.user.firstName }} {{ conversation.user.lastName }}
                     {% else %}
-                        {{ user.email }}
-                        {{ user.getAvatar }}
+                        {{ conversation.user.email }}
                     {% endif %}
+                    
+                    {% if conversation.unreadCount > 0 %}
+                        ({{ conversation.unreadCount }} unread messages)
+                    {% endif %}
+                    
+                    {{ conversation.user.getAvatar }}
                 </a>
             </li>
         {% endfor %}

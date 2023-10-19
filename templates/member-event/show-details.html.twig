@@ -2,19 +2,26 @@
 
 {% block body %}
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
+
+    <div class="member-events-container">
+
+        <div class="events-cover">
+            <img src="/{{ event.cover }}" alt="cover">
+        </div>
+        <div class="events-info">
     <h1>{{ event.titre }}</h1>
     <p>{{ event.description }}</p>
     <p>Date: {{ event.date|date('Y-m-d') }}</p>
     <p>Places disponible: {{ event.places }}</p>
     {% if not participant %}
     <form action="{{ path('app_participate', {'id': event.id}) }}" method="post">
-        <button type="submit">Participer</button>
+        <button class="button-3" type="submit">Participer</button>
     </form>
 {% else %}
     <p>Vous participez déjà à cet évènement.</p>
     <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="btn btn-primary">Modifier mes invités</a>
     <form action="{{ path('app_cancel_participation', {'id': participant.id}) }}" method="post">
-        <button type="submit" class="btn btn-danger">Annuler ma participation</button>
+        <button type="submit" class="button-3">Annuler ma participation</button>
     </form>
 {% endif %}
     <h2>Participants</h2>
@@ -38,4 +45,6 @@
             </li>
         {% endfor %}
     </ul>
+        </div>
+    </div>
 {% endblock %}

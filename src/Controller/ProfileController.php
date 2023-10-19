@@ -8,6 +8,7 @@ use App\Entity\Images;
 use App\Form\UserType;
 use App\Form\ImgModifyType;
 use App\Entity\UserImgModify;
+use App\Form\SetPasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfileController extends AbstractController
 {
@@ -62,6 +64,41 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+ * @Route("/set-password/{token}", name="set_password_route")
+ */
+public function setPassword(Request $request, string $token, EntityManagerInterface $em, UserPasswordHasherInterface $passwordEncoder): Response
+{
+    $user = $em->getRepository(User::class)->findOneBy(['passwordResetToken' => $token]);
+
+    if (!$user) {
+        throw $this->createNotFoundException('Invalid or expired token.');
+    }
+
+    $form = $this->createForm(SetPasswordType::class);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+        $hashedPassword = $passwordEncoder->hashPassword($user, $data['plainPassword']);
+        $user->setPassword($hashedPassword);
+        $user->setPasswordResetToken(null); // Clear reset token
+        $user->setPasswordResetTokenExpiresAt(null); // Clear token expiration
+    
+        $em->persist($user);
+        $em->flush();
+    
+        $this->addFlash('success', 'Password set successfully!');
+    
+        return $this->redirectToRoute('app_login'); // Redirect to your login page
+    }
+
+    return $this->render('change_password/path_to_set_password_template.html.twig', [
+        'form' => $form->createView(),
+        'token' => $token,
+    ]);
+}
 
     /**
      * Modification de l'image de profil

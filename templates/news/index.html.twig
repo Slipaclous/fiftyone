@@ -7,7 +7,6 @@
     {% endif %}{% endblock %}
 
 {% block body %}
-
 <div class="example"></div>
 <div class="last-news">
 <a href="{{ path('news_show', { 'slug': lastNews[0].getSlug }) }}">
@@ -72,7 +71,7 @@
     <rect width="32" height="32" fill="white"></rect>
   </clipPath>
 </defs>
-  </svg>  Nos dernières actualités
+  </svg>  Nos actualités
     {% endif %}
 </h1>
 
@@ -82,7 +81,7 @@
     <div class="form-group">
         <input type="text" name="search" placeholder="Chercher une actualité ..." class="form-control">
     </div>
-    <button type="submit" class="bouton-voir">Rechercher</button>
+    <button type="submit" class=" button">Rechercher</button>
 </form>
     <form action="{{ path('news_index') }}" method="GET">
     <div class="form-group filtrage">
@@ -94,7 +93,7 @@
             {% endfor %}
         </select>
     </div>
-    <button type="submit" class="bouton-voir filtre">Filter</button>
+    <button type="submit" class="bouton-voir button filtre">Filter</button>
 </form>
 
 
