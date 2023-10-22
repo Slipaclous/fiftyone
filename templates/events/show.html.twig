@@ -10,7 +10,7 @@
         <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="button-2">Faire une réservation</a>
         <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="button-2">Modifier ma réservation</a>
     </div>
-{% else %}
+{% endif %}
   <div class="container">
     <h1 class="title-home">{{ event.Titre }}</h1>
     <div class="imgcover">
