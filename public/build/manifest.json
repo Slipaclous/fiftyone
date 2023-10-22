@@ -4,6 +4,5 @@
   "build/runtime.js": "http://localhost:8080/build/runtime.js",
   "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.css": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.css",
   "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-11fa6b.js",
-  "build/images/communication.jpg": "http://localhost:8080/build/images/communication.24e6c7de.jpg",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-e6ff8c.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-e6ff8c.js"
+  "build/images/communication.jpg": "http://localhost:8080/build/images/communication.24e6c7de.jpg"
 }

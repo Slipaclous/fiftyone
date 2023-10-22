@@ -1415,8 +1415,14 @@ text-align: center;
   border-radius: 15px;
   margin: 35px auto;
   text-align: center;
-  box-shadow: 0px 0px 10px #2D3B6F;
+  box-shadow: 0px 0px 3px #2D3B6F;
 }
+.events-member:hover{
+  box-shadow: 0px 0px 10px #2D3B6F;
+  transition-duration: 0.5s;
+  border: none;
+}
+
 .single-event{
   text-decoration: none;
   color:#2D3B6F;

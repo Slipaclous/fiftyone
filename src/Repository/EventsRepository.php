@@ -50,10 +50,23 @@ class EventsRepository extends ServiceEntityRepository
     }
     public function findClosestEvents(): array
     {
-        return $this->createQueryBuilder('e')
+        // First, try to find upcoming events
+        $queryBuilder = $this->createQueryBuilder('e')
             ->where('e.date >= :currentDate')
             ->setParameter('currentDate', new \DateTime())
             ->orderBy('e.date', 'ASC')
+            ->setMaxResults(3);
+    
+        $upcomingEvents = $queryBuilder->getQuery()->getResult();
+    
+        // If there are upcoming events, return them
+        if (count($upcomingEvents) > 0) {
+            return $upcomingEvents;
+        }
+    
+        // If no upcoming events are found, return the most recent past events
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.date', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
