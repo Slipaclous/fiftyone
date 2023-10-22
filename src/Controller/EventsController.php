@@ -49,10 +49,7 @@ public function index(EventsRepository $eventsRepository, PaginatorInterface $pa
         8 // Nombre d'éléments par page
     );
     
-    // Use dump here
-    foreach ($pagination as $event) {
-        dump($event->getPlaces());
-    }
+  
 
     return $this->render('events/index.html.twig', [
         'events' => $pagination,
