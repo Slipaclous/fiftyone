@@ -719,7 +719,7 @@ header {
     .news-image-cont{
       position: relative;
       width: 100%;
-      min-height: 30vh;
+      height: 30vh;
       display: flex;
       justify-content: center;
       align-items: center;
