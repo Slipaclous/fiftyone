@@ -3,21 +3,25 @@
 {% block title %}{{ event.Titre }}{% endblock %}
 
 {% block body %}
-<div class="reservation">
-    <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="button-2">Faire une réservation</a>
-    <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="button">Modifier ma réservation</a>
+
+
+{% if event.getPlaces > 0 %}
+    <div class="reservation">
+        <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="button-2">Faire une réservation</a>
+        <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="button-2">Modifier ma réservation</a>
     </div>
+{% else %}
   <div class="container">
     <h1 class="title-home">{{ event.Titre }}</h1>
     <div class="imgcover">
     <img src="/images/{{ event.getCover }}" class="cover" alt="dsfqsd">
     </div>
-    <h3 class="actu-title-show">qsdqsd</h3>
+    
     <p>{{ event.description|raw }}</p>
     <p>{{ event.date|date('Y-m-d') }}</p>
     
     
-    <h3 class='title-home'>Images:</h3>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <ol class="carousel-indicators">
         {% for image in event.getImages() %}

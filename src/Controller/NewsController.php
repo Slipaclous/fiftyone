@@ -53,7 +53,7 @@ class NewsController extends AbstractController
 
         // Récupération de la page courante depuis les paramètres de la requête
         $page = $request->query->getInt('page', 1);
-        $perPage = 5; // Ajuster le nombre d'éléments par page selon les besoins
+        $perPage = 6; // Ajuster le nombre d'éléments par page selon les besoins
         $pagination = $paginator->paginate($newsQuery, $page, $perPage);
 
         $categories = $categoriesRepository->findAll();

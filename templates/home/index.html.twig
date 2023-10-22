@@ -93,11 +93,12 @@
         {% for newsItem in news %}
         <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="link-last-news">
             <div class="last-3-news">
+            <h5 class="last-3-news-title">{{ newsItem.titre }}</h5>
             <div class="news-image-cont">
                 <img src="/images/{{ newsItem.cover }}" class="last-3-news-img" alt="News Image">
             </div>
-                <h5 class="last-3-news-title">{{ newsItem.titre }}</h5>
-                <p> {{newsItem.date| date('d-m-Y')}}</p>
+                
+                
                 
             </div>
             </a>

@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container-news">
   <div class="row">
 
   <h1>
@@ -103,7 +103,8 @@
 
     
     {% for news in news %}
-      <div class="col-md-6 mx-auto">
+      <div class="col-md-4 mx-auto">
+    <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="">
         <div class="card-home mb-4">
         
           <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
@@ -127,6 +128,7 @@
           </div>
           </div>
         </div>
+      </a>
       </div>
     {% endfor %}
   </div>

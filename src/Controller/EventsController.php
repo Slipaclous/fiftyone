@@ -27,33 +27,38 @@ class EventsController extends AbstractController
     }
 
     #[Route('/events', name: 'app_events')]
-    public function index(EventsRepository $eventsRepository, PaginatorInterface $paginator, Request $request): Response
-    {
-        $searchQuery = $request->query->get('search');
-        $closestEvents = $eventsRepository->findClosestEvents();
+public function index(EventsRepository $eventsRepository, PaginatorInterface $paginator, Request $request): Response
+{
+    $searchQuery = $request->query->get('search');
+    $closestEvents = $eventsRepository->findClosestEvents();
 
-        // Crée le constructeur de requête pour récupérer les événements
-        $eventsQueryBuilder = $eventsRepository->createQueryBuilder('e')
-            ->orderBy('e.date', 'DESC');
+    // Crée le constructeur de requête pour récupérer les événements
+    $eventsQueryBuilder = $eventsRepository->createQueryBuilder('e')
+        ->orderBy('e.date', 'DESC');
 
-        if ($searchQuery) {
-            $eventsQueryBuilder->andWhere('e.titre LIKE :searchQuery OR e.description LIKE :searchQuery')
-                ->setParameter('searchQuery', '%' . $searchQuery . '%');
-        }
-
-        $eventsQuery = $eventsQueryBuilder->getQuery();
-
-        $pagination = $paginator->paginate(
-            $eventsQuery,
-            $request->query->getInt('page', 1), // Numéro de page actuelle, par défaut 1
-            8 // Nombre d'éléments par page
-        );
-
-        return $this->render('events/index.html.twig', [
-            'events' => $pagination,
-            'closestEvents' => $closestEvents,
-        ]);
+    if ($searchQuery) {
+        $eventsQueryBuilder->andWhere('e.titre LIKE :searchQuery OR e.description LIKE :searchQuery')
+            ->setParameter('searchQuery', '%' . $searchQuery . '%');
     }
+
+    $eventsQuery = $eventsQueryBuilder->getQuery();
+
+    $pagination = $paginator->paginate(
+        $eventsQuery,
+        $request->query->getInt('page', 1), // Numéro de page actuelle, par défaut 1
+        8 // Nombre d'éléments par page
+    );
+    
+    // Use dump here
+    foreach ($pagination as $event) {
+        dump($event->getPlaces());
+    }
+
+    return $this->render('events/index.html.twig', [
+        'events' => $pagination,
+        'closestEvents' => $closestEvents,
+    ]);
+}
     //route
     #[Route('/events/{slug}/reservation', name: 'app_events_reservation')]
     public function makeReservation(

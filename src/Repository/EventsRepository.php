@@ -49,28 +49,36 @@ class EventsRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
     public function findClosestEvents(): array
-    {
-        // First, try to find upcoming events
-        $queryBuilder = $this->createQueryBuilder('e')
-            ->where('e.date >= :currentDate')
-            ->setParameter('currentDate', new \DateTime())
-            ->orderBy('e.date', 'ASC')
-            ->setMaxResults(3);
-    
-        $upcomingEvents = $queryBuilder->getQuery()->getResult();
-    
-        // If there are upcoming events, return them
-        if (count($upcomingEvents) > 0) {
-            return $upcomingEvents;
-        }
-    
-        // If no upcoming events are found, return the most recent past events
-        return $this->createQueryBuilder('e')
-            ->orderBy('e.date', 'DESC')
-            ->setMaxResults(3)
-            ->getQuery()
-            ->getResult();
+{
+    // Try to find upcoming events
+    $queryBuilder = $this->createQueryBuilder('e')
+        ->where('e.date >= :currentDate')
+        ->setParameter('currentDate', new \DateTime())
+        ->orderBy('e.date', 'ASC');
+
+    $upcomingEvents = $queryBuilder->getQuery()->getResult();
+
+    $numUpcomingEvents = count($upcomingEvents);
+
+    // If there are 3 or more upcoming events, return them
+    if ($numUpcomingEvents >= 3) {
+        return $upcomingEvents;
     }
+
+    // If fewer than 3 upcoming events, fetch past events to fill the gap
+    $numPastEventsNeeded = 3 - $numUpcomingEvents;
+    $pastEvents = $this->createQueryBuilder('e')
+        ->where('e.date < :currentDate')
+        ->setParameter('currentDate', new \DateTime())
+        ->orderBy('e.date', 'DESC')
+        ->setMaxResults($numPastEventsNeeded)
+        ->getQuery()
+        ->getResult();
+
+    // Return a mix of upcoming and past events
+    return array_merge($upcomingEvents, array_reverse($pastEvents));
+}
+
 
 //    /**
 //     * @return Events[] Returns an array of Events objects

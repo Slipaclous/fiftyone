@@ -11,7 +11,6 @@
     <h1 class="actu-title-show">{{ news.Titre }}</h1>
     <h3 class="subtitle-actu">{{ news.soustitre }}</h3>
     <p>{{ news.description|raw }}</p>
-    <h3 class="subtitle-actu">Images:</h3>
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <ol class="carousel-indicators">
         {% for image in news.getImages() %}
@@ -35,7 +34,6 @@
       </a>
     </div>
 
-    <h3 class="subtitle-actu">Commentaires:</h3>
     <ul>
       {% for comment in comments %}
         <li>
