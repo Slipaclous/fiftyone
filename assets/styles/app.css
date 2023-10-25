@@ -385,7 +385,7 @@ header {
     background-color: #003049; /* Change the background color on hover */
 }
 /* disable the after for the first child */
-.site-links li:first-child a::after {
+.site-links li:first-child a:hover::after {
   display: none;
 }
 .site-link li .home-link:hover::after{
@@ -1253,8 +1253,12 @@ text-align: center;
     font-size: 20px;
     
   }
+  .text-presentation .button-2{
+    margin: 20px auto;
+  }
   .link-last-news{
     min-width: 80vw;
+    margin-top: 25px;
   }
   .latest-news{
     width: 95vw;
@@ -1348,6 +1352,10 @@ text-align: center;
   }
   .menu-icon{
     width: 15%;
+    text-align: center;
+  }
+  .menu-icon span{
+    text-align: center;
   }
   
   .container-presentation .wrapper{
@@ -1524,7 +1532,12 @@ text-align: center;
   }
   .carousel-item{
     height: 30vh;
-
+  }
+  .title-home{
+    font-size: 1.5rem;
+  }
+  .latest-news{
+    margin: 25px;
   }
   .container-presentation .wrapper{
     flex-direction: column;
@@ -1776,7 +1789,7 @@ a {
 
 @media only screen and (max-width: 480px) {
   .container-member {
-    width: 100%;
+    width: 90%;
   }
   .events-member {
     width: 100%;
