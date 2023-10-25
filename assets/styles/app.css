@@ -789,7 +789,8 @@ header {
       height: 100%;
       margin: 15px auto;
       text-align: center;
-      min-height: 30vh;
+      height: 30vh;
+
       box-shadow: 0 0 2px black;
       overflow: hidden;
     }
@@ -803,7 +804,7 @@ header {
     .link-last-news{
       text-decoration: none;
       color: #003049;
-      width: 30vw;
+      width: 25vw;
     }
     .latest-news p{
       margin-top: 20px;
