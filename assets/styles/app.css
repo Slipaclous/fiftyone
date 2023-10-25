@@ -834,8 +834,8 @@ header {
       top: 40%;
       text-transform: uppercase;
       margin: 0 15px;
-      width: 25%;
-      font-size: 1.5rem;
+      width: 80%;
+      font-size: 1.3rem;
     }
     .last-3-news:hover .last-3-news-img{
       filter: brightness(30%);
