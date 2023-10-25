@@ -73,41 +73,43 @@
 </div>
 
 
-  <h2 class="title-home"><svg width="32" height="32" viewBox="0 0 32 32" class="news-icon" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_121_5309)">
-        <path d="M24 11.6667H29.3334V28H2.66669V4H24V24.6667" stroke="currentColor" stroke-width="2"></path>
-        <path d="M7.33331 14.6666V9.33331H19.3333V14.6666H7.33331Z" stroke="currentColor" stroke-width="2"></path>
-        <path d="M6.33331 21.3333H20.3333" stroke="currentColor" stroke-width="2"></path>
-      </g>
-      <defs>
-        <clipPath id="clip0_121_5309">
-          <rect width="32" height="32" fill="white"></rect>
-        </clipPath>
-      </defs>
-    </svg> Nos dernières actualités</h2>
-    <div class="outer-container">
-    <div class="latest-news-container"></div>  <!-- This will only have the background and its filter -->
-    <div class="latest-news-content">
-        <div class="latest-news">
-        {% for newsItem in news %}
-        <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="link-last-news">
-            <div class="last-3-news">
-            <h5 class="last-3-news-title">{{ newsItem.titre }}</h5>
-            <div class="news-image-cont">
-                <img src="/images/{{ newsItem.cover }}" class="last-3-news-img" alt="News Image">
-            </div>
-                
-                
-                
-            </div>
-            </a>
-        {% endfor %}
-        </div>    
+<h2 class="title-home"><svg width="32" height="32" viewBox="0 0 32 32" class="news-icon" fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_121_5309)">
+      <path d="M24 11.6667H29.3334V28H2.66669V4H24V24.6667" stroke="currentColor" stroke-width="2"></path>
+      <path d="M7.33331 14.6666V9.33331H19.3333V14.6666H7.33331Z" stroke="currentColor" stroke-width="2"></path>
+      <path d="M6.33331 21.3333H20.3333" stroke="currentColor" stroke-width="2"></path>
+    </g>
+    <defs>
+      <clipPath id="clip0_121_5309">
+        <rect width="32" height="32" fill="white"></rect>
+      </clipPath>
+    </defs>
+  </svg> Nos dernières actualités</h2>
+<div class="outer-container">
+  <div class="latest-news-container"></div> <!-- This will only have the background and its filter -->
+  <div class="latest-news-content">
+    <div class="latest-news">
+      {% for newsItem in news %}
+      <a href="{{ path('news_show', { 'slug': newsItem.getSlug }) }}" class="link-last-news">
+        <div class="last-3-news">
+          <h5 class="last-3-news-title">{{ newsItem.titre }}</h5>
+          <div class="news-image-cont">
+            <img src="/images/{{ newsItem.cover }}" class="last-3-news-img" alt="News Image">
+
+          </div>
+
+
+
+        </div>
+        <p>{{newsItem.getDate|date('d-m-Y')}}</p>
+      </a>
+      {% endfor %}
     </div>
+  </div>
 </div>
 
- 
+
 
 
 {% block javascripts %}

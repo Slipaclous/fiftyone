@@ -7,6 +7,9 @@
     {% endif %}{% endblock %}
 
 {% block body %}
+<div class="bandeau-actus">
+  <h4>Actualités</h4>
+</div>
 <div class="example"></div>
 <div class="last-news">
 <a href="{{ path('news_show', { 'slug': lastNews[0].getSlug }) }}">
@@ -113,18 +116,6 @@
             <h5 class="card-title">{{ news.getTitre() }}</h5>
             <p class="card-text">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
             <div class="bout">
-            <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="view-actu"> Voir l'actualité 
-            <svg width="24" height="24" viewBox="0 0 32 32" class="arrow" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_118_4063)">
-                  <path d="M1.33331 16H29.3333" stroke="currentColor" stroke-width="2"></path>
-                  <path d="M21.3333 8L29.3333 16L21.3333 24" stroke="currentColor" stroke-width="2"></path>
-                </g>
-                <defs>
-                  <clipPath id="clip0_118_4063">
-                    <rect width="32" height="32" fill="white"></rect>
-                  </clipPath>
-                </defs>
-              </svg></a>
           </div>
           </div>
         </div>

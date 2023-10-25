@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=GFS+Didot&family=Manrope&family=Roboto&display=swap');
   @import '~bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'GFS Didot', sans-serif;
 }
 body {
   /* background: linear-gradient(#fff,#c6d9ee); */
@@ -28,11 +28,103 @@ body {
 
 
 /*button  */ 
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  margin: 0 auto;
+}
+.btn-8 {
+  background-color: #f0ecfc;
+background-image: linear-gradient(315deg, #f0ecfc 0%, #003049 74%);
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-8 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-8:before,
+.btn-8:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #003049;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8:before{
+   height: 0%;
+   width: 2px;
+}
+.btn-8:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-8:hover:before {
+  height: 100%;
+}
+.btn-8:hover:after {
+  width: 100%;
+}
+.btn-8:hover{
+  background: transparent;
+}
+.btn-8 span:hover{
+  color: #003049;
+}
+.btn-8 span:before,
+.btn-8 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #003049;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-8 span:after {
+  height: 2px;
+  width: 0%;
+}
+.btn-8 span:hover:before {
+  height: 100%;
+}
+.btn-8 span:hover:after {
+  width: 100%;
+}
 .button {
   position: relative;
   display: block;
-  color: #2D3B6F;
-  border: 1px solid #2D3B6F;
+  color: #003049;
+  border: 1px solid #003049;
   background: transparent;
   overflow: hidden;
   text-align: center;
@@ -46,7 +138,7 @@ body {
   position: absolute;
   height: 150%;
   width: 150%;
-  background-color: #2D3B6F;
+  background-color: #003049;
   transform: translate(-80px, 38px);
   transition: transform 0.45s ease-in-out;
 }
@@ -69,8 +161,8 @@ body {
   position: relative;
   display: block;
   color: white;
-  border: 1px solid  #2D3B6F;
-  background-color: #2D3B6F;
+  border: 1px solid  #003049;
+  background-color: #003049;
   overflow: hidden;
   text-align: center;
   width: 200px;
@@ -94,7 +186,7 @@ body {
   z-index: -1;
 }
 .button-2:hover {
-  color: #2D3B6F;
+  color: #003049;
   transition: ease-in-out 0.5s;
   z-index: 1;
 }
@@ -146,6 +238,10 @@ body {
   padding: 0;
   border-bottom:1px solid rgb(206, 179, 25) ;
 }
+.homelink:hover{
+  text-decoration: none;
+  color: #F4F4F4;
+}
 
 .users-p{
   display: inline-block;
@@ -178,7 +274,7 @@ body {
 .top-menu{
   width: 100%;
   height: 5vh;
-  background-color: #2D3B6F;
+  background-color: #003049;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -259,7 +355,7 @@ header {
   
   .site-links li a {
     text-decoration: none;
-    color: #2D3B6F;
+    color: #003049;
     font-size: 1.1rem;
     position: relative;
     padding: 5px 10px;
@@ -284,8 +380,16 @@ header {
     background-color: transparent;
     transition-duration:0.5s ;
   } 
+ 
   .site-links li a:hover::after {
-    background-color: #2D3B6F; /* Change the background color on hover */
+    background-color: #003049; /* Change the background color on hover */
+}
+/* disable the after for the first child */
+.site-links li:first-child a::after {
+  display: none;
+}
+.site-link li .home-link:hover::after{
+  display: none;
 }
 
 .site-link li a::after .logo-tel{
@@ -328,6 +432,7 @@ header {
   }
   .avatar{
     margin: 0 15px;
+    border-radius:50%;
   }
   .nav-item{
     width: 100%;
@@ -390,9 +495,9 @@ header {
       
       .wrapper {
         display: flex;
-        min-height: 70vh;
+        min-height: 60vh;
         width: 80%;
-        margin: 5rem auto;
+        margin:0 auto;
         align-items: center;
         justify-content: center;
       }
@@ -457,13 +562,13 @@ header {
   footer {
     background-color: white;
     border: 1px solid rgb(206, 179, 25);
-    color: #2D3B6F;
+    color: #003049;
     font-weight: 600;
     padding: 20px;
     text-align: center;
   }
   footer a{
-    color: #2D3B6F;
+    color: #003049;
     text-decoration: none;
   }
   .btn-pres{
@@ -488,7 +593,7 @@ header {
     margin: 0 auto;
   }
         .card-home{
-          min-height: 55vh;
+          min-height: 50vh;
           justify-content: space-between;
           align-items: center;
           margin: 15px;
@@ -560,7 +665,7 @@ header {
         .card-title{
           font-size: 1.4rem;
           margin: 20px;
-          color: #2D3B6F;
+          color: #003049;
         }
         .card-img-top2{
           width: 100%;
@@ -591,7 +696,7 @@ header {
         justify-self: flex-end;
         padding: 10px;
         text-decoration: none;
-        color: #2D3B6F;
+        color: #003049;
         font-weight: bold;
         font-size: 0.9rem;
         margin-bottom: 15px;
@@ -618,10 +723,10 @@ header {
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
         font-weight: bolder;
-        color: #2D3B6F;
+        color: #003049;
       }
       .new-icon{
-        color: #2D3B6F;
+        color: #003049;
       }
 
 
@@ -640,26 +745,12 @@ header {
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url('/public/images/communication.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
+        background: #50646e;
         z-index: 1; /* Background layer */
         padding: 50px;
     }
     
-    .latest-news-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ffffff;
-        opacity: 0.5;
-        z-index: 2; /* Filter layer */
-        margin: auto;
-    }
+    
     
     .latest-news-content {
         position: relative;
@@ -669,12 +760,13 @@ header {
         justify-content: center;
         align-items: center;
         
+        
         z-index: 3; /* Content layer - ensuring it's above the filter */
     }
     
     .latest-news {
         width: 80%;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.691);
         filter: opacity(80%);
         border-radius: 25px;
         min-height: 55vh;
@@ -683,8 +775,10 @@ header {
         display: flex;
         justify-content: space-around;
         align-items: center;
+        flex-wrap: wrap;
     }
     .last-3-news{
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -693,7 +787,7 @@ header {
       border-radius: 25px;
       width: 80%;
       height: 100%;
-      margin: 0 auto;
+      margin: 15px auto;
       text-align: center;
       min-height: 30vh;
       box-shadow: 0 0 2px black;
@@ -701,14 +795,21 @@ header {
     }
     .last-3-news p{
       margin: 0;
+      color: white;
     }
     .last-3-news:hover{
       opacity: 0.8;
     }
     .link-last-news{
       text-decoration: none;
-      color: #2D3B6F;
-      width: 100%;
+      color: #003049;
+      width: 30vw;
+    }
+    .latest-news p{
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.3rem;
+      color: rgb(105, 104, 104);
     }
     .last-3-news-img{
       width: 100%;
@@ -719,7 +820,7 @@ header {
     .news-image-cont{
       position: relative;
       width: 100%;
-      height: 30vh;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -729,7 +830,7 @@ header {
       position: absolute;
       z-index: 2;
       opacity: 0;
-      top: 50%;
+      top: 40%;
       text-transform: uppercase;
       margin: 0 15px;
       width: 25%;
@@ -760,11 +861,12 @@ header {
 }
 
 .latest {
-  width: 50vw;
-  height: 100%;
+  min-width: 50vw;
+  min-height: 100%;
   position: relative;
   overflow: hidden; /* Hide overflowing content */
   display: flex;
+  box-sizing: border-box;
 
 }
 
@@ -774,15 +876,16 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
+  background-repeat: no-repeat;
   background-position: center center;
-  background-size: 140%;
+  background-size: cover;
   filter:brightness(40%) ;
 
-  transition: background-size 1s ease-in-out,filter 1s ease-in-out;
+  transition: transform 1s ease-in-out,filter 1s ease-in-out;
 }
 
 .latest:hover .image {
-  background-size: 150%;
+  transform: scale(1.1);
   filter: brightness(65%);
 }
 
@@ -802,6 +905,8 @@ header {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .first-last, .second-last {
@@ -811,19 +916,21 @@ header {
 }
 
 .first-last .image, .second-last .image {
-  position: absolute;
+  position: absolute;;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-repeat: no-repeat;
   background-position: center center;
-  background-size: 100%;
+  background-size: cover;
   filter:brightness(40%);
-  transition: background-size 1s ease-in-out,filter 1s ease-in-out;
+  overflow: hidden;
+  transition: transform 1s ease-in-out,filter 1s ease-in-out;
 }
 
 .first-last:hover .image, .second-last:hover .image {
-  background-size: 110%;
+  transform: scale(1.1);
   filter: brightness(65%);
 }
 
@@ -842,7 +949,7 @@ header {
         .date-show{
           font-size: 0.8rem;
           margin-top: 20px;
-          color: #2D3B6F;
+          color: #003049;
         }
         .container-actu{
           margin: 0 auto;
@@ -860,12 +967,12 @@ header {
           border-radius: 2%;
         }
         .actu-title-show{
-          color: #2D3B6F;
+          color: #003049;
           border-bottom: 1px solid rgb(206, 179, 25);
           padding-bottom: 20px;
         }
         .subtitle-actu{
-          color: #2D3B6F;
+          color: #003049;
           font-size: 1.6rem;
           margin-top: 20px;
         }
@@ -901,26 +1008,39 @@ header {
 /* fin member events */ 
 /* Pages d'actualités */
       .actus-title{
-        color: #2D3B6F;
+        color: #003049;
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
       }
   .carousel-item img{
-    height:60vh;
-    object-fit: cover;
+    height:40vh;
+    object-fit:cover;
   }
   .bandeau{
     position: relative;
     width: 100%;
-    height: 35vh ;
+    height: 30vh ;
     z-index: 1;
     color: white;
+  }
+  .bandeau-actus{
+    background-color:#003049 ;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bandeau-actus h4{
+    color: white;
+    font-size: 3rem;
+    text-transform: uppercase;
   }
   .bandeau img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     filter: brightness(50%);
+    object-position: center center;
     z-index: 1;
   }
   .bandeau h4{
@@ -930,7 +1050,7 @@ header {
     transform: translate( -50%);
     z-index: 2;
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     color: white;
 
@@ -961,8 +1081,8 @@ text-align: center;
     margin: 50px 0;
   }
   .submit-btn{
-    background-color: #2D3B6F;
-    border: 2px solid #2D3B6F;
+    background-color: #003049;
+    border: 2px solid #003049;
     border-radius: 0px;
     color: white;
     padding: 10px;
@@ -973,7 +1093,7 @@ text-align: center;
   }
   .submit-btn:hover{
     background-color: #F4F4F4;
-    color: #2D3B6F;
+    color: #003049;
   }
  
   .bouton-voir{
@@ -1021,15 +1141,38 @@ text-align: center;
   
   .pagination a:hover,
   .pagination .current {
-    background: #2D3B6F;
+    background: #003049;
     color: white;
     padding: 5px 10px;
   }
 
 
   .contact{
-    width: 80%;
+    width: 40%;
     margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.44);
+    padding: 50px;
+    border-radius: 25px;
+  }
+  .contact-field:first-child{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact-field label{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  #contact_message{
+    max-height: 15vh;
+    min-height: 15vh;
+  }
+
+  .contact-field .mb-3{
+    width: 100%;
   }
   h1{
     margin: 50px 0;
@@ -1088,7 +1231,7 @@ text-align: center;
 }
 .card .cate{
   text-align:center;
-  color: #2D3B6F;
+  color: #003049;
   font-weight: bolder;
 }
 .carousel{
@@ -1109,7 +1252,12 @@ text-align: center;
     font-size: 20px;
     
   }
-
+  .link-last-news{
+    min-width: 80vw;
+  }
+  .latest-news{
+    width: 95vw;
+  }
   .principe{
     flex-direction: column;
   }
@@ -1211,11 +1359,9 @@ text-align: center;
 /* media query for screens between 1400px and 1024 px */
 @media (min-width: 1200px) and (max-width: 1400px) {
 
-  .news-image-cont{
-    height: 15vh;
-  }
+
   .last-3-news-img{
-    height: 15vh;
+
   }
   .last-3-news-title{
     font-size: 1.2rem;
@@ -1226,7 +1372,7 @@ text-align: center;
 @media (min-width: 768px) and (max-width: 1200px) {
   .latest-news{
     width: 95%;
-    height: 50vh;
+    min-height: 50vh;
   }
   .last-3-news-title{
     font-size: 1.2rem;
@@ -1236,11 +1382,8 @@ text-align: center;
     font-size: 15px;
     margin-left: 20px;
   }
-  .news-image-cont{
-    height: 12vh;
-  }
+
   .last-3-news-img{
-    height: 12vh;
     
   }
   .container-presentation .wrapper{
@@ -1277,11 +1420,32 @@ text-align: center;
   .carousel-slide {
     display: none !important;
   }
+  .events-member{
+    min-width: 75vw;
+  }
+  .container-member svg{
+    width: 100px;
+    height: 100px;
+  }
+  .upcoming-event h4{
+    font-size: 1.1rem;
+  }
   .carousel-slide.active{
     display: block !important;
     width: 70%;
     left: 13.5% !important;
     margin: 0 auto;
+  }
+  .link-last-news{
+    width: 65vw;
+  }
+  .last-3-news-title{
+    opacity: 1;
+    top: 45%;
+    font-size: 1.4rem;
+  }
+  .last-3-news-img{
+    filter: brightness(50%);
   }
 }
 @media (max-width:800px) {
@@ -1290,6 +1454,15 @@ text-align: center;
     width: 90%;
     left: 5% !important;
     margin: 0 auto;
+  }
+  .events-member{
+    display: flex;
+    flex-direction: column;
+    min-height: 45vh;
+  }
+  .events-member svg{
+    width: 150px;
+    height: 150px;
   }
   .controls{
     width: 110% !important;
@@ -1417,13 +1590,16 @@ text-align: center;
 }
 
 /* Espace membres */
+.conti{
+  /* background: linear-gradient(to right, #ffd89b, #004e92); */
+  background: #157a6e
+}
 .member-title{
   text-align: center;
   padding-top: 45px;
-  color: #2D3B6F;
+  color: white;
 }
 .container-member{
-  background-color: #ffffff;
   width: 75%;
   margin: 0 auto;
   display: flex;
@@ -1432,7 +1608,8 @@ text-align: center;
   min-height: 100vh;
 }
 .events-member{
-  background-color: white;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.378);
   width: 55vw;
   height: 25vh;
   display: flex;
@@ -1442,17 +1619,17 @@ text-align: center;
   border-radius: 15px;
   margin: 35px auto;
   text-align: center;
-  box-shadow: 0px 0px 3px #2D3B6F;
+  box-shadow: 0px 0px 3px #003049;
 }
 .events-member:hover{
-  box-shadow: 0px 0px 10px #2D3B6F;
+  box-shadow: 0px 0px 15px #ffffff;
   transition-duration: 0.5s;
   border: none;
 }
 
 .single-event{
   text-decoration: none;
-  color:#2D3B6F;
+  color:#003049;
   font-weight: 800;
   border-radius: 10px;
   text-align: center;
@@ -1468,9 +1645,7 @@ text-align: center;
 .upcoming-event h4{
   font-weight: 600;
 }
-.conti{
-  background-color:#ffffff;
-}
+
 .upcoming-event a{
   color: #000;
   text-decoration: underline;
@@ -1483,7 +1658,7 @@ text-align: center;
   text-align: center;
 }
 /* .other-events:hover{
-  color: #2D3B6F;
+  color: #003049;
   background-color: white;
   transition-duration: 0.3s;
   font-weight: 800;
@@ -1503,12 +1678,12 @@ text-align: center;
 }
 .meetings-member p{
   font-weight: 800;
-  color: #2D3B6F;
+  color: #003049;
   font-size: larger;
   margin-bottom: 20px;
 }
 .meeting-button{
-  background-color: #2D3B6F;
+  background-color: #003049;
   padding: 8px;
   color: white;
   text-decoration: none;
@@ -1517,14 +1692,14 @@ text-align: center;
   margin-top: 20px;
 }
 .meeting-button:hover{
-  color: #2D3B6F;
+  color: #003049;
   background-color: white;
   transition-duration: 0.3s;
   font-weight: 800;
 }
 
 .area-back{
-  color: #2D3B6F;
+  color: #003049;
 }
 .area-back:hover{
     background-color: #e9e7e7;
@@ -1568,8 +1743,8 @@ text-align: center;
   flex-direction: column;
 }
 .title-area{
-  color: #2D3B6F;
-  border-bottom: 1px solid #2D3B6F;
+  color: #003049;
+  border-bottom: 1px solid #003049;
   padding: 10px;
   width: 100%;
   margin: 0 auto;
@@ -1889,14 +2064,14 @@ span {
     background-color: #fff;
     border: none;
     padding: 10px 20px;
-    border: 1px solid #2D3B6F ;
+    border: 1px solid #003049 ;
     border-radius: 35%;
     cursor: pointer;
     font-size: 1rem;
     font-weight: bolder;
 }
 .carousel-control:hover{
-  background-color: #2D3B6F;
+  background-color: #003049;
   color: white;
   transition-duration: 0.3s;
 }
@@ -1908,7 +2083,7 @@ span {
   border-radius: 5px;
 }
 .title-carousel{
-  color: #2D3B6F;
+  color: #003049;
   font-size: 1.6rem;
   font-weight: bolder;
   margin: 20px;
@@ -1927,7 +2102,7 @@ span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #2D3B6F, #8bb6e8);
+  background: linear-gradient(to right, #003049, #8bb6e8);
   color: white;
 }
 .container-contact h1{

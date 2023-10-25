@@ -3,16 +3,22 @@
 {% extends 'base.html.twig' %}
 {% block title %}Contact{% endblock %}
 {% block body %}
+<div class="bandeau">
+  <img src="/images/contact.jpg" class="img-bandeau" alt="">
+  <h4>Contactez nous</h4>
+</div>
     <div class="div container-contact">
-    <h1 class="title-home">Contactez nous</h1>
-
     <div class="contact">
     
     {{ form_start(form) }}
+        <div class="contact-field">
         {{ form_row(form.email) }}
+        </div>
+        <div class="contact-field">
         {{ form_row(form.message) }}
+        </div>
 
-        <button type="submit" class="bouton-voir">Envoyer</button>
+        <button type="submit" class="custom-btn btn-8">Envoyer</button>
     {{ form_end(form) }}
     </div>
 

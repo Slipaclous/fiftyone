@@ -48,6 +48,19 @@ class MemberEventsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    /**
+     * @return MemberEvents[] Returns an array of MemberEvents objects
+     */
+    public function findNewEventsSinceLastWednesday(): array
+    {
+        $lastWednesday = new \DateTime('last Wednesday');
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.createdAt > :lastWednesday')
+            ->setParameter('lastWednesday', $lastWednesday)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return MemberEvents[] Returns an array of MemberEvents objects

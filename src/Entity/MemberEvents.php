@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\MemberEventsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MemberEventsRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 
 #[ORM\Entity(repositoryClass: MemberEventsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class MemberEvents
 {
     #[ORM\Id]
@@ -34,6 +38,9 @@ class MemberEvents
     #[ORM\Column(length: 255)]
     private ?string $cover = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $createdAt = null;
+
 
     public function __construct()
     {
@@ -49,7 +56,7 @@ class MemberEvents
     {
         return $this->titre;
     }
-
+    
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
@@ -57,6 +64,23 @@ class MemberEvents
         return $this;
     }
 
+    public function getCreatedAt(): ?\DateTimeInterface
+{
+    return $this->createdAt;
+}
+
+public function setCreatedAt(\DateTimeInterface $createdAt): self
+{
+    $this->createdAt = $createdAt;
+
+    return $this;
+}
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+    
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;

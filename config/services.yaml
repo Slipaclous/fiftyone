@@ -43,6 +43,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
     
+    App\Command\:
+        resource: '../src/Command/*'
+        tags: ['console.command']
+        
     App\Controller\ProfileController:
         arguments:
             $entityManager: '@doctrine.orm.default_entity_manager'
