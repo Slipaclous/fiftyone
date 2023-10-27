@@ -80,16 +80,7 @@
 </h1>
   </div>
   <div class="filter-search">
-  <div class="search-container">
-    <form action="{{ path('news_index') }}" method="GET" class="search-form">
-        <input type="text" name="search" placeholder="Chercher une actualité ..." class="search-input">
-        <button type="submit" class="search-button">
-            <i class="fas fa-search"></i>
-        </button>
-        
-    </form>
-    </div>
-    <div class="filter-container">
+  <div class="filter-container">
   <form action="{{ path('news_index') }}" method="GET" class="filter-form">
     <div class="select-wrapper">
       <select id="category" name="category" class="filter-select">
@@ -105,6 +96,16 @@
     <button type="submit" class="filter-button">Filtrer</button>
   </form>
 </div>
+  <div class="search-container">
+    <form action="{{ path('news_index') }}" method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Chercher une actualité ..." class="search-input">
+        <button type="submit" class="search-button">
+            <i class="fas fa-search"></i>
+        </button>
+        
+    </form>
+    </div>
+    
 
 </div>
 
