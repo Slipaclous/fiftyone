@@ -134,7 +134,7 @@ public function getAvailablePlaces(): int
     $reservedPlaces = 0;
     
     foreach ($this->reservations as $reservation) {
-        $reservedPlaces += $reservation->getNumberOfPeople();
+        $reservedPlaces -= $reservation->getNumberOfPeople();
     }
 
     return max(0, $this->places - $reservedPlaces);

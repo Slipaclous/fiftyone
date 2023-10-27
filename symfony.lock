@@ -12,6 +12,19 @@
             "./src/ApiResource/.gitignore"
         ]
     },
+    "connectholland/cookie-consent-bundle": {
+        "version": "0.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.4",
+            "ref": "9725d24dc996a1041f25b9e29fc1567a861f98e4"
+        },
+        "files": [
+            "./config/packages/ch_cookie_consent.yaml",
+            "./config/routes/ch_cookie_consent.yaml"
+        ]
+    },
     "cron/cron-bundle": {
         "version": "2.10.3"
     },

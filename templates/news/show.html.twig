@@ -34,27 +34,25 @@
       </a>
     </div>
 
-    <ul>
-    <h3 class="subtitle-actu">Ajoutez un commentaire:</h3>
-    {{ form_start(commentForm) }}
-    {{ form_widget(commentForm) }}
-    <button class=" submit-btn " type="submit">Envoyer</button>
-    {{ form_end(commentForm) }}
-      {% for comment in comments %}
-        <li>
-        <div class="commentaires">
-        <h4>{{ comment.pseudo }}</h4>
-        {{ comment.dateUpload|date('d-m-Y') }}
-        <div class="commentaire-contenu">
-          {{ comment.contenu }}
-          
+    <div class="comment-section">
+  <h3 class="subtitle-actu">Ajoutez un commentaire:</h3>
+  {{ form_start(commentForm) }}
+  {{ form_widget(commentForm) }}
+  <button class="submit-btn" type="submit">Envoyer</button>
+  {{ form_end(commentForm) }}
+  
+  <ul>
+    {% for comment in comments %}
+      <li class="comment">
+        <div class="avatar">{{ comment.pseudo|first }}</div>
+        <div class="comment-content">
+          <div class="comment-author">{{ comment.pseudo }}</div>
+          <div class="comment-date">{{ comment.dateUpload|date('d-m-Y') }}</div>
+          <div class="comment-text">{{ comment.contenu }}</div>
         </div>
-        </div>
-        </li>
-      {% endfor %}
-    </ul>
-
-    
-
-  </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+</div>
 {% endblock %}

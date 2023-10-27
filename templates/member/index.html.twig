@@ -148,7 +148,7 @@
                 {% if most_recent_meeting_summary %}
                 <p>{{ most_recent_meeting_summary.getDate()|format_date('none', 'd-M-Y', null, 'gregorian', 'fr') }}</p>
                 <a href="{{ path('pdf_display', {'pdf': most_recent_meeting_summary.getPdf()}) }}" target="_blank"
-                    class="single-event button">Voir le PV</a>
+                    class="">Voir le PV</a>
                 {% else %}
                 <p>Aucun PV disponible.</p>
                 {% endif %}
