@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>ReservationNumber</th>
+                <th>NumberOfpeople</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.FirstName }}</td>
+                <td>{{ reservation.LastName }}</td>
+                <td>{{ reservation.reservationNumber }}</td>
+                <td>{{ reservation.numberOfpeople }}</td>
+                <td>{{ reservation.email }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_new') }}">Create new</a>
+{% endblock %}

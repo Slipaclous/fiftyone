@@ -1,7 +1,12 @@
 {# templates/meeting_summary/list.html.twig #}
 
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}PV des réunions{% endblock %}
 
 {% block body %}

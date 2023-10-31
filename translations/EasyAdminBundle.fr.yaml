@@ -1,0 +1,13 @@
+action:
+    new: 'Créer'
+    edit: 'Modifier'
+    search: 'Rechercher'
+    delete: 'Supprimer'
+label:
+    'true': 'Oui'
+    'false': 'Non'
+    'empty': 'Vide'
+    'null': 'Aucun'
+    nullable_field: 'Laisser vide pour aucune valeur'
+    object: 'Objet PHP'
+

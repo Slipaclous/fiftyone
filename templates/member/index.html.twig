@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Espace membre{% endblock %}
 
 {% block body %}
 <div class="conti">
 
     <div class="bandeau" style="">
-  <img src="/images/members.jpg" class="img-bandeau" alt="">
-  <h4>Espace Membre</h4>
-</div>
+        <img src="/images/members.jpg" class="img-bandeau" alt="">
+        <h4>Espace Membre</h4>
+    </div>
     <div class="container-member">
-        {# ... existing content ... #}
 
         <div class="events-member">
-            {% if event %}
             <div class="svg-event">
                 <svg width="150" height="150" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#EBEDED"
@@ -30,9 +33,11 @@
                         fill="#35495E" /></svg>
 
             </div>
+            {% if event %}
             <div class="upcoming-event">
-                <h4>Prochain évènement  </h4>
-                <a href="{{ path('app_member_event_details', {'id': event.id}) }}">{{ event.getTitre }} {{ event.date|date('d-m-Y') }}</a>
+                <h4>Prochain évènement </h4>
+                <a href="{{ path('app_member_event_details', {'id': event.id}) }}">{{ event.getTitre }}
+                    {{ event.date|date('d-m-Y') }}</a>
 
             </div>
             <div class="msg">
@@ -42,6 +47,7 @@
                 <a href="{{ path('app_member_event') }}" class="single-event button">Voir les évènements</a>
             </div>
             </div>
+        
         <div class="events-member">
             <div class="next-meeting">
 
@@ -101,11 +107,11 @@
                 <p>{{ meeting.getDate()|format_date('none', 'd MMMM Y', null, 'gregorian', 'fr') }}</p>
                 {% else %}
                 <p>Aucune réunion à venir.</p>
-            
+
                 {% endif %}
             </div>
-                <div class="msg">
-                
+            <div class="msg">
+
                 <a href="{{path("upcoming_meetings")}}" class="single-event button">Prochaines réunions </a>
             </div>
         </div>
@@ -152,7 +158,7 @@
                 {% else %}
                 <p>Aucun PV disponible.</p>
                 {% endif %}
-                
+
             </div>
             <div class="msg">
                 <a href="{{path('summary_list')}}" class="single-event button">Voir tous les pv </a>
@@ -175,7 +181,7 @@
             </div>
             <div class="upcoming-event">
                 <h4>Notifications</h4>
-                
+
                 Vous n'avez aucune nouvelle notifications!
             </div>
             <div class="msg">
@@ -186,5 +192,7 @@
         </div>
 
     </div>
-</div>
+    </div>
+    </div>
+
 {% endblock %}

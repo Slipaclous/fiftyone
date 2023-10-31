@@ -87,6 +87,7 @@
 </div>
 {% block javascripts %}
 <script>
+{{ parent() }}
 const cards = document.querySelectorAll('.parallax');
 
 cards.forEach(card => {

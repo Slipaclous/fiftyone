@@ -1,7 +1,12 @@
 {# templates/member/upcoming_meetings.html.twig #}
 
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Réunion à venir{% endblock %}
 
 {% block body %}

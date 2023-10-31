@@ -4,13 +4,17 @@
         {{ message }}
     </div>
 {% endfor %}
+<div class="forms-container">
+
   {{ form_start(form, {'action': path('message_reply', {'message': message.id})}) }}
-    <div style="display: none;">{{ form_label(form.content)}}</div>
-  {{ form_row(form.content) }}
+    
+  {{ form_label(form.content,'Message:') }}
+  {{ form_widget(form.content) }}
    <div style="display: none;">
     {{ form_label(form.receiver) }}
     {{ form_widget(form.receiver) }}
   </div>
-  <button type="submit" class="btn btn-primary">Envoyer</button>
+  <button type="submit" class="button-2">Envoyer</button>
   {{ form_end(form) }}
   </form>
+</div>

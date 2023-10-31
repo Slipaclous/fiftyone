@@ -1,14 +1,20 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Ajouter un PV{% endblock %}
 
 {% block body %}
+<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <div class="container">
         <h2 class="mt-4">Ajouter un PV</h2>
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">Créer le PV</button>
+        <button type="submit" class="button-2">Créer le PV</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+    <script>
+        {{ parent() }}
+    </script>
+{% endblock %}
 {% block body %}
+<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
        <h2 class="title-home">Conversation avec 
         {% if conversationUser.firstName and conversationUser.lastName %}
             {{ conversationUser.firstName }} {{ conversationUser.lastName }}
@@ -9,16 +14,20 @@
         {% endif %}
     </h2>
     <div class="conversation-container">
-        {% for message in messages %}
+        {% for message in messages|reverse %}
             <div class="message {% if message.sender == app.user %}sent{% else %}received{% endif %}">
                 <span class="message-sender">
                     {% if message.sender == app.user %}
                         Vous 
                     {% else %}
+                    {% if message.sender.firstName and message.sender.lastName %}
                         {{ message.sender.firstName }} {{ message.sender.lastName }} 
+                    {% else %}
+                        {{ message.sender.email }}
+                    {% endif %}
                     {% endif %}
                 </span>
-                <span class="message-date"> {{ message.createdAt|date('Y-m-d H:i:s') }}</span>
+                <span class="message-date"> {{ message.createdAt|date('Y-m-d H:i') }}</span>
                 <div class="message-content">{{ message.content }}</div>
             </div>
         {% endfor %}

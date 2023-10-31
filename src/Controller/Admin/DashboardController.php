@@ -10,6 +10,8 @@ use App\Entity\Contact;
 use App\Entity\Carousel;
 use App\Entity\Comments;
 use App\Entity\Categories;
+use App\Entity\Reservation;
+use App\Entity\Presentation;
 use App\Repository\VisitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,6 +132,10 @@ private function getVisitorsLastMonth(): int
         ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comments::class);
+
+        yield MenuItem::linkToCrud('Reservations', 'fas fa-calendar-alt', Reservation::class);
+
+        yield MenuItem::linkToCrud('Presentation', 'fas fa-info-circle', Presentation::class);
 
        ;
     }

@@ -3,6 +3,7 @@
 {% block title %}Participation à l'évènement{% endblock %}
 
 {% block body %}
+<div class="forms-container">
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <h1>Participation à l'évènement</h1>
 
@@ -15,22 +16,24 @@
             {% endfor %}
         </div>
 
-        <button type="button" id="add-guest">Ajouter un invité</button>
+       <button type="button" id="add-guest" class="button-2">Ajouter un invité</button>
 
         <div class="mb-3">
             {{ form_label(participantForm.comment, 'Note') }}
             {{ form_widget(participantForm.comment) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-
+        <button type="submit" class="button">Participer</button>
+        
         {{ form_end(participantForm) }}
     </form>
+</div>
 {% block javascripts %}
     <!-- Include jQuery from a CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
+  {{ parent() }}
     $(document).ready(function () {
         const guestsContainer = $('#event_participant_guests');
         const addGuestButton = $('#add-guest');

@@ -17,6 +17,11 @@ class MeetingSummaryType extends AbstractType
         $builder
             ->add('date', DateTimeType::class, [
                 'widget' => 'single_text',
+                'label'=>'Date de la réunion',
+                'attr' => [
+                    'class' => 'datepicker',
+                    'min' => (new \DateTime())->format('Y-m-d'),
+                ],
             ])
             ->add('pdf', FileType::class, [
                 'mapped' => false,

@@ -44,6 +44,11 @@ class Reservation
     {
         return $this->Event;
     }
+   
+    public function __toString(): string
+    {
+        return $this->Event ? $this->Event->__toString() : 'No Event';
+    }
 
     public function setEvent(?Events $Event): static
     {
@@ -111,4 +116,5 @@ class Reservation
 
         return $this;
     }
+    
 }

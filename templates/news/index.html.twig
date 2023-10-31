@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
+
 {% block title %}{% if selectedCategory is not null and selectedCategory.id == categories[0].id %}
         {{ categories[0].nom|upper }}
     {% else %}
@@ -93,7 +100,7 @@
       </select>
       <i class="fas fa-chevron-down"></i>
     </div>
-    <button type="submit" class="filter-button">Filtrer</button>
+    <button type="submit" class="filter-button"><i class="fas fa-filter"></i></button>
   </form>
 </div>
   <div class="search-container">

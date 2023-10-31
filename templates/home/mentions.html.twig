@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Mensions{% endblock %}
 
 {% block body %}

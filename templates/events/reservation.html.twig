@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block body %}
+<div class="forms-container">
     <h1>Faire une réservation</h1>
 
     {{ form_start(form) }}
 
-    {{ form_row(form.firstName, {'label': 'First Name'}) }}
-    {{ form_row(form.lastName, {'label': 'Last Name'}) }}
-    {{ form_row(form.numberOfPeople, {'label': 'Number of People'}) }}
+    {{ form_row(form.firstName, {'label': 'Nom'}) }}
+    {{ form_row(form.lastName, {'label': 'Prénom'}) }}
+    {{ form_row(form.numberOfPeople, {'label': 'Nombre de participant'}) }}
+    {{ form_row(form.email, {'label': 'E-mail'}) }}
 
-    <button type="submit" class="btn btn-primary">Réserver</button>
+    <button type="submit" class="button-2">Réserver</button>
 
     {{ form_end(form) }}
+</div>
 {% endblock %}

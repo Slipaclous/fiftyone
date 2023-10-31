@@ -15,10 +15,13 @@ class MeetingType extends AbstractType
     {
         $builder
             ->add('date', DateType::class, [
-                'label' => 'Meeting Date',
+                'label' => 'Date de la réunion',
                 'html5' => false,
                 'format' => 'yyyy-MM-dd',
-                'attr' => ['class' => 'datepicker'], // You can add a datepicker class if needed
+                'attr' => [
+                    'class' => 'datepicker',
+                    'min' => (new \DateTime())->format('Y-m-d'),
+                ], // You can add a datepicker class if needed
             ]);
     }
 

@@ -240,6 +240,23 @@ public function createEventForm(Request $request, EntityManagerInterface $manage
         'event_form' => $form->createView(),
     ]);
 }
+
+#[Route('/member-event/delete/{id}', name: 'app_member_event_delete')]
+public function delete(MemberEvents $event, EntityManagerInterface $entityManager, Security $security): Response
+{
+    // Check if the current user has the ROLE_ADMIN role
+    if (!$security->isGranted('ROLE_ADMIN')) {
+        throw $this->createAccessDeniedException('You do not have permission to delete events.');
+    }
+
+    // Proceed to delete the event
+    $entityManager->remove($event);
+    $entityManager->flush();
+
+    $this->addFlash('success', 'Event deleted successfully.');
+
+    return $this->redirectToRoute('app_member_event');
+}
 }
 
 

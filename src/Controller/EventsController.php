@@ -112,7 +112,18 @@ public function index(EventsRepository $eventsRepository, PaginatorInterface $pa
         ]);
     }
 
-
+    #[Route('/reservation/{id}/delete', name: 'app_delete_reservation')]
+    public function deleteReservation(Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        $event = $reservation->getEvent();
+    
+        $entityManager->remove($reservation);
+        $entityManager->flush();
+    
+        $this->addFlash('success', 'Reservation deleted successfully.');
+    
+        return $this->redirectToRoute('app_events_show', ['slug' => $event->getSlug()]);
+    }
     #[Route('/events/modify', name: 'app_modify_reservation')]
     public function modifyReservation(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -184,4 +195,14 @@ public function index(EventsRepository $eventsRepository, PaginatorInterface $pa
             'event' => $event,
         ]);
     }
+    #[Route('/admin/events/{id}/print-reservations', name: 'admin_print_reservations')]
+public function printReservations(Events $event): Response
+{
+    $reservations = $event->getReservations();
+
+    return $this->render('admin/events/print_reservations.html.twig', [
+        'event' => $event,
+        'reservations' => $reservations,
+    ]);
+}
 }

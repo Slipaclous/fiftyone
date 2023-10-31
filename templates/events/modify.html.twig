@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+    <script>
+        {{ parent() }}
+    </script>
+{% endblock %}
 
 {% block title %}Modifier ma réservation{% endblock %}
 
 {% block body %}
+<div class="forms-container">
     <h1>Modifier ma réservation</h1>
 
     {{ form_start(form) }}
-    {{ form_row(form.reservationNumber) }}
+    {{ form_row(form.reservationNumber ,{'label': 'Numéro de réservation'}) }}
 
-    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="submit" class="button-2">Modifier</button>
+    
+
     {{ form_end(form) }}
+</div>
 {% endblock %}

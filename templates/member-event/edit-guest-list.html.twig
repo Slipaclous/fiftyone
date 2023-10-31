@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="forms-container">
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <h1>Edit Guest List</h1>
     <form method="post" id="guests-form">
@@ -15,15 +16,17 @@
         </div>
     {% endfor %}
 </div>
-        <button type="button" class="btn btn-success" id="add-guest">Add Guest</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="button" id="add-guest">Ajouter un invité</button>
+        <button type="submit" class="button-2">Modifier</button>
         {{ form_end(form) }}
     </form>
+</div>
 
     {% block javascripts %}
-        {{ parent() }}
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
+        {{ parent() }}
             // public/js/guest-list.js
             $(document).ready(function () {
                 const guestsContainer = $('#guests-list');

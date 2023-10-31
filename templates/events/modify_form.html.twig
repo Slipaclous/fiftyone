@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
-
+    {% block javascripts %}
+        <script>
+            {{ parent() }}
+        </script>
+    {% endblock %}
 {% block title %}Modifier ma réservation{% endblock %}
 
 {% block body %}
+    <div class="forms-container">
     <h1>Modifier ma réservation</h1>
+    <a href="{{ path('app_delete_reservation', {id: reservation.id}) }}" class="btn btn-danger" onclick="return confirm('Êtes vous sur de vouloir supprimer ?');">Supprimer ma révervation</a>
 
     {{ form_start(form) }}
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
-    {{ form_row(form.numberOfPeople) }}
+    {{ form_row(form.firstName,{'label':'Nom'}) }}
+    {{ form_row(form.lastName,{'label':'Prénom'}) }}
+    {{ form_row(form.numberOfPeople,{'label':'Nombre de participants'}) }}
 
-    <button type="submit" class="btn btn-primary">Modifier</button>
+    <button type="submit" class="button-2">Modifier</button>
+    
     {{ form_end(form) }}
+    </div>
 {% endblock %}

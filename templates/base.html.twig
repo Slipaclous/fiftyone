@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
+
 
         <link rel="icon" type="image/x-icon" href="/images/logo3.gif" />
 
@@ -36,11 +39,59 @@
             
         {% endfor %}
         {% block body %}
+        
+        <script>
+        
+        </script>
         {% endblock %}
+
         {% include "partials/footer.html.twig" %}
          {{ encore_entry_script_tags('app') }}
          {% block javascripts %}
+         
+         console.log("Script is loaded");
+            window.addEventListener("load", function(){
+                console.log('kekw');
+                window.cookieconsent.initialise({
+                    
+                "palette": {
+                    "popup": {
+                    "background": "#edeff5",
+                    "text": "#838391"   
+                    },
+                    "button": {
+                    "background": "#4b81e8"
+                    }
+                },
+                "theme": "classic",
+                "content": {
+                    "message": "Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site",
+                    "dismiss": "J'accepte les cookies",
+                    "link": "En savoir plus",
+                    "href": "{{ path('app_home') }}"
+                }
+                })
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    console.log('hello bitch')
+    window.onscroll = function() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = "block";
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.style.display = "none";
+        backToTopBtn.classList.remove("show");
+      }
+    };
+
+    backToTopBtn.addEventListener('click', function () {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+  });
+        
         {% endblock %}
-    </body>
     
+    </body>
 </html>

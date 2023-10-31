@@ -1,6 +1,12 @@
 {# templates/contact.html.twig #}
 
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Contact{% endblock %}
 {% block body %}
 <div class="bandeau">

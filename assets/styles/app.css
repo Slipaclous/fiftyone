@@ -15,7 +15,7 @@ body {
 
     display: flex;
     flex-direction: column;
-    background-color: #F4F4F4;
+    
     min-height: 100vh;
 
 }
@@ -27,6 +27,11 @@ body {
   color: #F4F4F4;
 }
 
+/* forms */
+.forms-container{
+  width: 80%;
+  margin: 0 auto;
+}
 
 /*button  */ 
 .button-4
@@ -141,12 +146,12 @@ background-image: linear-gradient(315deg, #f0ecfc 0%, #003049 74%);
   height: 150%;
   width: 150%;
   background-color: #003049;
-  transform: translate(-80px, 38px);
+  transform: translate(-70px, 38px);
   transition: transform 0.45s ease-in-out;
 }
 .button:hover::before {
   content: "";
-  transform: translate(-80px, -15px);
+  transform: translate(-70px, -15px);
   z-index: -1;
 }
 .button:hover {
@@ -156,6 +161,10 @@ background-image: linear-gradient(315deg, #f0ecfc 0%, #003049 74%);
 }
 .button:active{
  transform: scale(0.9);
+}
+.forms-container button{
+  display: inline-block;
+  margin-top: 50px;
 }
 /* Button 2 */ 
 
@@ -176,15 +185,15 @@ background-image: linear-gradient(315deg, #f0ecfc 0%, #003049 74%);
   content: "";
   position: absolute;
   height: 120%;
-  width: 150%;
+  width: 200%;
   text-align: center;
   background-color: white ;
-  transform: translate(-80px, 38px);
+  transform: translate(-120px, 38px);
   transition: transform 0.45s ease-in-out;
 }
 .button-2:hover::before {
   content: "";
-  transform: translate(-80px, -10px);
+  transform: translate(-120px, -20px);
   z-index: -1;
 }
 .button-2:hover {
@@ -484,11 +493,9 @@ header {
       }
       
       .logo-presentation {
-        opacity: 0;
+        opacity: 1;
         width: 50%;
         height: 100%; /* Set to 100% to take the height from the parent */
-        transform: translateY(100%);
-        transition: opacity 0.5s ease, transform 0.5s ease;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -506,11 +513,42 @@ header {
       .logo-presentation img {
         height: 50vh;
       }
+      .container-presentation li{
+        list-style: list-item !important;
+      }
+      .submit-btn {
+        cursor: pointer;
+        
+      }
+      #backToTopBtn {
+        position: fixed;
+        bottom: 5vh;
+        right: 20px;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+        width: 3vw;
+        opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      }
+      #backToTopBtn.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      #backToTopBtn:hover {
+        background-color: #555;
+      }
       
       .text-presentation {
-        opacity: 0;
-        transform: translateY(-100%);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        opacity: 1;
         width: 50%;
         height: 100%; /* Set to 100% to take the height from the parent */
         justify-content: center;
@@ -870,7 +908,7 @@ header {
         left: 0;
         right: 0;
         bottom: 0;
-        background:linear-gradient(#f4f4f4,#003049) ;
+        background:linear-gradient(white,#003049) ;
         z-index: 1; /* Background layer */
         padding: 50px;
     }
@@ -1145,13 +1183,13 @@ header {
   .bandeau{
     position: relative;
     width: 100%;
-    height: 30vh ;
+    height: 25vh ;
     z-index: 1;
     color: white;
   }
   .bandeau-actus{
     background-color:#003049 ;
-    height: 30vh;
+    height: 25vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1336,15 +1374,31 @@ text-align: center;
   font-size: 35px;
 }
 
+.logo-presa{
+  margin-top: 15vh;
+}
+
 .principe:nth-child(even) .image-pres {
     order: 2;
 }
+
 
 .principe:nth-child(odd) .text-pres {
     order: 2;
 }
 .logo-presa{
-  height: 30vh;
+  height: 50vh;
+  width: 25vw;
+  object-fit: contain;
+}
+.principe:nth-child(3) .image-pres .logo-presa {
+  object-fit: contain;
+}
+.principe:first-child .image-pres .logo-presa {
+  object-fit: contain;
+}
+.text-pres strong{
+  font-size: 2rem;
 }
 .logo-pres{
   height: 50vh;
@@ -1390,6 +1444,19 @@ text-align: center;
   .site-title {
     font-size: 20px;
     
+  }
+  .container-presentation h2{
+    width: 80%;
+    text-align: center;
+  }
+  .title-home{
+    width: 80%;
+    text-align: center;
+    margin: 25px auto;
+  }
+ .footer {
+    flex-direction: column;
+    height: 25vh;
   }
   .container-news{
     width: 90%;
@@ -1537,6 +1604,11 @@ text-align: center;
   }
   .card-home{
     min-height: 40vh;
+    
+  }
+  .last-3-news{
+    width: 25vw;
+    height: 30vh;
   }
   .card-home{
     width: 35vw;
@@ -1628,6 +1700,9 @@ text-align: center;
   .last-3-news-img{
     filter: brightness(50%);
   }
+  .last-3-news{
+    width: 40vw;
+  }
 }
 @media (max-width:800px) {
   .carousel-slide.active{
@@ -1648,6 +1723,19 @@ text-align: center;
   .controls{
     width: 110% !important;
     left: 50% !important;
+  }
+  .last-3-news{
+    width: 60vw;
+  }
+  
+}
+@media (max-width:400px){
+  .last-3-news{
+    width: 80vw;
+  }
+  .latest-news{
+    width: 100%;
+    margin: 0;
   }
 }
 /* Burger menu icon */
@@ -2153,8 +2241,11 @@ span {
 .conversation-container {
   width: 80%; /* Adjust the width as needed */
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+
+  max-height: 400px; /* or whatever height you prefer */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .message {

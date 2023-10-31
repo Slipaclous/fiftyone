@@ -1,0 +1,14 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <h1>Réservations pour l'évènement: {{ event.titre }}</h1>
+    <p>Total de places réservées: {{ event.getTotalReservedPlaces }}</p>
+    <p>Places restantes: {{ event.getFreePlaces }}</p>
+    <ul>
+        {% for reservation in reservations %}
+            <li>{{ reservation.FirstName }} {{ reservation.LastName }} {{reservation.numberOfPeople}}</li>
+            <li></li>
+
+        {% endfor %}
+    </ul>
+{% endblock %}

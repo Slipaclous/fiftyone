@@ -1,7 +1,12 @@
 {# templates/member/create_meeting.html.twig #}
 
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block title %}Ajouter une réunion {% endblock %}
 
 {% block body %}
@@ -12,7 +17,7 @@
         {{ form_start(form) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Ajouter la réunion</button>
+        <button type="submit" class="button-2">Ajouter la réunion</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

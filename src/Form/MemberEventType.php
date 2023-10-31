@@ -20,7 +20,13 @@ class MemberEventType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class)
-            ->add('date', DateType::class) // Corrected type declaration
+            ->add('date', DateType::class, [
+                'widget' => 'single_text', // Use HTML5 date input type
+                'attr' => [
+                    'class' => 'datepicker',
+                    'min' => (new \DateTime())->format('Y-m-d'),
+                ],
+            ])
             ->add('description', TextareaType::class)
             ->add('places', IntegerType::class)
             // add image upload by the UploadImageType form

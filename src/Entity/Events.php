@@ -65,7 +65,10 @@ class Events
     {
         return $this->titre;
     }
-
+    public function __toString(): string
+    {
+        return $this->titre;
+    }
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
@@ -134,7 +137,7 @@ public function getAvailablePlaces(): int
     $reservedPlaces = 0;
     
     foreach ($this->reservations as $reservation) {
-        $reservedPlaces -= $reservation->getNumberOfPeople();
+        $reservedPlaces += $reservation->getNumberOfPeople();
     }
 
     return max(0, $this->places - $reservedPlaces);
@@ -148,6 +151,22 @@ public function getAvailablePlaces(): int
         return $this->images;
     }
 
+    public function getTotalReservedPlaces(): int
+{
+    $totalReserved = 0;
+    
+    foreach ($this->reservations as $reservation) {
+        $totalReserved += $reservation->getNumberOfpeople();
+    }
+    
+    return $totalReserved;
+}
+
+public function getFreePlaces(): int
+{
+    $freePlaces = $this->places - $this->getTotalReservedPlaces();
+    return max($freePlaces, 0);  // Ensure that the result is not negative
+}
     public function addImage(Images $image): static
     {
         if (!$this->images->contains($image)) {

@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}{{ news.Titre }} {% endblock %}
 
 {% block body %}
   <div class="container-actu">
+
+
     <div class="imgcover">
       <img src="/images/{{news.getCover}}" alt="image" class="cover">
-    </div>
+    </div> 
+         
     <p class="date-show">Date: {{ news.date|date('Y-m-d') }}</p>
     <h1 class="actu-title-show">{{ news.Titre }}</h1>
     <h3 class="subtitle-actu">{{ news.soustitre }}</h3>
@@ -34,25 +39,62 @@
       </a>
     </div>
 
-    <div class="comment-section">
-  <h3 class="subtitle-actu">Ajoutez un commentaire:</h3>
-  {{ form_start(commentForm) }}
-  {{ form_widget(commentForm) }}
-  <button class="submit-btn" type="submit">Envoyer</button>
-  {{ form_end(commentForm) }}
-  
-  <ul>
-    {% for comment in comments %}
-      <li class="comment">
-        <div class="avatar">{{ comment.pseudo|first }}</div>
-        <div class="comment-content">
-          <div class="comment-author">{{ comment.pseudo }}</div>
-          <div class="comment-date">{{ comment.dateUpload|date('d-m-Y') }}</div>
-          <div class="comment-text">{{ comment.contenu }}</div>
+   <div class="comment-section">
+        <h3 class="subtitle-actu">Commentaires</h3>
+        
+      
+        <button id="toggleCommentForm" type="button" class="submit-btn">Ajoutez un commentaire</button>
+        
+       
+        <div id="commentForm" class="comment-form" style="display: none;">
+            {{ form_start(commentForm) }}
+            {{ form_widget(commentForm) }}
+            <button class="submit-btn" type="submit">Envoyer</button>
+            {{ form_end(commentForm) }}
         </div>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+        
+        
+        <ul>
+            {% for comment in comments %}
+                <li class="comment">
+                    <div class="avatar">{{ comment.pseudo|first }}</div>
+                    <div class="comment-content">
+                        <div class="comment-author">{{ comment.pseudo }}</div>
+                        <div class="comment-date">{{ comment.dateUpload|date('d-m-Y') }}</div>
+                        <div class="comment-text">{{ comment.contenu }}</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
+{% block javascripts %}
+<script>
+{{ parent() }}
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentForm = document.getElementById('commentForm');
+        const toggleButton = document.getElementById('toggleCommentForm');
+
+        toggleButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (commentForm.style.display === 'none' || commentForm.style.display === '') {
+                commentForm.style.display = 'block';
+                toggleButton.style.display = 'none'; // Hide the button
+                commentForm.style.opacity = 0;
+                commentForm.style.transition = 'opacity 0.5s';
+                setTimeout(() => commentForm.style.opacity = 1, 10);
+            } else {
+                commentForm.style.opacity = 0;
+                setTimeout(() => {
+                    commentForm.style.display = 'none';
+                    toggleButton.style.display = 'block'; // Show the button
+                }, 500);
+            }
+        });
+    });
+</script>
+{% endblock %}
+

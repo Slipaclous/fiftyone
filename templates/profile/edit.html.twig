@@ -1,6 +1,12 @@
 {# templates/profile/edit.html.twig #}
 
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 
 {% block body %}
     <h1>Modification de votre profil</h1>

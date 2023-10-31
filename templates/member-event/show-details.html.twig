@@ -1,7 +1,18 @@
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block body %}
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
+{% if is_granted('ROLE_ADMIN') %}
+    <form action="{{ path('app_member_event_delete', {'id': event.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger">Supprimer l'évènement</button>
+    </form>
+{% endif %}
 
     <div class="member-events-container">
 

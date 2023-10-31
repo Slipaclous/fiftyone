@@ -1,12 +1,20 @@
 {# templates/member_area/create_event.html.twig #}
 
 {% extends 'base.html.twig' %}
-
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+ 
+{% endblock %}
 {% block body %}
+    <div class="forms-container">
 <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
     <h2>Création d'évènements</h2>
+    
     {{ form_start(event_form) }}
     {{ form_widget(event_form) }}
-    <button type="submit">Créer l'évènement</button>
+    <button class="button" type="submit">Créer l'évènement</button>
     {{ form_end(event_form) }}
+    </div>
 {% endblock %}
