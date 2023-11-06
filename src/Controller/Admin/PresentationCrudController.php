@@ -22,8 +22,8 @@ class PresentationCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
-        yield TextEditorField::new('text');
-        yield ImageField::new('image')
+        yield TextEditorField::new('text', 'Texte');
+        yield ImageField::new('image', 'Image')
             ->setBasePath('/images')
             ->setUploadDir('public/images')
             ->setUploadedFileNamePattern('[randomhash].[extension]')

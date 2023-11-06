@@ -7,6 +7,7 @@ use App\Entity\Metting;
 use App\Form\MeetingType;
 use App\Entity\MeetingSummary;
 use App\Form\MeetingSummaryType;
+use App\Repository\MessageRepository;
 use App\Repository\MettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\MemberEventsRepository;
@@ -24,12 +25,16 @@ class MemberAreaController extends AbstractController
     // Action pour afficher la page d'accueil de l'espace membre
     #[Route('/member/area', name: 'member_area')]
     #[IsGranted('ROLE_USER')]
-    public function index(MemberEventsRepository $eventsRepository, MeetingSummaryRepository $meetingSummaryRepository, MettingRepository $meetingRepository): Response
+    public function index(MemberEventsRepository $eventsRepository, MeetingSummaryRepository $meetingSummaryRepository, MettingRepository $meetingRepository, MessageRepository $messageRepository): Response
     {
         if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MEMBER')) {
             // Redirect the user to the 403 page
             return new Response($this->renderView('bundles/TwigBundle/Exception/error403.html.twig'), Response::HTTP_FORBIDDEN);
         }
+
+        $user = $this->getUser();
+        $unreadMessagesCount = $messageRepository->countUnreadMessagesForUser($user);
+
         // Récupérer le prochain événement
         $nextEvent = $eventsRepository->findNextEvent();
         
@@ -45,6 +50,7 @@ class MemberAreaController extends AbstractController
             'event' => $nextEvent,
             'meeting' => $nextMeeting,
             'most_recent_meeting_summary' => $mostRecentMeetingSummary,
+            'unread_messages' => $unreadMessagesCount,
         ]);
     }
 
@@ -149,5 +155,9 @@ class MemberAreaController extends AbstractController
 
         return $response;
     }
+    
+
+
+
 }
 

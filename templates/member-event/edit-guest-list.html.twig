@@ -2,16 +2,16 @@
 
 {% block body %}
 <div class="forms-container">
-<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
-    <h1>Edit Guest List</h1>
+<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
+    <h1 class="actus-title activite">Liste d'invités</h1>
     <form method="post" id="guests-form">
         {{ form_start(form) }}
         <div id="guests-list" data-prototype="{{ form_widget(form.guests.vars.prototype)|e('html_attr') }}">
     {{ form_errors(form.guests) }}
     {% for guestForm in form.guests %}
         <div class="guest-form">
-            {{ form_row(guestForm.prenom) }}
-            {{ form_row(guestForm.nom) }}
+            {{ form_row(guestForm.prenom,{'label':"Nom de l'invité"}) }}
+            {{ form_row(guestForm.nom,{'label':"Prénom de l'invité"}) }}
             <a href="{{ path('app_delete_guest', {'id': guestForm.vars.value.id}) }}" class="btn btn-danger mx-2">Supprimer l'invité</a>
         </div>
     {% endfor %}

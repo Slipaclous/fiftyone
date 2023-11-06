@@ -9,8 +9,8 @@
 {% endblock %}
 {% block body %}
     <div class="forms-container">
-<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
-    <h2>Création d'évènements</h2>
+<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
+    <h2 class="actus-title activite" >Création d'évènements</h2>
     
     {{ form_start(event_form) }}
     {{ form_widget(event_form) }}

@@ -18,7 +18,7 @@ class CommentsCrudController extends AbstractCrudController
     {
         return [
            
-            TextField::new('contenu'),
+            TextField::new('contenu', 'Contenu'),
             
         ];
     }

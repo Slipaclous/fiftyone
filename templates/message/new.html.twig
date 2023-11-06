@@ -10,9 +10,9 @@
 {% block title %}Envoyer un message{% endblock %}
 
 {% block body %}
-<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
+<a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
 <div class="forms-container">
-  <h1>Envoyer un message</h1>
+  <h1 class="actus-title activite">Envoyer un message</h1>
 
   {{ form_start(form) }}
   {{ form_label(form.content,'Message :') }}

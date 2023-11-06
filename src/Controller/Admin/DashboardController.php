@@ -133,8 +133,6 @@ private function getVisitorsLastMonth(): int
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comments::class);
 
-        yield MenuItem::linkToCrud('Reservations', 'fas fa-calendar-alt', Reservation::class);
-
         yield MenuItem::linkToCrud('Presentation', 'fas fa-info-circle', Presentation::class);
 
        ;

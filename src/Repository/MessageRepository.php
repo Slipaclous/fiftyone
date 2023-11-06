@@ -23,11 +23,12 @@ class MessageRepository extends ServiceEntityRepository
     }
 
 
+        // Cette fonction trouve toutes les conversations pour un utilisateur donné.
     public function findConversationsForUser(User $user): array
     {
         $conversations = [];
 
-        // Group messages by sender and receiver pairs
+        // Regroupe les messages par paire d'expéditeur et de destinataire.
         $messages = $this->createQueryBuilder('m')
             ->andWhere('m.sender = :user OR m.receiver = :user')
             ->setParameter('user', $user)
@@ -36,6 +37,7 @@ class MessageRepository extends ServiceEntityRepository
             ->getResult();
 
         foreach ($messages as $message) {
+            // Détermine avec qui l'utilisateur a la conversation.
             $conversationUser = $message->getSender() === $user
                 ? $message->getReceiver()
                 : $message->getSender();
@@ -43,6 +45,7 @@ class MessageRepository extends ServiceEntityRepository
             $conversationUserId = $conversationUser->getId();
             $conversationContent = $message->getContent();
 
+            // Crée une nouvelle conversation si elle n'existe pas déjà.
             if (!isset($conversations[$conversationUserId])) {
                 $conversations[$conversationUserId] = [
                     'user' => $conversationUser,
@@ -50,6 +53,7 @@ class MessageRepository extends ServiceEntityRepository
                 ];
             }
 
+            // Ajoute le message à la conversation existante.
             $conversations[$conversationUserId]['messages'][] = [
                 'content' => $conversationContent,
                 'createdAt' => $message->getCreatedAt()
@@ -59,6 +63,7 @@ class MessageRepository extends ServiceEntityRepository
         return $conversations;
     }
 
+    // Cette fonction récupère tous les messages pour une conversation entre deux utilisateurs.
     public function findMessagesForConversation(User $user1, User $user2): array
     {
         return $this->createQueryBuilder('m')
@@ -69,17 +74,31 @@ class MessageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // Cette fonction compte le nombre de messages non lus pour un utilisateur dans une conversation.
     public function getUnreadCountForUserInConversation(User $recipient, User $sender): int
     {
         return $this->createQueryBuilder('m')
             ->select('COUNT(m.id)')
             ->where('m.receiver = :receiver')
             ->andWhere('m.sender = :sender')
-            ->andWhere('m.isRead = false') // Assuming 'isRead' is a boolean column
+            ->andWhere('m.isRead = false') // On suppose que 'isRead' est une colonne booléenne.
             ->setParameter('receiver', $recipient)
             ->setParameter('sender', $sender)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+    public function countUnreadMessagesForUser(User $user): int
+    {
+        // Create a QueryBuilder to count messages
+        $qb = $this->createQueryBuilder('m');
+        $qb->select('count(m.id)')
+           ->where('m.receiver = :user')
+           ->andWhere('m.isRead = :isRead')
+           ->setParameter('user', $user)
+           ->setParameter('isRead', false);
+    
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
 //    /**

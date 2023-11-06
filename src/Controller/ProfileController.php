@@ -66,34 +66,52 @@ class ProfileController extends AbstractController
     }
 
     /**
- * @Route("/set-password/{token}", name="set_password_route")
- */
+     * Modification du mot de passe
+     *
+     * @param Request $request
+     * @param UserPasswordHasherInterface $passwordEncoder
+     * @return Response
+     */
+#[Route("/set-password/{token}", name:"set_password_route")]
+// Définit le nouveau mot de passe de l'utilisateur à l'aide du token de réinitialisation.
 public function setPassword(Request $request, string $token, EntityManagerInterface $em, UserPasswordHasherInterface $passwordEncoder): Response
 {
+    // Recherche l'utilisateur par le token de réinitialisation du mot de passe.
     $user = $em->getRepository(User::class)->findOneBy(['passwordResetToken' => $token]);
 
+    // Si l'utilisateur n'est pas trouvé ou que le token est invalide/expiré, renvoie une erreur.
     if (!$user) {
-        throw $this->createNotFoundException('Invalid or expired token.');
+        throw $this->createNotFoundException('Token invalide ou expiré.');
     }
 
+    // Crée et gère le formulaire de définition du nouveau mot de passe.
     $form = $this->createForm(SetPasswordType::class);
     $form->handleRequest($request);
 
+    // Vérifie si le formulaire est soumis et valide.
     if ($form->isSubmitted() && $form->isValid()) {
+        // Récupère les données du formulaire.
         $data = $form->getData();
+        // Hash le nouveau mot de passe.
         $hashedPassword = $passwordEncoder->hashPassword($user, $data['plainPassword']);
+        // Met à jour le mot de passe de l'utilisateur.
         $user->setPassword($hashedPassword);
-        $user->setPasswordResetToken(null); // Clear reset token
-        $user->setPasswordResetTokenExpiresAt(null); // Clear token expiration
+        // Réinitialise le token de réinitialisation du mot de passe.
+        $user->setPasswordResetToken(null); // Efface le token
+        $user->setPasswordResetTokenExpiresAt(null); // Efface l'expiration du token
     
+        // Persiste l'utilisateur et enregistre les changements dans la base de données.
         $em->persist($user);
         $em->flush();
     
-        $this->addFlash('success', 'Password set successfully!');
+        // Ajoute un message flash de succès.
+        $this->addFlash('success', 'Mot de passe défini avec succès!');
     
-        return $this->redirectToRoute('app_login'); // Redirect to your login page
+        // Redirige vers la page de connexion.
+        return $this->redirectToRoute('app_login'); // Redirige vers votre page de connexion
     }
 
+    // Affiche le formulaire de définition du nouveau mot de passe.
     return $this->render('change_password/path_to_set_password_template.html.twig', [
         'form' => $form->createView(),
         'token' => $token,

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Exception;
 use DateTimeZone;
 use App\Entity\User;
 use DateTimeImmutable;
@@ -28,45 +29,47 @@ class MessageController extends AbstractController
     }
 
     
-    #[Route('/message/new', name: 'message_new')]
-    public function newMessage(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
-    {
-        $message = new Message();
-        $message->setIsRead(false); // Setting the value explicitly
-        // Fetch users to populate the receiver dropdown
-        $users = $userRepository->findAll();
+    // Crée un nouveau message.
+#[Route('/message/new', name: 'message_new')]
+public function newMessage(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+{
+    $message = new Message();
+    $message->setIsRead(false); // Initialise le message comme non lu
+    // Récupère tous les utilisateurs pour peupler le menu déroulant des destinataires
+    $users = $userRepository->findAll();
 
-        $form = $this->createForm(MessageType::class, $message);
+    $form = $this->createForm(MessageType::class, $message);
 
-        $form->handleRequest($request);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Get the current logged-in user as the sender
-            $sender = $this->getUser();
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Obtient l'utilisateur actuellement connecté comme expéditeur
+        $sender = $this->getUser();
 
-            // Set the sender and current datetime
-            $message->setSender($sender);
-            $createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
-            $message->setCreatedAt($createdAt);
-            // Populate other fields (e.g., content, receiver) based on your requirements
+        // Définit l'expéditeur et la date et heure actuelles
+        $message->setSender($sender);
+        $createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
+        $message->setCreatedAt($createdAt);
+        // Renseigne les autres champs (par exemple, contenu, destinataire) selon vos besoins
 
-            // Handle saving the message
-            $entityManager->persist($message);
-            $entityManager->flush();
+        // Gère l'enregistrement du message
+        $entityManager->persist($message);
+        $entityManager->flush();
 
-            $this->addFlash('success', 'Message sent successfully!');
-            return $this->redirectToRoute('member_area');
-        }
-
-        return $this->render('message/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $this->addFlash('success', 'Message envoyé avec succès!');
+        return $this->redirectToRoute('member_area');
     }
 
-    #[Route('/message/reply/{message}', name: 'message_reply')]
+    return $this->render('message/new.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
+// Répond à un message existant.
+#[Route('/message/reply/{message}', name: 'message_reply')]
 public function reply(Message $message, Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
 {
-    // Fetch the receiver user based on the message
+    // Récupère l'utilisateur destinataire en fonction du message
     $receiver = $message->getReceiver();
 
     $replyMessage = new Message();
@@ -78,7 +81,7 @@ public function reply(Message $message, Request $request, EntityManagerInterface
 
     if ($form->isSubmitted() && $form->isValid()) {
         $sender = $this->getUser();
-        $createdAt = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
+        $createdAt = new DateTimeImmutable('now', new DateTimeZone('Europe/Paris'));
 
         $replyMessage
             ->setSender($sender)
@@ -89,11 +92,11 @@ public function reply(Message $message, Request $request, EntityManagerInterface
             $entityManager->persist($replyMessage);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Reply sent successfully!');
+            $this->addFlash('success', 'Réponse envoyée avec succès!');
             return $this->redirectToRoute('message_show_conversation', ['id' => $receiver->getId()]);
-        } catch (\Exception $e) {
-            $this->addFlash('error', 'An error occurred while saving the message: ' . $e->getMessage());
-            $logger->error('Error saving message: ' . $e->getMessage());
+        } catch (Exception $e) {
+            $this->addFlash('error', "Une erreur s'est produite lors de l'enregistrement du message : " . $e->getMessage());
+            $logger->error("Erreur lors de l'enregistrement du message : " . $e->getMessage());
         }
     }
 
@@ -103,21 +106,22 @@ public function reply(Message $message, Request $request, EntityManagerInterface
     ]);
 }
 
-    #[Route('message/conversations', name: 'message_conversations')]
-    public function showConversations(MessageRepository $messageRepository): Response
+// Affiche les conversations de l'utilisateur.
+#[Route('message/conversations', name: 'message_conversations')]
+public function showConversations(MessageRepository $messageRepository): Response
 {
-    // Get the current logged-in user
+    // Obtient l'utilisateur actuellement connecté
     $user = $this->getUser();
 
-    // If the user is not logged in or not found, throw an appropriate exception or handle the case
+    // Si l'utilisateur n'est pas connecté ou introuvable, lance une exception appropriée ou gère le cas
     if (!$user) {
-        throw $this->createNotFoundException('User not found');
+        throw $this->createNotFoundException('Utilisateur non trouvé');
     }
 
-    // Fetch conversations for the current user
+    // Récupère les conversations pour l'utilisateur actuel
     $conversations = $messageRepository->findConversationsForUser($user);
 
-    // Extract users from conversations and get unread count
+    // Extrait les utilisateurs des conversations et obtient le nombre de messages non lus
     $usersWithConversations = [];
     foreach ($conversations as $conversation) {
         $currentUser = $conversation['user'];
@@ -132,19 +136,20 @@ public function reply(Message $message, Request $request, EntityManagerInterface
         'usersWithConversations' => $usersWithConversations,
     ]);
 }
+// Affiche une conversation spécifique avec un utilisateur donné.
 #[Route('/conversation/{id}', name: 'message_show_conversation', requirements: ['id' => '\d+'])]
 public function showConversation(int $id, MessageRepository $messageRepository, EntityManagerInterface $entityManager): Response
 {
-    // Get the current logged-in user
+    // Récupère l'utilisateur actuellement connecté
     $user = $this->getUser();
 
-    // Fetch the user with whom the conversation is to be displayed
+    // Recherche l'utilisateur avec lequel la conversation doit être affichée
     $conversationUser = $entityManager->getRepository(User::class)->find($id);
 
-    // Fetch messages for the given conversation
+    // Récupère les messages pour la conversation donnée
     $messages = $messageRepository->findMessagesForConversation($user, $conversationUser);
 
-    // Mark messages as read
+    // Marque les messages comme lus
     foreach ($messages as $message) {
         if (!$message->getIsRead() && $message->getReceiver() === $user) {
             $message->setIsRead(true);

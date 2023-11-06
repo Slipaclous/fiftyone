@@ -17,8 +17,8 @@ class SetPasswordType extends AbstractType
         $builder
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password'],
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmez votre mot de passe'],
                 'invalid_message' => 'The password fields must match.',
             ]);
     }

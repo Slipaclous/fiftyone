@@ -56,124 +56,133 @@ public function index(EventsRepository $eventsRepository, PaginatorInterface $pa
         'closestEvents' => $closestEvents,
     ]);
 }
-    //route
-    #[Route('/events/{slug}/reservation', name: 'app_events_reservation')]
-    public function makeReservation(
-        Request $request,
-        Events $event,
-        EntityManagerInterface $entityManager,
-        ReservationEmailSender $emailSender,
-    ): Response {
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-        $form->handleRequest($request);
+    // Route pour effectuer une réservation pour un événement
+#[Route('/events/{slug}/reservation', name: 'app_events_reservation')]
+public function makeReservation(
+    Request $request,Events $event,EntityManagerInterface $entityManager,ReservationEmailSender $emailSender): Response 
+    {
+    $reservation = new Reservation();
+    $form = $this->createForm(ReservationType::class, $reservation);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Generate a unique reservation number (you can use a custom logic)
-            $reservation->setReservationNumber(uniqid());
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Générer un numéro de réservation unique (vous pouvez utiliser une logique personnalisée)
+        $reservation->setReservationNumber(uniqid());
 
-            // Link the reservation to the event
-            $reservation->setEvent($event);
+        // Associer la réservation à l'événement
+        $reservation->setEvent($event);
 
-            // Persist the reservation to the database
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+        // Persister la réservation dans la base de données
+        $entityManager->persist($reservation);
+        $entityManager->flush();
 
-            // Update event availability
-            $event->decrementAvailability($reservation->getNumberOfPeople());
+        // Mettre à jour la disponibilité de l'événement
+        $event->decrementAvailability($reservation->getNumberOfPeople());
 
-            // Send an email with reservation details and reservation number
-            $subject = 'Reservation Confirmation';
-            $toEmail = $reservation->getEmail(); // Use the email address from the reservation entity
+        // Envoyer un e-mail avec les détails de la réservation et le numéro de réservation
+        $subject = 'Confirmation de réservation';
+        $toEmail = $reservation->getEmail(); // Utiliser l'adresse e-mail de l'entité réservation
 
-            // Render the email content using the email template
-            $emailContent = $this->renderView(
-                'email/reservation.html.twig',
-                [
-                    'event' => $event,
-                    'reservation' => $reservation,
-                ]
-            );
+        // Générer le contenu de l'e-mail en utilisant le template d'e-mail
+        $emailContent = $this->renderView(
+            'email/reservation.html.twig',
+            [
+                'event' => $event,
+                'reservation' => $reservation,
+            ]
+        );
 
-            try {
-                $emailSender->sendReservationConfirmationEmail($toEmail, $subject, $event, $reservation, $emailContent); // Pass $emailContent as the fourth argument
-            } catch (\Exception $e) {
-                // Handle email sending errors here, e.g., log the error
-                $this->addFlash('error', 'Failed to send the reservation confirmation email.');
-            }
-
-            $this->addFlash('success', 'Reservation successful!'); // Optional: Flash message
-            return $this->redirectToRoute('app_events_show', ['slug' => $event->getSlug()]);
+        try {
+            // Essayer d'envoyer l'e-mail de confirmation de réservation
+            $emailSender->sendReservationConfirmationEmail($toEmail, $subject, $event, $reservation, $emailContent);
+        } catch (\Exception $e) {
+            // Gérer les erreurs d'envoi d'e-mail ici, par exemple, logger l'erreur
+            $this->addFlash('error', "L'envoi de l'e-mail de confirmation de réservation a échoué.");
         }
 
-        return $this->render('events/reservation.html.twig', [
-            'form' => $form->createView(),
-            'event' => $event,
-        ]);
-    }
-
-    #[Route('/reservation/{id}/delete', name: 'app_delete_reservation')]
-    public function deleteReservation(Reservation $reservation, EntityManagerInterface $entityManager): Response
-    {
-        $event = $reservation->getEvent();
-    
-        $entityManager->remove($reservation);
-        $entityManager->flush();
-    
-        $this->addFlash('success', 'Reservation deleted successfully.');
-    
+        // Message flash optionnel pour indiquer le succès de l'action
+        $this->addFlash('success', 'Réservation effectuée avec succès !');
         return $this->redirectToRoute('app_events_show', ['slug' => $event->getSlug()]);
     }
-    #[Route('/events/modify', name: 'app_modify_reservation')]
-    public function modifyReservation(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createFormBuilder()
-            ->add('reservationNumber', TextType::class, [
-                'label' => 'Reservation Number',
-                'attr' => ['placeholder' => 'Enter your reservation number'],
-            ])
-            ->getForm();
-    
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservationNumber = $form->getData()['reservationNumber'];
-    
-            $reservation = $entityManager->getRepository(Reservation::class)->findOneBy(['reservationNumber' => $reservationNumber]);
-    
-            if ($reservation) {
-                return $this->redirectToRoute('app_modify_reservation_form', ['id' => $reservation->getId()]);
-            } else {
-                $this->addFlash('error', 'No reservation found with the provided reservation number.');
-            }
+
+    return $this->render('events/reservation.html.twig', [
+        'form' => $form->createView(),
+        'event' => $event,
+    ]);
+}
+
+// Route pour supprimer une réservation
+#[Route('/reservation/{id}/delete', name: 'app_delete_reservation')]
+public function deleteReservation(Reservation $reservation, EntityManagerInterface $entityManager): Response {
+    $event = $reservation->getEvent();
+
+    // Supprimer la réservation et mettre à jour la base de données
+    $entityManager->remove($reservation);
+    $entityManager->flush();
+
+    // Message flash pour confirmer la suppression de la réservation
+    $this->addFlash('success', 'Réservation supprimée avec succès.');
+
+    return $this->redirectToRoute('app_events_show', ['slug' => $event->getSlug()]);
+}
+
+// Route pour rechercher une réservation afin de la modifier
+#[Route('/events/reservation/modify', name: 'app_modify_reservation')]
+public function modifyReservation(Request $request, EntityManagerInterface $entityManager): Response {
+    $form = $this->createFormBuilder()
+        ->add('reservationNumber', TextType::class, [
+            'label' => 'Numéro de réservation',
+            'attr' => ['placeholder' => 'Entrez votre numéro de réservation'],
+        ])
+        ->getForm();
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Rechercher la réservation avec le numéro fourni
+        $reservationNumber = $form->getData()['reservationNumber'];
+        $reservation = $entityManager->getRepository(Reservation::class)->findOneBy(['reservationNumber' => $reservationNumber]);
+
+        if ($reservation) {
+            // Rediriger vers le formulaire de modification si la réservation est trouvée
+            return $this->redirectToRoute('app_modify_reservation_form', ['id' => $reservation->getId()]);
+        } else {
+            // Message flash si aucune réservation n'est trouvée
+            $this->addFlash('error', 'Aucune réservation trouvée pour ce numéro.');
         }
-    
-        return $this->render('events/modify.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
+
+    return $this->render('events/modify.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
     
-    #[Route('/reservation/{id}/modify', name: 'app_modify_reservation_form')]
-    public function modifyReservationForm(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(ModifyReservationType::class, $reservation);
-    
-        $form->handleRequest($request);
-    
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($reservation);
-            $entityManager->flush();
-    
-            $this->addFlash('success', 'Reservation updated successfully.');
-    
-            return $this->redirectToRoute('app_events_show', ['slug' => $reservation->getEvent()->getSlug()]);
-        }
-    
-        return $this->render('events/modify_form.html.twig', [
-            'form' => $form->createView(),
-            'reservation' => $reservation,
-        ]);
+    // Route pour le formulaire de modification d'une réservation spécifique
+#[Route('/reservation/{id}/modify', name: 'app_modify_reservation_form')]
+public function modifyReservationForm(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response {
+    // Créer et gérer le formulaire de modification d'une réservation existante
+    $form = $this->createForm(ModifyReservationType::class, $reservation);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Enregistrer les modifications de la réservation dans la base de données
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+
+        // Message flash pour indiquer le succès de la modification de la réservation
+        $this->addFlash('success', 'La modification de votre réservation a été enregistrée avec succès.');
+
+        // Redirection vers la page de détail de l'événement après modification de la réservation
+        return $this->redirectToRoute('app_events_show', ['slug' => $reservation->getEvent()->getSlug()]);
     }
+
+    // Afficher le formulaire de modification si la requête n'est pas valide ou pas encore soumise
+    return $this->render('events/modify_form.html.twig', [
+        'form' => $form->createView(),
+        'reservation' => $reservation,
+    ]);
+}
     
     /**
      * Affiche un événement

@@ -10,9 +10,9 @@
 {% block title %}Réunion à venir{% endblock %}
 
 {% block body %}
-    <a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
+    <a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
     <div class="container">
-        <h2 class="mt-4">Calendrier des réunions</h2>
+        <h2 class="actus-title activite">Calendrier des réunions</h2>
         <a href="{{ path('create_meeting') }}" class="btn btn-success">Ajouter une nouvelle réunion</a>
     
         {% if upcoming_meetings %}

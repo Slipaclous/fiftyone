@@ -18,7 +18,7 @@ class CarouselCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('title'),
+            TextField::new('title', 'Titre'),
             ImageField::new('image')->setBasePath('/images')->setUploadDir('public/images')->setUploadedFileNamePattern('[randomhash].[extension]'),
         ];
     }

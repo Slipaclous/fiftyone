@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+// Importations des classes nécessaires à la commande
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,17 +13,21 @@ use App\Entity\MemberEvents;
 use App\Entity\User;
 use Symfony\Component\Console\Attribute\AsCommand;
 
+// Annotation pour configurer la commande CLI
 #[AsCommand(
     name: 'App:SendEventsEmailCommand',
-    description: 'Add a short description for your command',
+    description: 'Ajoute une courte description pour votre commande',
 )]
 class SendEventsEmailCommand extends Command
 {
+    // Nom par défaut de la commande
     protected static $defaultName = 'app:sendEventsEmail';
 
+    // Déclaration des propriétés pour le gestionnaire d'entité et le service de messagerie
     private $entityManager;
     private $mailer;
 
+    // Constructeur avec injection de dépendances pour EntityManager et MailerInterface
     public function __construct(EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         parent::__construct();
@@ -30,42 +35,48 @@ class SendEventsEmailCommand extends Command
         $this->mailer = $mailer;
     }
 
+    // La méthode execute est le point d'entrée de la commande lorsqu'elle est exécutée
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // Assume you have a field 'createdAt' in your MemberEvents entity
-        // and a method to fetch all events created after a certain date.
         $lastWednesday = new \DateTime('last Wednesday');
         $newEvents = $this->entityManager->getRepository(MemberEvents::class)->findNewEventsSinceLastWednesday();
 
+        // Vérifier s'il y a de nouveaux événements
         if (count($newEvents) > 0) {
+            // Récupérer tous les utilisateurs
             $users = $this->entityManager->getRepository(User::class)->findAll();
 
+            // Envoyer un email à chaque utilisateur
             foreach ($users as $user) {
                 $email = (new Email())
                     ->from('gauthier.minor@gmail.com')
                     ->to($user->getEmail())
                     ->subject('Nouveaux évènements de membres!')
-                    ->html($this->renderEventsEmail($newEvents));
+                    ->html($this->renderEventsEmail($newEvents)); // Générer le contenu de l'email
 
                 $this->mailer->send($email);
             }
 
-            $output->writeln('Emails have been sent!');
+            // Message de confirmation d'envoi des emails
+            $output->writeln('Les emails ont été envoyés !');
         } else {
-            $output->writeln('No new events to send.');
+            // Message s'il n'y a pas de nouveaux événements
+            $output->writeln('Pas de nouveaux événements à envoyer.');
         }
 
+        // Retourner le statut de succès de la commande
         return Command::SUCCESS;
     }
 
+    // Méthode privée pour rendre le contenu de l'email basé sur les nouveaux événements
     private function renderEventsEmail($events): string
     {
-        // Render the email content based on the new events.
-        // This could be a Twig template, or simply a concatenation of strings.
-        // For example:
-        $content = '<h1>New Member Events!</h1>';
+        // Générer le contenu de l'email.
+        // Cela pourrait être un template Twig, ou simplement une concaténation de chaînes.
+        // Par exemple :
+        $content = '<h1>Nouveaux événements des membres !</h1>';
         foreach ($events as $event) {
-            $content .= '<p>' . $event->getTitre() . ' on ' . $event->getDate()->format('Y-m-d') . '</p>';
+            $content .= '<p>' . $event->getTitre() . ' le ' . $event->getDate()->format('Y-m-d') . '</p>';
         }
 
         return $content;

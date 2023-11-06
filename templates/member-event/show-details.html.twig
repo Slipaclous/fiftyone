@@ -6,11 +6,11 @@
  
 {% endblock %}
 {% block body %}
-<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
+<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
 {% if is_granted('ROLE_ADMIN') %}
     <form action="{{ path('app_member_event_delete', {'id': event.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="btn btn-danger">Supprimer l'évènement</button>
+        <button type="submit" class="btn btn-danger space">Supprimer l'évènement</button>
     </form>
 {% endif %}
 
@@ -19,43 +19,57 @@
         <div class="events-cover">
             <img src="/{{ event.cover }}" alt="cover">
         </div>
-        <div class="events-info">
-    <h1>{{ event.titre }}</h1>
-    <p>{{ event.description }}</p>
-    <p>Date: {{ event.date|date('Y-m-d') }}</p>
-    <p>Places disponible: {{ event.places }}</p>
-    {% if not participant %}
-    <form action="{{ path('app_participate', {'id': event.id}) }}" method="post">
-        <button class="button-3" type="submit">Participer</button>
-    </form>
+        <div class="events-info-container">
+    <h2>{{ event.titre }}</h2>
+    <div class="events-info-container-info">
+        <p>{{ event.description }}</p>
+        <p>Date: {{ event.date|date('Y-m-d') }}</p>
+        <p>Places disponible: {{ event.places }}</p>
+        {% if not participant %}
+        <form action="{{ path('app_participate', {'id': event.id}) }}" method="post">
+            <button class="button-2" type="submit">Participer</button>
+        </form>
+    </div>
 {% else %}
     <p>Vous participez déjà à cet évènement.</p>
-    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="btn btn-primary">Modifier mes invités</a>
+    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="button">Modifier mes invités</a>
     <form action="{{ path('app_cancel_participation', {'id': participant.id}) }}" method="post">
-        <button type="submit" class="button-3">Annuler ma participation</button>
+        <button type="submit" class="button-2">Annuler ma participation</button>
     </form>
 {% endif %}
-    <h2>Participants</h2>
+    
+        </div>
+    </div>
+    <div class="participants">
+    <h2>Liste des participants</h2>
     <ul>
         {% for participant in participants %}
-            <li>
-                {% if participant.participant.firstName and participant.participant.lastName %}
-                    - {{ participant.participant.firstName }} {{ participant.participant.lastName }}
-                {% else %}
-                    - {{ participant.participant.email }}
-                {% endif %}
-                <ul>
-                    {% for guest in participant.guests %}
-                        <li>
+        <li>
+            {% if participant.participant.firstName and participant.participant.lastName %}
+            - {{ participant.participant.firstName }} {{ participant.participant.lastName }}
+            {% else %}
+            - {{ participant.participant.email }}
+            {% endif %}
+            <ul>
+                <li>
+                    <div>Invités:</div>
+                    <ul>
+                        {% for guest in participant.guests %}
+                        <li class="invites">
                             {% if guest.prenom and guest.nom %}
-                                Guest: {{ guest.prenom }} {{ guest.nom }}
+                            {{ guest.prenom }} {{ guest.nom }}
                             {% endif %}
                         </li>
-                    {% endfor %}
-                </ul>
-            </li>
+                        {% endfor %}
+                        <li>
+                            Note :{{participant.comment}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
         {% endfor %}
     </ul>
-        </div>
+</div>
     </div>
 {% endblock %}

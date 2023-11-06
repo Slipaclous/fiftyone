@@ -25,107 +25,97 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+    // Injection de dépendances pour les services nécessaires
     private AuthorizationCheckerInterface $authorizationChecker;
     private UserPasswordHasherInterface $passwordEncoder;
     private MailerInterface $mailer;
-    
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, UserPasswordHasherInterface $passwordEncoder,MailerInterface $mailer)
-    {
+
+    // Constructeur avec les services injectés
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker, 
+        UserPasswordHasherInterface $passwordEncoder,
+        MailerInterface $mailer
+    ) {
         $this->authorizationChecker = $authorizationChecker;
         $this->passwordEncoder = $passwordEncoder;
         $this->mailer = $mailer;
     }
 
+    // Renvoie le FQCN de l'entité que ce contrôleur gère
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
+    // Configuration des champs pour les formulaires CRUD
     public function configureFields(string $pageName): iterable
     {
+        // Configuration conditionnelle des champs selon la page
         if ($pageName !== Crud::PAGE_NEW) {
             $passwordField = TextField::new('password')
                 ->setFormType(PasswordType::class)
                 ->setRequired(false)
                 ->hideOnIndex();
-    
+
+            // Désactiver le champ de mot de passe lors de l'édition
             if ($pageName === Crud::PAGE_EDIT) {
                 $passwordField->setFormTypeOption('disabled', true);
             }
         }
 
+        // Retourner les champs configurés pour le formulaire
         return [
-            TextField::new('email'),
-            // Afficher l'image d'avatar
-            // TextField::new('firstName'),
-            // TextField::new('lastName'),
-            // ImageField::new('avatar')
-            //     ->setBasePath('')
-            //     ->setUploadDir('public/images')
-            //     ->setUploadedFileNamePattern('[randomhash].[extension]')
-            //     ->setRequired(false)
-            //     ->hideOnForm(),
-                
-            // Ajouter le champ de description
-            // TextareaField::new('informations')
-            //     ->setLabel('Description'),
-
-            // Ajouter le champ de rôle
-            ChoiceField::new('roles')
+            TextField::new('email', 'Email'),
+            ChoiceField::new('roles', 'Roles')
                 ->allowMultipleChoices()
                 ->setChoices([
                     'Admin' => 'ROLE_ADMIN',
                     'User' => 'ROLE_MEMBER',
-                ])
-                ->allowMultipleChoices(),
-
-            // $passwordField,
+                ]),
         ];
     }
 
+    // Persister une nouvelle entité dans la base de données
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance ): void
     {
-        // Autoriser uniquement les administrateurs à créer des utilisateurs
+        // Vérification de l'autorisation de l'utilisateur
         if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException('Accès refusé.');
         }
 
+        // Gestion du mot de passe avant de persister l'entité
         $newPassword = $entityInstance->getPassword();
-        $user = $this->getUser();
         if (!empty($newPassword)) {
-            // Hasher le nouveau mot de passe avant de persister l'entité
             $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
             $entityInstance->setPassword($hashedPassword);
-            
-        }
-        if (empty($newPassword)) {
+        } else {
+            // Définir un mot de passe temporaire si aucun n'est fourni
             $newPassword = 'temporary_password';
             $hashedPassword = $this->passwordEncoder->hashPassword($entityInstance, $newPassword);
             $entityInstance->setPassword($hashedPassword);
         }
 
-        
+        // Générer un token unique pour la vérification/réinitialisation du mot de passe
+        if ($entityInstance instanceof User) {
+            $token = bin2hex(random_bytes(32));
+            $entityInstance->setPasswordResetToken($token);
+            $entityInstance->setPasswordResetTokenExpiresAt(new DateTimeImmutable('+24 hours'));
 
-    // Generate a unique token for user verification/resetting password.
-    if ($entityInstance instanceof User) {
-        $token = bin2hex(random_bytes(32));
-        $entityInstance->setPasswordResetToken($token);
-        $entityInstance->setPasswordResetTokenExpiresAt(new DateTimeImmutable('+24 hours'));
- // Token valid for 24 hours
+            // Envoi d'un email pour configurer le mot de passe
+            $email = (new TemplatedEmail())
+                ->from('your_email@example.com')
+                ->to($entityInstance->getEmail())
+                ->subject('Set Up Your Password')
+                ->htmlTemplate('email/setup_password.html.twig')
+                ->context([
+                    'token' => $token,
+                ]);
 
-        // Send email
-        $email = (new TemplatedEmail())
-            ->from('your_email@example.com')
-            ->to($entityInstance->getEmail())
-            ->subject('Set Up Your Password')
-            ->htmlTemplate('email/setup_password.html.twig')
-            ->context([
-                'token' => $token,
-            ]);
+            $this->mailer->send($email);
+        }
 
-        $this->mailer->send($email);
-    }
-    parent::persistEntity($entityManager, $entityInstance);
+        // Appeler la méthode parent pour persister l'entité
+        parent::persistEntity($entityManager, $entityInstance);
     }
 
 
@@ -143,14 +133,18 @@ class UserCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
+    // Configuration des actions disponibles pour l'entité User
     public function configureActions(Actions $actions): Actions
     {
+        // Appeler la méthode parent pour obtenir les actions configurées par défaut
         $actions = parent::configureActions($actions);
 
-        if (!$this->isGranted('ROLE_ADMIN')) {
+        // Désactiver la création, la modification et la suppression pour les non-administrateurs
+        if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $actions->disable(Action::NEW, Action::EDIT, Action::DELETE);
         }
 
+        // Retourner les actions configurées
         return $actions;
     }
 }

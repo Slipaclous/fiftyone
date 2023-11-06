@@ -6,24 +6,35 @@
  
 {% endblock %}
 {% block body %}
-    <h2 class="title-home">Liste de vos conversations</h2>
-    <ul>
-        {% for conversation in usersWithConversations %}
-            <li>
-                <a href="{{ path('message_show_conversation', {'id': conversation.user.id}) }}">
-                    {% if conversation.user.firstName and conversation.user.lastName %}
-                        {{ conversation.user.firstName }} {{ conversation.user.lastName }}
-                    {% else %}
-                        {{ conversation.user.email }}
-                    {% endif %}
-                    
-                    {% if conversation.unreadCount > 0 %}
-                        ({{ conversation.unreadCount }} unread messages)
-                    {% endif %}
-                    
-                    {{ conversation.user.getAvatar }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+<a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
+    <div class="container">
+        <h2 class="actus-title activite">Conversations</h2>
+        {% if usersWithConversations|length > 0 %}
+            <ul class="conversations list-group">
+                {% for conversation in usersWithConversations %}
+                    <li class="list-group-item d-flex align-items-center">
+                        {% if conversation.user.avatar %}
+                            <img src="/{{conversation.user.getAvatar}}" class="avatar rounded-circle mr-3" alt="{{ conversation.user.firstName }} {{ conversation.user.lastName }}">
+                        {% else %}
+                            <img src="/images/avatar.png" class="avatar rounded-circle mr-3" alt="Default Avatar">
+                        {% endif %}
+                        <div>
+                            <a class="text-dark" href="{{ path('message_show_conversation', {'id': conversation.user.id}) }}">
+                                {% if conversation.user.firstName and conversation.user.lastName %}
+                                    {{ conversation.user.firstName }} {{ conversation.user.lastName }}
+                                {% else %}
+                                    {{ conversation.user.email }}
+                                {% endif %}
+                            </a>
+                            {% if conversation.unreadCount > 0 %}
+                                <span class="badge badge-primary ml-2">{{ conversation.unreadCount }} messages non lu </span>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">No conversations found.</p>
+        {% endif %}
+    </div>
 {% endblock %}

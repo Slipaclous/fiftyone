@@ -10,23 +10,33 @@
 {% block title %}PV des réunions{% endblock %}
 
 {% block body %}
+<a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
     <div class="container">
-        <h2 class="mt-4">PV des réunions</h2>
-
-        <ul>
-                    <a href="{{path('create_summary')}}">Ajouter un PV</a>
-            {% for summary in summaries %}
-                <li>
-                    <strong>Date:</strong> {{ summary.date|date('d-m-Y') }}
-                    <br>
-                    {% if summary.pdf %}
-                        <strong>PDf:</strong> 
-                        <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">Voir le PDF</a>
-                    {% else %}
-                        <em>Pas de PV en ligne</em>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+    <h2 class="actus-title activite">PV des réunions</h2>
+    
+    <div class="text-right mb-3">
+        <a class="button-2" href="{{ path('create_summary') }}">Ajouter un PV</a>
     </div>
+    
+    {% if summaries is not empty %}
+        <div class="list-group">
+            {% for summary in summaries %}
+                <div class="list-group-item mb-2">
+                    <div>
+                        <strong>Réunion du {{ summary.date|date('d-m-Y') }}</strong> 
+                    </div>
+                    <div>
+                        {% if summary.pdf %}
+                            <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">Voir le PDF</a>
+                        {% else %}
+                            <em>Pas de PV en ligne</em>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Aucun PV disponible.</p>
+    {% endif %}
+</div>
 {% endblock %}

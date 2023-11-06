@@ -16,12 +16,12 @@ class MeetingType extends AbstractType
         $builder
             ->add('date', DateType::class, [
                 'label' => 'Date de la réunion',
-                'html5' => false,
-                'format' => 'yyyy-MM-dd',
+                'html5' => true, // Ensure this is set to true to use the browser's native datepicker
+                'widget' => 'single_text', // Use 'single_text' for a text input date picker
                 'attr' => [
                     'class' => 'datepicker',
                     'min' => (new \DateTime())->format('Y-m-d'),
-                ], // You can add a datepicker class if needed
+                ],
             ]);
     }
 

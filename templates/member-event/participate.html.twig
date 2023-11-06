@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="forms-container">
-<a href="{{path('member_area')}}" class="area-back">Retour à l'espace membre</a>
-    <h1>Participation à l'évènement</h1>
+<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
+    <h1 class="actus-title activite">Participation à l'évènement</h1>
 
     <form method="POST" action="{{ path('app_participate', {'id': event.id}) }}">
         {{ form_start(participantForm) }}
