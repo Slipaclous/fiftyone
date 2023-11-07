@@ -63,7 +63,7 @@ public function showEventDetails(MemberEvents $event, EventParticipantRepository
     if ($participantForm->isSubmitted() && $participantForm->isValid()) {
         $this->processParticipantForm($participantForm, $event, $entityManager);
 
-        $this->addFlash('success', 'You have successfully participated in the event.');
+        $this->addFlash('success', "Votre participation à l'évènement a été enregistrée !.");
 
         return $this->redirectToRoute('app_member_event_details', ['id' => $event->getId()]);
     }
@@ -83,7 +83,7 @@ public function editGuestList(EventParticipant $eventParticipant, Request $reque
 {
     //
     if ($this->getUser() !== $eventParticipant->getParticipant()) {
-        throw new AccessDeniedException('You do not have permission to edit this guest list.');
+        throw new AccessDeniedException("Vous n'avez pas la permission de modifier cette liste d'invités");
     }
 
     $form = $this->createForm(GuestListType::class, $eventParticipant);
@@ -96,7 +96,7 @@ public function editGuestList(EventParticipant $eventParticipant, Request $reque
         // Handle the form submission and persist the data.
         $entityManager->flush(); // Flush all changes to the database
 
-        $this->addFlash('success', 'Your guest list has been updated.');
+        $this->addFlash('success', 'Liste d\'invités mise à jour avec succès.');
 
         return $this->redirectToRoute('app_member_event_details', ['id' => $eventParticipant->getEvent()->getId()]);
     }
@@ -113,13 +113,13 @@ public function deleteGuest(Guests $guest, EntityManagerInterface $entityManager
 {
     // Check if the current user has permission to delete this guest
     if ($this->getUser() !== $guest->getEventParticipant()->getParticipant()) {
-        throw new AccessDeniedException('You do not have permission to delete this guest.');
+        throw new AccessDeniedException('Vous n\'avez pas la permission de supprimer cet invité.');
     }
 
     $entityManager->remove($guest);
     $entityManager->flush();
 
-    $this->addFlash('success', 'Guest deleted successfully.');
+    $this->addFlash('success', 'Invité supprimé avec succès.');
 
     return $this->redirectToRoute('app_edit_guest_list', ['id' => $guest->getEventParticipant()->getId()]);
 }
@@ -158,7 +158,7 @@ public function deleteGuest(Guests $guest, EntityManagerInterface $entityManager
             $entityManager->persist($participant);
             $entityManager->flush();
     
-            $this->addFlash('success', 'You have successfully participated in the event.');
+            $this->addFlash('success', 'Votre participation à l\'évènement a été enregistrée !.');
     
             return $this->redirectToRoute('app_member_event_details', ['id' => $event->getId()]);
         }
@@ -193,14 +193,14 @@ public function cancelParticipation(EventParticipant $eventParticipant, EntityMa
 {
     // Check if the current user has permission to cancel their participation
     if ($this->getUser() !== $eventParticipant->getParticipant()) {
-        throw new AccessDeniedException('You do not have permission to cancel your participation.');
+        throw new AccessDeniedException('Vous n\'avez pas la permission d\'annuler votre participation à cet événement.');
     }
 
     // Remove the EventParticipant and associated guests
     $entityManager->remove($eventParticipant);
     $entityManager->flush();
 
-    $this->addFlash('success', 'Participation canceled successfully.');
+    $this->addFlash('success', 'Votre participation à l\'événement a été annulée avec succès.');
 
     return $this->redirectToRoute('app_member_event');
 }
@@ -246,14 +246,14 @@ public function delete(MemberEvents $event, EntityManagerInterface $entityManage
 {
     // Check if the current user has the ROLE_ADMIN role
     if (!$security->isGranted('ROLE_ADMIN')) {
-        throw $this->createAccessDeniedException('You do not have permission to delete events.');
+        throw $this->createAccessDeniedException('Vous n\'avez pas la permission de supprimer cet événement.');
     }
 
     // Proceed to delete the event
     $entityManager->remove($event);
     $entityManager->flush();
 
-    $this->addFlash('success', 'Event deleted successfully.');
+    $this->addFlash('success', '    L\'événement a été supprimé avec succès.');
 
     return $this->redirectToRoute('app_member_event');
 }

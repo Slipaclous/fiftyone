@@ -5,26 +5,31 @@
 
 {% block body %}
 <div class="carousel-container">
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
       {% set active = true %}
       {% for carouselItem in carouselImages %}
       <div class="carousel-item{% if active %} active{% endif %}">
-        <img class="d-block w-100" src="{{ asset('images/' ~ carouselItem.image) }}" alt="{{ carouselItem.title }}">
+        <div class="carousel-background" style="background-image: url('{{ asset('images/' ~ carouselItem.image) }}');"></div>
+        <div class="carousel-caption d-none d-md-block">
+          <h3>{{ carouselItem.title }}</h3>
+        </div>
       </div>
       {% set active = false %}
       {% endfor %}
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only"></span>
-    </a>
+  <span class="carousel-control-prev-icon">
+  </span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  <span class="carousel-control-next-icon">
+  </span>
+</a>
   </div>
 </div>
+
+
 
 <div class="container-presentation">
   <h2 class="title-home"><svg class="news-icon" width="36px" height="36px" viewBox="0 0 24 24" fill="none"

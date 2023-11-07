@@ -296,9 +296,6 @@ svg .avatar{
 }
 
 .carousel-container{
-  filter: brightness(65%);
-  height: 100%;
-  background-color: white;
   
 }
 #carouselExampleControls{
@@ -435,14 +432,14 @@ header {
     background-color: #003049; /* Change the background color on hover */
 }
 /* disable the after for the first child */
-.site-links li:first-child a:hover::after {
+.site-links li .home-link:hover::after {
   display: none;
 }
 .site-link li .home-link:hover::after{
   display: none;
 }
 
-.site-link li a::after .logo-tel{
+.site-link li .home-link::after .logo-tel{
   display: none;
 }
 
@@ -1297,8 +1294,8 @@ header {
         padding-bottom: 20px;
       }
   .carousel-item img{
-    height:40vh;
-    object-fit:cover;
+    /* height:40vh;
+    object-fit:cover; */
   }
   .bandeau{
     position: relative;
@@ -1337,6 +1334,7 @@ header {
     font-size: 3rem;
     text-transform: uppercase;
     color: white;
+    width: 100%;
 
   }
   .logo-menu{
@@ -1574,6 +1572,9 @@ text-align: center;
     text-align: center;
     margin: 25px auto;
   }
+  .logo-presa{
+    width: 80vw;
+  }
  .footer {
     flex-direction: column;
     height: 25vh;
@@ -1740,7 +1741,7 @@ text-align: center;
   }
   .last-3-news{
     width: 25vw;
-    height: 30vh;
+    height: 25vh;
   }
   .card-home{
     width: 35vw;
@@ -1855,13 +1856,14 @@ text-align: center;
     left: 50% !important;
   }
   .last-3-news{
-    width: 60vw;
+    width: 70vw;
   }
   
 }
-@media (max-width:400px){
+@media (max-width:450px){
   .last-3-news{
     width: 80vw;
+    height: 20vh;
   }
   .latest-news{
     width: 100%;
@@ -1909,6 +1911,9 @@ text-align: center;
     opacity: 1;
     width: 100%;
     height: 100%;
+  }
+  .events-member{
+    min-height: 65vh;
   }
 }
 /* Media query for responsive design */
@@ -1960,10 +1965,7 @@ text-align: center;
   header h1{
     font-size: 15px;
   }
-  .carousel-item img{
-    height: 30vh;
-    object-fit: cover;
-  }
+
   
   /* Show the burger menu icon */
   .menu-icon {
@@ -2211,7 +2213,62 @@ a {
     width: 90%;
   }
 }
+.carousel-item {
+  height: 60vh; /* Or the height you prefer */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  
 
+}
+.carousel-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(50%); /* Exemple de filtre, ajustez selon vos besoins */
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Assurez-vous que la couleur du titre contraste bien avec votre image */
+  /* Plus de styles pour le titre ici */
+}
+
+.carousel-caption h3 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 30%;
+}
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(0,0,0,0.1); /* Ajoute un léger fond au survol pour améliorer la visibilité */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  transition: background-color 0.5s ease; /* Effet de transition douce pour le fond au survol */
+}
+
+
+
+.carousel-item.active {
+  opacity: 1;
+}
 @media only screen and (max-width: 480px) {
   .container-member {
     width: 90%;
@@ -2221,7 +2278,10 @@ a {
   }
   .events-member {
     width: 100%;
-    height: 40vh;
+    min-height: 50vh;
+  }
+  .bandeau h4{
+    font-size: 2.3rem;
   }
   .meetings-member {
     width: 100%;
@@ -2592,6 +2652,9 @@ span {
   font-weight: bolder;
   margin: 20px;
   text-transform: uppercase;
+}
+.carousel-info {
+  width: 80%;
 }
 .carousel-info .btn-pres {
   margin: 0 auto;
