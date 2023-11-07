@@ -263,6 +263,11 @@ svg .avatar{
     z-index: 0; /* Reset z-index if needed */
   }
 }
+@media(hover:none){
+  .site-links li .home-link::after:hover{
+    display: none;
+  }
+}
 /* header and footer CSS */
 .fixed-header {
   position: static; /* Initially static, not hidden */
@@ -295,9 +300,7 @@ svg .avatar{
   display: inline-block;
 }
 
-.carousel-container{
-  
-}
+
 #carouselExampleControls{
   margin: 0 !important;
 }
@@ -416,7 +419,7 @@ header {
     
   }
   
-  .site-links li a::after {
+  .site-links li ::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -429,19 +432,15 @@ header {
   } 
  
   .site-links li a:hover::after {
-    background-color: #003049; /* Change the background color on hover */
+    background-color: #003049; 
 }
-/* disable the after for the first child */
-.site-links li .home-link:hover::after {
-  display: none;
-}
-.site-link li .home-link:hover::after{
+
+ .site-links li a:first-child:hover::after {
   display: none;
 }
 
-.site-link li .home-link::after .logo-tel{
-  display: none;
-}
+
+
 
 
 
@@ -634,12 +633,7 @@ header {
         text-align: center;
         margin: 15px;
       }
-      .textpres p{
-        
-      }
-
-
-      
+ 
   footer {
     background-color: white;
     border: 1px solid rgb(206, 179, 25);
@@ -951,6 +945,14 @@ header {
         font-weight: bolder;
         color: #003049;
       }
+      .title-events{
+        margin: 70px;
+        margin-bottom: 3rem;
+        border-bottom: 1px solid rgb(206, 179, 25);
+        padding-bottom: 20px;
+        font-weight: bolder;
+        color: #003049;
+      }
       .new-icon{
         color: #003049;
       }
@@ -976,7 +978,7 @@ header {
         padding: 50px;
     }
     
-    
+ 
     
     .latest-news-content {
         position: relative;
@@ -1206,13 +1208,13 @@ header {
 
         .reservation{
           display: flex;
-          flex-direction: column;
-          width: 50%;
-          height: 15vh;
+          width: 43%;
           justify-content: space-between;
-          position:fixed;
-          top: 60%;
-          left: 85%;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 20px;
+
+          
         }
 
 
@@ -1228,19 +1230,22 @@ header {
         }
         .events-cover{
           width: 40vw;
-          height: 50vh;
-          object-fit: cover;
+          height: 70vh;
+          object-fit: contain;
+          object-position: center;
+          align-self: none;
+          border-right: 2px solid rgb(206, 179, 25);
         }
         .events-cover img{
           height: 100%;
-          width: 100%;
+          width: 90%;
           object-fit: cover;
         }
         .events-info-container{
           display: flex;
           flex-direction: column;
-          justify-content: space-around;
-          align-items: center;
+          width: 40%;
+          height: 100%;
         }
         .events-info-container-info{
           display: flex;
@@ -1293,10 +1298,6 @@ header {
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
       }
-  .carousel-item img{
-    /* height:40vh;
-    object-fit:cover; */
-  }
   .bandeau{
     position: relative;
     width: 100%;
@@ -1430,10 +1431,9 @@ text-align: center;
 
 
   .contact{
-    width: 40%;
+    width: 100%;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.44);
-    padding: 50px;
     border-radius: 25px;
   }
   .contact-field:first-child{
@@ -1563,6 +1563,15 @@ text-align: center;
     font-size: 20px;
     
   }
+  .member-events-container{
+    flex-direction: column;
+  }
+  .events-info-container{
+    width: 90%;
+  }
+  .events-cover{
+    width: 90%;
+  }
   .container-presentation h2{
     width: 80%;
     text-align: center;
@@ -1571,6 +1580,11 @@ text-align: center;
     width: 80%;
     text-align: center;
     margin: 25px auto;
+  }
+  .title-events{
+    width: 80%;
+    text-align: center;
+    margin: 45px  auto !important;
   }
   .logo-presa{
     width: 80vw;
@@ -1711,10 +1725,6 @@ text-align: center;
   .container-actu{
     width: 60%;
   }
-
-  .last-3-news-img{
-
-  }
   .last-3-news-title{
     font-size: 1.2rem;
     margin: 0;
@@ -1753,10 +1763,6 @@ text-align: center;
   .site-title {
     font-size: 15px;
     margin-left: 20px;
-  }
-
-  .last-3-news-img{
-    
   }
   .container-presentation .wrapper{
     width: 100%;
@@ -1954,13 +1960,6 @@ text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .info-user .nav-item{
-    
-  }
-  /* Put the link to the right without position absolute */
-  .login-link{
-    
   }
   header h1{
     font-size: 15px;
@@ -2273,6 +2272,18 @@ a {
   .container-member {
     width: 90%;
   }
+  .reservation {
+    width: 100%;
+    flex-direction: column;
+  }
+  .reservation a{
+    width: 100%;
+  }
+  .available-place{
+    text-align: center;
+    margin-top: 15px ;
+  }
+
   .contact-field:first-child{
     width: 80%;
   }
@@ -2662,17 +2673,40 @@ span {
 }
 /* Contact */ 
 
-.container-contact{
-  width: 100%;
-  min-height: 74.2vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to right, #003049, #8bb6e8);
-  color: white;
+.container-contact {
+  width: 65vw;
+  margin: 50px auto;
+  padding: 2em;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 .container-contact h1{
   color: white;
+}
+
+/* Styles spécifiques pour le formulaire de contact */
+.contact-field {
+  margin-bottom: 1em;
+}
+
+.contact-field label {
+  display: block;
+  margin-bottom: .5em;
+  color: #003049;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  padding: .5em;
+  border: 1px solid #003049;
+  border-radius: 5px;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: rgb(206, 179, 25);
+  box-shadow: 0 0 5px rgba(206, 179, 25, 0.5);
 }

@@ -11,16 +11,17 @@
 {% block body %}
 
 
-{% if event.getAvailablePlaces > 0 %}
+
+  <div class="container">
+    <h1 class="title-events">{{ event.Titre }}</h1>
+    {% if event.places !=null %}
+    {% if event.getAvailablePlaces > 0 %}
+    <p class="available-place">Places restantes : {{event.getAvailablePlaces}}</p>
     <div class="reservation">
         <a href="{{ path('app_events_reservation', {'slug': event.getSlug()}) }}" class="button-2">Faire une réservation</a>
         <a href="{{ path('app_modify_reservation', {'slug': event.getSlug()}) }}" class="button-2">Modifier ma réservation</a>
     </div>
 {% endif %}
-  <div class="container">
-    <h1 class="title-home">{{ event.Titre }}</h1>
-    {% if event.places !=null %}
-    <p>Places restantes : {{event.getAvailablePlaces}}</p>
     {% endif %}
     <div class="imgcover">
     <img src="/images/{{ event.getCover }}" class="cover" alt="dsfqsd">
