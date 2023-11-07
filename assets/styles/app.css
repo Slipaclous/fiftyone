@@ -419,7 +419,7 @@ header {
     
   }
   
-  .site-links li ::after {
+  .site-link::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -431,19 +431,9 @@ header {
     transition-duration:0.5s ;
   } 
  
-  .site-links li a:hover::after {
+  .site-link:hover::after {
     background-color: #003049; 
 }
-
- .site-links li a:first-child:hover::after {
-  display: none;
-}
-
-
-
-
-
-
 
   .presentation {
     text-align: center;
@@ -1239,7 +1229,7 @@ header {
         .events-cover img{
           height: 100%;
           width: 90%;
-          object-fit: cover;
+          object-fit: contain;
         }
         .events-info-container{
           display: flex;
@@ -1716,6 +1706,13 @@ text-align: center;
   .card-home{
     min-height: 60vh;
   }
+  .events-member{
+    width: 100% !important;
+  }
+  .container-member{
+    width: 80%;
+  }
+  
   .card-home{
     width: 30vw;
   }
@@ -1741,6 +1738,9 @@ text-align: center;
   .latest-news{
     width: 95%;
     min-height: 50vh;
+  }
+  .events-member{
+    width: 100% !important;
   }
   .container-news{
     width: 90%;
@@ -1839,7 +1839,7 @@ text-align: center;
     width: 40vw;
   }
 }
-@media (max-width:800px) {
+@media (max-width:840px) {
   .carousel-slide.active{
     display: block !important;
     width: 90%;
@@ -1851,6 +1851,10 @@ text-align: center;
   }
   .container-actu{
     width: 80%;
+  }
+  .events-member {
+    width: 90%;
+    height: 30vh;
   }
   .events-member{
     display: flex;
@@ -2197,10 +2201,7 @@ a {
   .container-member {
     width: 90%;
   }
-  .events-member {
-    width: 90%;
-    height: 30vh;
-  }
+  
   .meetings-member {
     width: 90%;
     height: 30vh;
@@ -2490,6 +2491,9 @@ span {
 .avatar {
   width: 50px;
   height: 50px;
+}
+.avatar-svg{
+  background-color: white;
 }
 .rounded-circle {
   border-radius: 50%;
