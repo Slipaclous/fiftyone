@@ -262,11 +262,9 @@ svg .avatar{
     background-color: inherit; /* or set it to the initial background color */
     z-index: 0; /* Reset z-index if needed */
   }
-}
-@media(hover:none){
-  .site-links li .home-link::after:hover{
+  .site-link:hover::after {
     display: none;
-  }
+}
 }
 /* header and footer CSS */
 .fixed-header {
@@ -826,6 +824,9 @@ header {
           -webkit-appearance: none;
           -moz-appearance: none;
         }
+        .filter-select option{
+          color: #003049;
+        }
         
         .filter-button {
           background: #333;
@@ -1343,8 +1344,14 @@ header {
     text-align: center;
   }
   .imgcover{
-width: 100%;
-text-align: center;
+    width: 100%;
+    text-align: center;
+  }
+  .imgcover img{
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
+    border-radius: 2%;
   }
   .container h3{
     text-align: center;
@@ -1552,6 +1559,13 @@ text-align: center;
   .site-title {
     font-size: 20px;
     
+  }
+  .events-cover{
+    border-right: none;
+    border-bottom: 1px solid rgb(206, 179, 25);
+  }
+  .events-cover img{
+    height: 95%;
   }
   .member-events-container{
     flex-direction: column;
@@ -1873,7 +1887,7 @@ text-align: center;
 @media (max-width:450px){
   .last-3-news{
     width: 80vw;
-    height: 20vh;
+    height: 30vh;
   }
   .latest-news{
     width: 100%;
@@ -2133,11 +2147,16 @@ text-align: center;
 
 .area-back{
   color: #003049;
-  font-weight: 800;
   display: block;
   margin-left: 5px;
   overflow: hidden;
-  
+}
+.breadcrumb{
+  width: 80%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
 }
 .area-back:hover{
     text-decoration: underline;
@@ -2272,6 +2291,24 @@ a {
 @media only screen and (max-width: 480px) {
   .container-member {
     width: 90%;
+  }
+  .breadcrumb{
+    width: 95%;
+    font-size: 0.9rem;
+  }
+  .events-info-container{
+    width: 95%;
+  }
+  .events-info-container h2{
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .participants{
+    width: 95%;
+  }
+  .upcoming-event{
+    width: 95%;
+    font-size: 1.3em;
   }
   .reservation {
     width: 100%;
@@ -2603,6 +2640,13 @@ span {
 }
 .carousel-slide .carousel-info {
     display: none; /* By default hide the carousel info */
+}
+.news-event{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* Position for the central slide */

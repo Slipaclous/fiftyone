@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
-
+{% block title %}    
+    Liste d'invités
+{% endblock %}
 {% block body %}
 <div class="forms-container">
-<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
+<div class="breadcrumb">
+    <a href="{{path('member_area')}}" class="area-back">Espace membre ></a>
+    <a href="{{path('app_member_event')}}" class="area-back">Activités à venir ></a>
+    <a href="{{ path('app_member_event_details', {'id': event.id}) }}"class="area-back">{{event.titre}} </a>
+</div>
     <h1 class="actus-title activite">Liste d'invités</h1>
     <form method="post" id="guests-form">
         {{ form_start(form) }}

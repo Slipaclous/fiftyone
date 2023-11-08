@@ -3,9 +3,15 @@
 <script>
     {{ parent() }}
 </script>
- 
+ {% block title %}
+    Réservation
+    {% endblock %}
 {% endblock %}
 {% block body %}
+<div class="breadcrumb">
+    <a href="{{path('app_events')}}" class="area-back">Évènements ></a>
+    <a href="{{ path('app_events_show', { 'slug': event.getSlug() }) }}" class="area-back">{{event.titre}} ></a>
+</div>
 <div class="forms-container">
     <h1>Faire une réservation</h1>
 

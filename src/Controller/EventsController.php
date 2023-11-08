@@ -65,6 +65,9 @@ public function makeReservation(
     $form = $this->createForm(ReservationType::class, $reservation);
     $form->handleRequest($request);
 
+    // get the events related to have link back to the event page without the getDoctrine
+    $events = $reservation->getEvent();
+    
     if ($form->isSubmitted() && $form->isValid()) {
         // Générer un numéro de réservation unique (vous pouvez utiliser une logique personnalisée)
         $reservation->setReservationNumber(uniqid());
@@ -89,6 +92,7 @@ public function makeReservation(
             [
                 'event' => $event,
                 'reservation' => $reservation,
+                
             ]
         );
 
@@ -108,6 +112,7 @@ public function makeReservation(
     return $this->render('events/reservation.html.twig', [
         'form' => $form->createView(),
         'event' => $event,
+        'events'=> $events,
     ]);
 }
 
@@ -137,6 +142,9 @@ public function modifyReservation(Request $request, EntityManagerInterface $enti
         ->getForm();
 
     $form->handleRequest($request);
+
+    //get the event related
+    
 
     if ($form->isSubmitted() && $form->isValid()) {
         // Rechercher la réservation avec le numéro fourni

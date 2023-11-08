@@ -5,6 +5,9 @@
 {% block title %}{{ news.Titre }} {% endblock %}
 
 {% block body %}
+<div class="breadcrumb">
+    <a href="{{path('news_index')}}" class="area-back">Actualités ></a>
+</div>
   <div class="container-actu">
 
 
@@ -24,7 +27,7 @@
       </ol>
       <div class="carousel-inner">
         {% for image in news.getImages() %}
-          <div class="carousel-item {% if loop.first %}active{% endif %}">
+          <div class="carousel-item news-event {% if loop.first %}active{% endif %}">
             <img src="/images/{{ image.Url }}" class="d-block w-100 carousel-img" alt="Image">
           </div>
         {% endfor %}

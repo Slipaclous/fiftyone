@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% block title %}Liste de réservations{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
+    <h1>Listes des réservations</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>ReservationNumber</th>
-                <th>NumberOfpeople</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Numéro de réservation</th>
+                <th>Nombre de places</th>
                 <th>Email</th>
                 <th>actions</th>
             </tr>
@@ -27,17 +27,17 @@
                 <td>{{ reservation.numberOfpeople }}</td>
                 <td>{{ reservation.email }}</td>
                 <td>
-                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">montrer</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Pas de données</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+    <a href="{{ path('app_reservation_new') }}">Ajouter</a>
 {% endblock %}

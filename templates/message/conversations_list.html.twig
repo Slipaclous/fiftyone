@@ -3,10 +3,14 @@
 <script>
     {{ parent() }}
 </script>
- 
+{% endblock %}
+ {% block title %}
+   Conversations
 {% endblock %}
 {% block body %}
-<a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
+	<div class="breadcrumb">
+    <a href="{{path('member_area')}}" class="area-back">Espace membre ></a>
+</div>
     <div class="container">
         <h2 class="actus-title activite">Conversations</h2>
         {% if usersWithConversations|length > 0 %}

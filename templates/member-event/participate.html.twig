@@ -3,8 +3,12 @@
 {% block title %}Participation à l'évènement{% endblock %}
 
 {% block body %}
+<div class="breadcrumb">
+    <a href="{{path('member_area')}}" class="area-back">Espace membre ></a>
+    <a href="{{path('app_member_event')}}" class="area-back">Activités à venir ></a>
+    <a href="{{ path('app_member_event_details', {'id': event.id}) }}"class="area-back">{{event.titre}} </a>
+</div>
 <div class="forms-container">
-<a href="{{path('member_area')}}" class="area-back">-> Retour à l'espace membre</a>
     <h1 class="actus-title activite">Participation à l'évènement</h1>
 
     <form method="POST" action="{{ path('app_participate', {'id': event.id}) }}">

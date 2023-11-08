@@ -10,7 +10,10 @@
 {% block title %}Ajouter une réunion {% endblock %}
 
 {% block body %}
-<a href="{{path('member_area')}}" class="area-back"> ->Retour à l'espace membre</a>
+<div class="breadcrumb">
+    <a href="{{path('member_area')}}" class="area-back">Espace membre ></a>
+    <a href="{{path('upcoming_meetings')}}" class="area-back">Calendrier de réunions ></a>
+</div>
     <div class="container">
         <h2 class="actus-title activite">Ajouter une réunion</h2>
 

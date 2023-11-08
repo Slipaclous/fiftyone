@@ -85,6 +85,8 @@ public function editGuestList(EventParticipant $eventParticipant, Request $reque
     if ($this->getUser() !== $eventParticipant->getParticipant()) {
         throw new AccessDeniedException("Vous n'avez pas la permission de modifier cette liste d'invités");
     }
+    //récupérer l'évènement associé à l'EventParticipant
+    $event = $eventParticipant->getEvent();
 
     $form = $this->createForm(GuestListType::class, $eventParticipant);
     //
@@ -104,6 +106,7 @@ public function editGuestList(EventParticipant $eventParticipant, Request $reque
     return $this->render('member-event/edit-guest-list.html.twig', [
         'eventParticipant' => $eventParticipant,
         'form' => $form->createView(),
+        'event' => $event,
     ]);
 }
 
@@ -134,6 +137,9 @@ public function deleteGuest(Guests $guest, EntityManagerInterface $entityManager
         // Assuming $this->getUser() returns a User instance
         $participantEntity = $this->getUser();
     
+
+        //Get the event associated
+        
         // Set the Participant entity for the EventParticipant
         $participant->setParticipant($participantEntity);
     

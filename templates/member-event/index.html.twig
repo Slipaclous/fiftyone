@@ -3,10 +3,14 @@
 <script>
     {{ parent() }}
 </script>
- 
+ {% block title %}
+    Activités
+	{% endblock %}
 {% endblock %}
 {% block body %}
-	<a href="{{ path('member_area') }}" class="area-back">-> Retour à l'espace membre</a>
+	<div class="breadcrumb">
+    <a href="{{path('member_area')}}" class="area-back">Espace membre ></a>
+</div>
 	<h1 class="actus-title activite">
 		
 		Activités 
