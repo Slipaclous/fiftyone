@@ -1167,13 +1167,13 @@ header {
 
 /* Show actualités */
         .date-show{
-          font-size: 0.8rem;
+          font-size: 1rem;
           margin-top: 20px;
           color: #003049;
         }
         .container-actu{
           margin: 0 auto;
-          width: 40%;
+          width: 50%;
         }
         .imgcover{
           width: 100%;
@@ -2277,9 +2277,14 @@ span {
 .carousel-news-actus .carousel-inner{
   height: 100%;
 }
+
+
 @media (max-width: 767px) {
   .site-title {
     font-size: 20px;
+  }
+  .message{
+    min-width: 65%;
   }
   .container-contact{
     width: 90%;
@@ -2649,6 +2654,9 @@ span {
   .breadcrumb{
     width: 95%;
     font-size: 0.9rem;
+  }
+  .message{
+    min-width: 85%;
   }
   .events-info-container{
     width: 95%;

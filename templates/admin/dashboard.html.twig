@@ -86,6 +86,12 @@
                     <p class="card-dashboard-text">Nombre d'événements: {{ totalEvents }}</p>
                 </div>
             </div>
+                {# {% for totalEvent in totalEvents %}
+
+                <div>
+                totalEvent: {{ totalEvent.getTotalReservedPlaces }}
+                </div> 
+                {% endfor %} #}
 
             <!-- reservations Card -->
             <div class="card-dashboard">
@@ -94,7 +100,7 @@
                 </div>
                 <div class="card-dashboard-body">
                  {% for eventReservation in eventReservations %}
-                    <p class="card-dashboard-text">{{ eventReservation.titre }}: {{ eventReservation.reservationCount }}</p>
+                    <p class="card-dashboard-text">{{ eventReservation.titre }}: {{ eventReservation.getTotalReservedPlaces }}</p>
                 {% else %}
                 <p>Pas de réservations</p>
                 </div>

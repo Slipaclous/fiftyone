@@ -12,9 +12,10 @@ use App\Entity\Comments;
 use App\Entity\Categories;
 use App\Entity\Reservation;
 use App\Entity\Presentation;
-use App\Repository\EventsRepository;
 use App\Repository\VisitRepository;
+use App\Repository\EventsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -36,21 +37,19 @@ class DashboardController extends AbstractDashboardController
     }
 
     #[Route('/admin', name: 'admin')]
-    public function dashboardIndex(EntityManagerInterface $entityManager, EventsRepository $eventsRepository): Response
+    public function dashboardIndex(EntityManagerInterface $entityManager): Response
     {
         if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MEMBER')) {
             // Redirect the user to the 403 page
             return new Response($this->renderView('bundles/TwigBundle/Exception/error403.html.twig'), Response::HTTP_FORBIDDEN);
         }
         // Call the function you've set up in your repository
-        $eventReservations = $eventsRepository->getReservationCounts();
-
-        // Filter to only include events with places set (assuming you have a `placesAvailable` field)
         $totalUsers = $this->getTotalUsers($entityManager);
         $totalNews = $this->getTotalNews($entityManager);
         $totalVisits = $this->getTotalVisits(); 
         $totalUniqueVisitors = $this->getTotalUniqueVisitors();
         $totalEvents = $this->getTotalEvents($entityManager);
+        $eventReservations = $this->getEvents($entityManager);
 
 
         return $this->render('admin/dashboard.html.twig', [
@@ -63,6 +62,17 @@ class DashboardController extends AbstractDashboardController
         ]);
     }
     
+
+    
+    private function getEvents(EntityManagerInterface $entityManager): array
+{
+    // Create a Criteria instance
+    $criteria = Criteria::create()
+        ->where(Criteria::expr()->neq('places', null)); // 'places' is not null
+
+    // Use the matching method of the repository with your criteria
+    return $entityManager->getRepository(Events::class)->matching($criteria)->toArray();
+}
 private function getTotalEvents(EntityManagerInterface $entityManager): int
 {
     // Retrieve total events count from your EventsRepository or any other source

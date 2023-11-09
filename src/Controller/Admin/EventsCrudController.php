@@ -48,8 +48,7 @@ class EventsCrudController extends AbstractCrudController
         yield IntegerField::new('places'); // Champ pour le nombre de places
 
         // Champ de collection pour télécharger plusieurs images
-        yield CollectionField::new('images')
-            ->setEntryType(ImageUploadType::class);
+        
     }
 
     public function configureActions(Actions $actions): Actions
