@@ -29,6 +29,15 @@ class EventsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getReservationCounts(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('e.titre, COUNT(r.id) AS reservationCount')
+            ->leftJoin('e.reservations', 'r')
+            ->groupBy('e.id')
+            ->getQuery()
+            ->getResult();
+    }
 
     public function remove(Events $entity, bool $flush = false): void
     {

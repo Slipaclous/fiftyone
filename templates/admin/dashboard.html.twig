@@ -93,8 +93,15 @@
                     Réservations
                 </div>
                 <div class="card-dashboard-body">
-                    <p class="card-dashboard-text">Nombre de réservations: {{ reservation }}</p>
+                 {% for eventReservation in eventReservations %}
+                    <p class="card-dashboard-text">{{ eventReservation.titre }}: {{ eventReservation.reservationCount }}</p>
+                {% else %}
+                <p>Pas de réservations</p>
                 </div>
+                
+                {% endfor %}
+                </div>
+                
 
         </div>
 
