@@ -11,8 +11,8 @@
       {% for carouselItem in carouselImages %}
       <div class="carousel-item{% if active %} active{% endif %}">
         <div class="carousel-background" style="background-image: url('{{ asset('images/' ~ carouselItem.image) }}');"></div>
-        <div class="carousel-caption d-none d-md-block">
-          <h3>{{ carouselItem.title }}</h3>
+        <div class="carousel-caption d-md-block">
+          {{ carouselItem.title }}
         </div>
       </div>
       {% set active = false %}
@@ -59,8 +59,7 @@
     </div>
     <div class="text-presentation">
       <div class="textpres">
-        <p>Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service
-          Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service
+        <p> Dans le but de récolter de fonds pour notre Service à la Communauté et de faire mieux connaître notre Service
           Club dans notre entité d’Enghien, nous avons développé trois activés pouvant toucher des publics différents.
           Vous trouverez ces organisations dans la page "Actualités".</p>
         <p>Grâce aux bénéfices récoltés chaque année lors de ces trois activités, nous pouvons aider financièrement via

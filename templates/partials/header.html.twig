@@ -39,12 +39,12 @@
               </a>
               
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+              {% if app.user.roles[0] == 'ROLE_ADMIN' %}
                 <a href="{{ path('admin') }}" class="dropdown-item">Tableau d'administration du site</a>
+                {% endif %}
                 <a href="{{ path('member_area') }}" class="dropdown-item">Espace membres</a>
                 <div class="dropdown-divider"></div>
                 <a href="{{ path('profile') }}" class="dropdown-item">Mon compte</a>
-                <a href="{{ path('edit') }}" class="dropdown-item">Modifier mon profil</a>
-                <div class="dropdown-divider"></div>
                 <a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a>
               </div>
             </li>

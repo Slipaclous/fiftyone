@@ -25,6 +25,7 @@ class HomeController extends AbstractController
             'newsi' => $newsi,
         ]);
     }
+    // Route pour la page de présentation
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation():Response
     {
@@ -33,6 +34,13 @@ class HomeController extends AbstractController
 
     #[Route('/mentions', name: 'app_mentions')]
     public function mentions():Response
+    {
+        return $this->render('home/mentions.html.twig');
+    }
+
+    //Route pour la page de mentions légales
+    #[Route('/contact', name: 'app_mentions')]
+    public function contact():Response
     {
         return $this->render('home/mentions.html.twig');
     }

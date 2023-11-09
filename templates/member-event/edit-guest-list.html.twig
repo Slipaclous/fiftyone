@@ -9,22 +9,26 @@
     <a href="{{path('app_member_event')}}" class="area-back">Activités à venir ></a>
     <a href="{{ path('app_member_event_details', {'id': event.id}) }}"class="area-back">{{event.titre}} </a>
 </div>
-    <h1 class="actus-title activite">Liste d'invités</h1>
+    <h1 class="actus-title activite">Modifer votre participation</h1>
+    <button type="button" class="button" id="add-guest">Ajouter un invité</button>
     <form method="post" id="guests-form">
         {{ form_start(form) }}
         <div id="guests-list" data-prototype="{{ form_widget(form.guests.vars.prototype)|e('html_attr') }}">
     {{ form_errors(form.guests) }}
+    
     {% for guestForm in form.guests %}
         <div class="guest-form">
             {{ form_row(guestForm.prenom,{'label':"Nom de l'invité"}) }}
             {{ form_row(guestForm.nom,{'label':"Prénom de l'invité"}) }}
             <a href="{{ path('app_delete_guest', {'id': guestForm.vars.value.id}) }}" class="btn btn-danger mx-2">Supprimer l'invité</a>
+            
         </div>
     {% endfor %}
 </div>
-        <button type="button" class="button" id="add-guest">Ajouter un invité</button>
+        
         <button type="submit" class="button-2">Modifier</button>
         {{ form_end(form) }}
+        
     </form>
 </div>
 
@@ -51,7 +55,7 @@
 
                         // Add a remove button for the newly added guest
                         const $newGuest = guestsContainer.children().last();
-                        const $removeButton = $('<button type="button" class="btn btn-danger remove-guest">Remove Guest</button>');
+                        const $removeButton = $('<button type="button" class="btn btn-danger remove-guest">Supprimer votre invité</button>');
                         $newGuest.append($removeButton);
                     }
                 });

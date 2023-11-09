@@ -19,28 +19,29 @@
     <h1 class="actu-title-show">{{ news.Titre }}</h1>
     <h3 class="subtitle-actu">{{ news.soustitre }}</h3>
     <p>{{ news.description|raw }}</p>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <ol class="carousel-indicators">
-        {% for image in news.getImages() %}
-          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
-        {% endfor %}
-      </ol>
-      <div class="carousel-inner">
-        {% for image in news.getImages() %}
-          <div class="carousel-item news-event {% if loop.first %}active{% endif %}">
-            <img src="/images/{{ image.Url }}" class="d-block w-100 carousel-img" alt="Image">
-          </div>
-        {% endfor %}
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade carousel-news-actus" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    {% for image in news.getImages() %}
+      <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    {% for image in news.getImages() %}
+      <div class="carousel-item {% if loop.first %}active{% endif %}" style="background-image: url('/images/{{ image.Url }}');">
+        <div class="carousel-background"></div> <!-- This div is not strictly necessary unless you want to add additional styling -->
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </a>
-    </div>
+    {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+
 
    <div class="comment-section">
         <h3 class="subtitle-actu">Commentaires</h3>

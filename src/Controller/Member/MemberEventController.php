@@ -109,7 +109,6 @@ public function editGuestList(EventParticipant $eventParticipant, Request $reque
         'event' => $event,
     ]);
 }
-
 //Supression d'un guest
 #[Route('/delete-guest/{id}', name: 'app_delete_guest')]
 public function deleteGuest(Guests $guest, EntityManagerInterface $entityManager): Response
@@ -174,8 +173,6 @@ public function deleteGuest(Guests $guest, EntityManagerInterface $entityManager
             'participantForm' => $form->createView(),
         ]);
     }
-
-
 
     private function createParticipantForm(MemberEvents $event): FormInterface
     {

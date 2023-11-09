@@ -44,38 +44,34 @@ class DashboardController extends AbstractDashboardController
         $totalUsers = $this->getTotalUsers($entityManager);
         $totalNews = $this->getTotalNews($entityManager);
         $totalVisits = $this->getTotalVisits(); 
-        $visitorsLast7Days = $this->getVisitorsLast7Days();
-        $visitorsLastMonth = $this->getVisitorsLastMonth();
         $totalUniqueVisitors = $this->getTotalUniqueVisitors();
+        $totalEvents = $this->getTotalEvents($entityManager);
+        $reservation= $this->getReservationlastMonth($entityManager);
 
         return $this->render('admin/dashboard.html.twig', [
             'totalUsers' => $totalUsers,
             'totalNews' => $totalNews,
-            'totalVisits' => $totalVisits,
-            'visitorsLast7Days' => $visitorsLast7Days,
-            'visitorsLastMonth' => $visitorsLastMonth,
             'totalUniqueVisitors' => $totalUniqueVisitors,
+            'totalVisits' => $totalVisits,
+            'totalEvents' => $totalEvents,
+            'reservation' => $reservation,
         ]);
     }
-
-    private function getVisitorsLast7Days(): int
+    
+private function getTotalEvents(EntityManagerInterface $entityManager): int
 {
-    $endDate = new \DateTime();
-    $startDate = (new \DateTime())->modify('-6 days');
-
-    return $this->visitRepository->countVisitsBetweenDates($startDate, $endDate);
+    // Retrieve total events count from your EventsRepository or any other source
+    return $entityManager->getRepository(Events::class)->count([]);
+}
+private function getReservationlastMonth(EntityManagerInterface $entityManager): int
+{
+    // Retrieve total events count from your EventsRepository or any other source
+    return $entityManager->getRepository(Reservation::class)->count([]);
 }
 private function getTotalUniqueVisitors(): int
 {
     // Retrieve total unique visitors count from your VisitRepository
     return $this->visitRepository->countUniqueVisitors();
-}
-private function getVisitorsLastMonth(): int
-{
-    $endDate = new \DateTime();
-    $startDate = (new \DateTime())->modify('-1 month');
-
-    return $this->visitRepository->countVisitsBetweenDates($startDate, $endDate);
 }
     private function getTotalVisits(): int
     {

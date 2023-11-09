@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class GuestType extends AbstractType
 {
@@ -14,13 +15,14 @@ class GuestType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Guest First Name',
+                'label' => "Nom de l'invité",
                 'required' => true,
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'Guest Last Name',
+                'label' => "Prénom de l'invité",
                 'required' => true,
             ]);
+           
     }
 
     public function configureOptions(OptionsResolver $resolver)
