@@ -78,16 +78,16 @@
             </div>
             {% if event %}
             <div class="upcoming-event">
-                <h4>Prochain évènement </h4>
+                <h4>Prochaines activités </h4>
                 <a href="{{ path('app_member_event_details', {'id': event.id}) }}">{{ event.getTitre }}
                     {{ event.date|date('d-m-Y') }}</a>
 
             </div>
             <div class="msg">
                 {% else %}
-                <p>Pas d'évènements à venir.</p>
+                <p>Pas d'activités à venir.</p>
                 {% endif %}
-                <a href="{{ path('app_member_event') }}" class="single-event button-3">Voir les évènements</a>
+                <a href="{{ path('app_member_event') }}" class="single-event button-3">Voir les activités</a>
             </div>
             </div>
         
