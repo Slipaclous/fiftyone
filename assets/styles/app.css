@@ -841,7 +841,7 @@ header {
         color: rgb(206, 179, 25);
       }
       .title-home {
-        margin: 70px;
+        margin: 30px 70px;
         margin-bottom: 3rem;
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
@@ -2037,6 +2037,78 @@ a {
 }
 .carousel-news-actus .carousel-inner{
   height: 100%;
+}
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 78vh;
+  background: #f4f4f8;
+}
+
+.login-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-title {
+  color: #003049;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.login-group {
+  margin-bottom: 1rem;
+}
+
+.login-label {
+  display: block;
+  margin-bottom: .5rem;
+  color: #333;
+}
+
+.login-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #003049;
+  color: white;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #003049;
+}
+
+.login-alert {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
 }
 @media (max-width: 767px) {
   .site-title {
