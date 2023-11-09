@@ -1813,7 +1813,7 @@ a {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: center;
+  background-position: center 40%;
   background-repeat: no-repeat;
   filter: brightness(50%); /* Exemple de filtre, ajustez selon vos besoins */
 }
