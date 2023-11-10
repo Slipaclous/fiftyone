@@ -11,7 +11,7 @@
 {% block body %}
     <div class="container">
         <h1>Modification de l'avatar de {{app.user.email}}</h1>
-        <img src="/uploads/{{app.user.avatar}}" alt="avatar de {{app.user.email}}">
+        <img src="/{{app.user.avatar}}" class="avatar" alt="avatar de {{app.user.email}}">
         {{form_start(myform)}}
             {{form_widget(myform)}}
             <button type="submit" class="btn btn-warning">Confirmez la modification de l'avatar</button>

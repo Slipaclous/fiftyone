@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+<script>
+    {{ parent() }}
+</script>
+{% endblock %}
 
 {% block title %}403 Accès non autorisé{% endblock %}
 
