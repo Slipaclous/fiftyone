@@ -8,13 +8,8 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import "./styles/bootstrap.min.css"
-
-import 'cookieconsent/build/cookieconsent.min.css';
-import 'cookieconsent';
-
-
-// start the Stimulus application
 import './bootstrap';
 import "bootstrap/dist/js/bootstrap.bundle"
 
-  
+import 'cookieconsent/build/cookieconsent.min.css';
+import 'cookieconsent';

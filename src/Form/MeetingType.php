@@ -5,9 +5,10 @@ namespace App\Form;
 
 use App\Entity\Metting;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class MeetingType extends AbstractType
 {
@@ -22,6 +23,10 @@ class MeetingType extends AbstractType
                     'class' => 'datepicker',
                     'min' => (new \DateTime())->format('Y-m-d'),
                 ],
+            ])
+            ->add('note', TextareaType::class, [
+                'label' => 'Note de la réunion',
+                'required' => false,
             ]);
     }
 

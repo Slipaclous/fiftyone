@@ -9,9 +9,9 @@
     <p>Vos détails de réservation:</p>
     <ul>
         <li>Numéro de réservation: {{ reservation.getReservationNumber() }}</li>
-        <li>2vènement: {{ event.getTitre() }}</li>
+        <li>Évènement: {{ event.getTitre() }}</li>
         <li>Date: {{ event.getDate()|date('Y-m-d H:i') }}</li>
-        <li>Nombre de personne: {{ reservation.getNumberOfPeople() }}</li>
+        <li>Nombre de participants: {{ reservation.getNumberOfPeople() }}</li>
     </ul>
 </body>
 </html>

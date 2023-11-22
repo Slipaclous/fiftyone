@@ -19,8 +19,13 @@ class CarouselCrudController extends AbstractCrudController
     {
         return [
             TextField::new('title', 'Titre'),
-            ImageField::new('image')->setBasePath('/images')->setUploadDir('public/images')->setUploadedFileNamePattern('[randomhash].[extension]'),
+            ImageField::new('image')
+                ->setBasePath('/images')
+                ->setUploadDir('public/images')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false), // Set the required option to false
         ];
     }
+    
     
 }

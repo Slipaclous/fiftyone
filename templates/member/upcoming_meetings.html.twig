@@ -26,7 +26,7 @@
                 {% endif %}
                 <ul class="list-group mt-2">
                     
-                        {{ meeting.date|date('d-m-Y') }}
+                        {{ meeting.date|date('d-m-Y') }}: {{ meeting.note }}
                     
                 </ul>
                 {% set currentMonth = meetingMonth %}

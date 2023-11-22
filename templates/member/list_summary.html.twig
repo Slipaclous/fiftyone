@@ -30,10 +30,15 @@
                     <div>
                         {% if summary.pdf %}
                             <a href="{{ path('pdf_display', {'pdf': summary.pdf}) }}" target="_blank">Voir le PDF</a>
-                        {% else %}
+                                    {% else %}
                             <em>Pas de PV en ligne</em>
                         {% endif %}
                     </div>
+                    <form action="{{ path('summary_delete', {'id': summary.id}) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this summary?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+                
                 </div>
             {% endfor %}
         </div>

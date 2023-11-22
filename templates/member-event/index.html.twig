@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
+ {% block title %}
+    Activités
+	{% endblock %}
 {% block javascripts %}
 <script>
     {{ parent() }}
 </script>
- {% block title %}
-    Activités
-	{% endblock %}
+
 {% endblock %}
 {% block body %}
 	<div class="breadcrumb">
@@ -16,7 +17,7 @@
 
 	<div class="container py-5">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
-			{% for event in events %}
+			{% for event in events|sort((a, b) => a.date <=> b.date) %}
 					<div class="col">
 				<a href="{{ path('app_member_event_details', {'id': event.id}) }}">
 						<div class="cardi h-100" style="position: relative">

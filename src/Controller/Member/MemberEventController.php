@@ -217,7 +217,7 @@ public function createEventForm(Request $request, EntityManagerInterface $manage
     if ($form->isSubmitted() && $form->isValid()) {
         // Handle the event cover image upload
         $file = $form['imageFile']->getData();
-       if(!empty($file)){
+        if(!empty($file)){
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();

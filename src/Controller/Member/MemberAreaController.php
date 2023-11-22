@@ -15,6 +15,7 @@ use App\Repository\MeetingSummaryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -136,6 +137,22 @@ class MemberAreaController extends AbstractController
             'summaries' => $summaries,
         ]);
     }
+
+    #[Route("/delete-summary/{id}", name:"summary_delete")]
+    public function deleteSummary(MeetingSummary $summary, EntityManagerInterface $entityManager): RedirectResponse
+    {
+        // Check if the user has the necessary permissions to delete the summary
+        // You can implement your own logic or use Symfony's security annotations
+
+        // Remove the summary from the database
+        $entityManager->remove($summary);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'PV supprimé avec succès!');
+
+        return $this->redirectToRoute('summary_list');
+    }
+
 
     // Action pour afficher un fichier PDF
     #[Route("/pdf-display/{pdf}", name:"pdf_display")]

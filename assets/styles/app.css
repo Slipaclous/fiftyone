@@ -7,6 +7,9 @@
     font-family: 'GFS Didot', sans-serif;
     scroll-behavior: smooth;
 }
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Roboto', sans-serif;
+}
 body {
     display: flex;
     flex-direction: column;   
@@ -131,14 +134,14 @@ background-image: linear-gradient(315deg, #f0ecfc 0%, #003049 74%);
   content: "";
   position: absolute;
   height: 150%;
-  width: 200%;
+  width: 300%;
   background-color: #003049;
-  transform: translate(-120px, 38px);
+  transform: translate(-150px, 38px);
   transition: transform 0.45s ease-in-out;
 }
 .button:hover::before {
   content: "";
-  transform: translate(-120px, -15px);
+  transform: translate(-150px, -15px);
   z-index: -1;
 }
 .button:hover {
@@ -854,6 +857,7 @@ header {
         border-bottom: 1px solid rgb(206, 179, 25);
         padding-bottom: 20px;
         font-weight: bolder;
+        text-transform: uppercase;
         color: #003049;
       }
       .new-icon{

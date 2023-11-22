@@ -25,8 +25,19 @@
     <div class="member-events-container">
 
         <div class="events-cover">
-            <img src="/{{ event.cover }}" alt="cover">
+    <a href="#" data-toggle="modal" data-target="#coverImageModal">
+        <img src="/{{ event.cover }}" alt="cover">
+    </a>
+</div>
+<div class="modal fade" id="coverImageModal" tabindex="-1" role="dialog" aria-labelledby="coverImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="img-fluid" src="/{{ event.cover }}" alt="Cover Image">
+            </div>
         </div>
+    </div>
+</div>
         <div class="events-info-container">
     <h2>{{ event.titre }}</h2>
     <div class="events-info-container-info">
