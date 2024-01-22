@@ -7,6 +7,9 @@
     font-family: 'GFS Didot', sans-serif;
     scroll-behavior: smooth;
 }
+a:hover{
+  text-decoration: none;
+}
 h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto', sans-serif;
 }
@@ -368,6 +371,7 @@ header {
     width: 50%;
     margin: 0;
     padding: 0;
+    color: #003049;
   }
   .site-links li {
     display: inline-block;
@@ -402,6 +406,90 @@ header {
   .site-link:hover::after {
     background-color: #003049; 
 }
+ul.site-links ul {
+  display: none;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  flex-direction: column;  /* Afficher les liens en colonne */
+  padding: 0;
+  width: 150%;  /* Utiliser une largeur de 150% */
+  padding: 20px;
+  left: 50%;  /* Positionner le centre du sous-menu sur le lien parent */
+  transform: translateX(-50%);  /* Centrer le sous-menu */
+  height: 0;  /* Masquer initialement le sous-menu en ajustant la hauteur */
+  align-items:flex-start;
+  justify-content: none!important;
+}
+.sub-link{
+  font-size: 1rem !important;
+}
+
+ul.site-links > li {
+  position: relative;
+}
+
+ul.site-links li:hover > ul {
+  display: flex;
+  height: auto;  /* Ajuster la hauteur pour afficher tout le contenu */
+  transition: transform 0.3s ease-in-out;
+}
+ul.site-links > li {
+  position: relative;
+}
+
+ul.site-links > li:hover > ul {
+  display: flex;
+  max-height: 200px;  /* Ajuster la hauteur maximale pour correspondre à votre contenu */
+}
+
+ul.site-links .site-sub::after {
+  content: '\25BE';  /* Code unicode pour la flèche vers la droite */
+  margin-left: 5px;  /* Espacement entre le texte et la flèche */
+}
+ul.site-links li:hover > ul {
+  display: flex;
+}
+.fonction{
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.become-oner li{
+  list-style: initial;
+  text-align: initial;
+}
+.committee-members,
+        .regular-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            justify-content: center;
+            margin: 50px;
+        }
+
+        .member-card {
+            border: 1px solid #ccc;
+            text-align: center;
+            width: 250px; /* Ajustez la largeur selon vos besoins */
+        }
+
+.committee-members,
+        .regular-members p{
+          margin: 15px;
+        }
+        .member-card img {
+          height: 300px;
+          width: 100%;
+         
+        }
+
+        .fake-avatar {
+            background-color: #ccc;
+            color: #fff;
+            width: 100px;
+            height: 100px;
+        }
   .presentation {
     text-align: center;
     margin-top: 50px;
@@ -1656,11 +1744,10 @@ a {
 }
 .carousel-caption {
   position: absolute;
-  bottom: 10%;
   left: 50%;
   text-transform: uppercase;
-  font-size: 2rem;
-  transform: translate(-50%, -50%);
+  font-size: 1.8rem;
+  transform: translate(-50%, -0%);
   color: white; 
 }
 .carousel-caption h3 {

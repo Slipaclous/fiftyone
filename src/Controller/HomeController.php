@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Repository\CarouselRepository;
 use App\Repository\NewsRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,16 @@ class HomeController extends AbstractController
             'newsi' => $newsi,
         ]);
     }
+
+    #[Route('/fifty-one-enghien', name:'app_club')]
+    public function club(UserRepository $users):Response
+    {
+        $user=$users->findAll();
+
+        return $this->render('home/club.html.twig',[
+            'users'=> $user
+        ]);
+    }
     // Route pour la page de présentation
     #[Route('/presentation', name: 'app_presentation')]
     public function presentation():Response
@@ -32,10 +43,15 @@ class HomeController extends AbstractController
         return $this->render('home/presentation.html.twig');
     }
 
-    #[Route('/conact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact')]
     public function mentions():Response
     {
         return $this->render('home/contact.html.twig');
+    }
+    #[Route('/devenir-fifty-oner', name: 'app_oner')]
+    public function fiftyoner():Response
+    {
+        return $this->render('home/oner.html.twig');
     }
 
     //Route pour la page de mentions légales

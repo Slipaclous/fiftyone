@@ -72,6 +72,18 @@ class UserCrudController extends AbstractCrudController
                     'Admin' => 'ROLE_ADMIN',
                     'User' => 'ROLE_MEMBER',
                 ]),
+            ChoiceField::new('fonction','fonction')
+                    ->setChoices([
+                        "Président"=>"president",
+                        "Past-Président"=>"pastPresident",
+                        "Vice-Président"=>"vicePresident",
+                        "Responsable Protocole" => "responsableProtocole",
+                        "Trésorier"=>"tresorier",
+                        "Aide à la Communauté"=>"aideCommunaute",
+                        "membre"=>"membre",
+                        "administrateur"=>"administrateur"
+
+                    ])
         ];
     }
 

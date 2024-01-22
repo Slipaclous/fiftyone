@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script>
+    {{ parent() }}
+        // Votre code JavaScript ici
+    </script>
+{% endblock %}
+
+{% block title %}Fifty-One club Enghien{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h2 class="title-home">Notre Comité</h2>
+
+    <div class="committee-members">
+        {% for user in users %}
+            {% if user.fonction is not null and user.fonction != "membre" and user.fonction!= "administrateur" %}
+                <div class="member-card">
+                    {% if user.avatar is not null %}
+                        <img src="{{ asset(user.avatar)}}" alt="image_membres" class="">
+                    {% else %}
+                        <img src="/images/anonyme_avatar.jpg" alt="">
+                    {% endif %}
+                    <p class="fonction">{{ user.fonction }}</p>
+                    <p>{{ user.firstName }} {{ user.lastName }}</p>
+                    <p>{{user.email}}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+<h2 class="title-home">Nos Membres</h2>
+    <div class="regular-members">
+        {% for user in users %}
+            {% if user.fonction is null or user.fonction == "membre" and user.fonction!= "administrateur" %}
+                <div class="member-card">
+                    {% if user.avatar is not null %}
+                        <img src="{{ asset(user.avatar)}}" alt="image_membres" class="">
+                    {% else %}
+                        <img src="/images/anonyme_avatar.jpg" alt="">
+                    {% endif %}
+                    <p>{{ user.firstName }} {{ user.lastName }}</p>
+                    {# Vous pouvez ajouter plus d'informations ici si nécessaire #}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
