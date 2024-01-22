@@ -27,8 +27,6 @@
         'responsableProtocole': 4,
         'tresorier': 5,
         'aideCommunaute': 6
-        'administrateur':7
-        'membre':8
     } %}
 
     {# Filtrer et trier les membres du comité #}
@@ -36,7 +34,7 @@
 
     <div class="committee-members">
         {% for user in users %}
-            {% if user.fonction is not null and user.fonction != "membre" and user.fonction!= 'administrateur' %}
+            {% if user.fonction is not null and user.fonction != "membre" and user.fonction!= "administrateur" %}
                 <div class="member-card">
                     {% if user.avatar is not null %}
                         <img src="{{ asset(user.avatar)}}" alt="image_membres" class="">
