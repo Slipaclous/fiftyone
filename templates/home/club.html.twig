@@ -19,6 +19,19 @@
 {% block body %}
     <h2 class="title-home">Notre Comité</h2>
 
+ {# Définition de l'ordre des fonctions du comité #}
+    {% set functionOrder = {
+        'president': 1,
+        'pastPresident': 2,
+        'vicePrésident': 3,
+        'responsableProtocole': 4,
+        'tresorier': 5,
+        'aideCommunaute': 6
+    } %}
+
+    {# Filtrer et trier les membres du comité #}
+    {% set committeeMembers = users|filter(user => user.fonction is not null and user.fonction != 'membre')|sort((a, b) => functionOrder[a.fonction] - functionOrder[b.fonction]) %}
+
     <div class="committee-members">
         {% for user in users %}
             {% if user.fonction is not null and user.fonction != "membre" and user.fonction!= "administrateur" %}
@@ -28,7 +41,25 @@
                     {% else %}
                         <img src="/images/anonyme_avatar.jpg" alt="">
                     {% endif %}
-                    <p class="fonction">{{ user.fonction }}</p>
+                    {% if user.fonction == "president" %}
+                        <p class="fonction">Président</p>
+                    {% endif %}
+                    {% if user.fonction == "pastPresident" %}
+                        <p class="fonction">Past-Président</p>
+                    {% endif %}
+                    {% if user.fonction == "vicePresident" %}
+                        <p class="fonction">Vice-Président</p>
+                    {% endif %}
+                    {% if user.fonction == "responsableProtocole" %}
+                        <p class="fonction">Responsable du Protocole</p>
+                    {% endif %}
+                    {% if user.fonction == "tresorier" %}
+                        <p class="fonction">trésorier</p>
+                    {% endif %}
+                    {% if user.fonction == "aideCommunaute" %}
+                        <p class="fonction">Aide à la communauté</p>
+                    {% endif %}
+                    
                     <p>{{ user.firstName }} {{ user.lastName }}</p>
                     <p>{{user.email}}</p>
                 </div>

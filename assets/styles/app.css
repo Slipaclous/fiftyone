@@ -251,6 +251,7 @@ svg .avatar{
   .site-link:hover::after {
     display: none;
 }
+.descri{display: none;}
 }
 /* header and footer CSS */
 .fixed-header {
@@ -2037,13 +2038,21 @@ a {
   justify-content: space-between;
 }
 /* Position for the central slide */
+.carousel-slide{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .carousel-slide.active {
     left: 33.33%;
     opacity: 1;
     transform: scale(1);
 }
 .carousel-slide.active .carousel-info {
-    display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .carousel-slide.prev {
     left: 0;
@@ -2423,6 +2432,7 @@ a {
   .last-3-news{
     width: 25vw;
     height: 25vh;
+    font-size: 1.2rem;
   }
   .card-home{
     width: 35vw;
@@ -2487,7 +2497,10 @@ a {
     font-size: 1.1rem;
   }
   .carousel-slide.active{
-    display: block ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     width: 70%;
     left: 13.5% ;
     margin: 0 auto;
@@ -2509,7 +2522,10 @@ a {
 }
 @media (max-width:840px) {
   .carousel-slide.active{
-    display: block ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     width: 90%;
     left: 5% ;
     margin: 0 auto;
@@ -2535,12 +2551,14 @@ a {
   }
   .last-3-news{
     width: 70vw;
+    font-size: 1.2rem;
   } 
 }
 @media (max-width:450px){
   .last-3-news{
     width: 80vw;
     height: 30vh;
+    font-size: 1.2rem;
   }
   .latest-news{
     width: 100%;
@@ -2639,6 +2657,9 @@ a {
   .site-title {
     font-size: 12px;
     margin-left: 20px;
+  }
+  .descri{
+    display: none;
   }
   .top-menu {
     height: 7vh;

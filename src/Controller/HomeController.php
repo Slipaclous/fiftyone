@@ -43,10 +43,10 @@ class HomeController extends AbstractController
         return $this->render('home/presentation.html.twig');
     }
 
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/conact', name: 'app_contact')]
     public function mentions():Response
     {
-        return $this->render('home/contact.html.twig');
+        return $this->render('contact/contact.html.twig');
     }
     #[Route('/devenir-fifty-oner', name: 'app_oner')]
     public function fiftyoner():Response

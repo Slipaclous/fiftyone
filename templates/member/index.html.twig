@@ -18,7 +18,7 @@
 
         <div class="events-member">
             <div class="logo-svg">
-               <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+               <svg version="1.0" id="Layer_1" height="125px" width="125px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                         width="800px" height="800px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
                     <g>
                         <g>
@@ -76,16 +76,17 @@
                     </svg>
 
             </div>
-            {% if event %}
             <div class="upcoming-event">
+            {% if event %}
                 <h4>Prochaines activités </h4>
                 <a href="{{ path('app_member_event_details', {'id': event.id}) }}">{{ event.getTitre }}
                     {{ event.date|date('d-m-Y') }}</a>
 
-            </div>
-            <div class="msg">
+            
                 {% else %}
                 <p>Pas d'activités à venir.</p>
+                </div>
+            <div class="msg">
                 {% endif %}
                 <a href="{{ path('app_member_event') }}" class="single-event button-3">Voir les activités</a>
             </div>
