@@ -30,7 +30,7 @@
     } %}
 
     {# Filtrer et trier les membres du comité #}
-    {% set committeeMembers = users|filter(user => user.fonction is not null and user.fonction != 'membre')|sort((a, b) => functionOrder[a.fonction] - functionOrder[b.fonction]) %}
+    {% set committeeMembers = users|filter(user => user.fonction is not null and user.fonction != 'membre' and user.fonction != 'administrateur')|sort((a, b) => functionOrder[a.fonction] - functionOrder[b.fonction]) %}
 
     <div class="committee-members">
         {% for user in users %}
