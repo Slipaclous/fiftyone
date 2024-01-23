@@ -35,7 +35,7 @@
 
 <div class="committee-members">
     {% for user in users %}
-         {% if user.fonction == 'administrateur' or user.fonction == 'membre' %}
+         {% if user.fonction == 'administrateur' or user.fonction == 'membre' or user.fonction == null %}
         {# Ne rien faire pour les administrateurs et membres #}
         {% else %}
             <div class="member-card">
