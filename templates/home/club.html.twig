@@ -31,14 +31,12 @@
 
 {# Filtrer et trier les membres du comité #}
 {% set committeeMembers = users|filter(user => user.fonction is not null and user.fonction != 'membre' and user.fonction != 'administrateur')|sort((a, b) => (functionOrder[a.fonction|lower]|default(999)) - (functionOrder[b.fonction|lower]|default(999))) %}
-
-{# Dans votre modèle Twig #}
-
 {# Dans votre modèle Twig #}
 
 <div class="committee-members">
     {% for user in users %}
-        <div class="member-card">
+        {% if user.fonction != 'administrateur' and user.fonction != 'membre' %}
+            <div class="member-card">
             {% if user.avatar is not null %}
                 <img src="{{ asset(user.avatar) }}" alt="image_membres" class="">
             {% else %}
@@ -65,6 +63,7 @@
             <p>{{ user.firstName }} {{ user.lastName }}</p>
             <p>{{ user.email }}</p>
         </div>
+        {% endif %}
     {% endfor %}
 </div>
 
