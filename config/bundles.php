@@ -21,4 +21,5 @@ return [
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Cron\CronBundle\CronCronBundle::class => ['all' => true],
     ConnectHolland\CookieConsentBundle\CHCookieConsentBundle::class => ['all' => true],
+    Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle::class => ['all' => true],
 ];

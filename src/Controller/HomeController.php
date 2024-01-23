@@ -31,6 +31,20 @@ class HomeController extends AbstractController
     public function club(UserRepository $users):Response
     {
         $user=$users->findAll();
+        $functionOrder = [
+            'president' => 1,
+            'pastPresident' => 2,
+            'vicePrésident' => 3,
+            'responsableProtocole' => 4,
+            'tresorier' => 5,
+            'aideCommunaute' => 6,
+        ];
+
+        usort($user, function ($a, $b) use ($functionOrder) {
+            $aOrder = $functionOrder[$a->getFonction()] ?? PHP_INT_MAX;
+            $bOrder = $functionOrder[$b->getFonction()] ?? PHP_INT_MAX;
+            return $aOrder - $bOrder;
+        });
 
         return $this->render('home/club.html.twig',[
             'users'=> $user
