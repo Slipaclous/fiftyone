@@ -328,6 +328,13 @@ nav{
   color: #003049;
   text-decoration: underline;
 }
+.advertisement{
+  font-weight: 600;
+}
+.deletion{
+  color: rgb(255, 0, 0);
+  font-weight: bolder;
+}
 .login-link a{
   color: black;
   text-decoration: none;
@@ -1403,7 +1410,7 @@ ul.site-links li:hover > ul {
     align-items: center;
   }
   .contact-field label{
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
   }
@@ -1518,7 +1525,7 @@ ul.site-links li:hover > ul {
 }
 /* Espace membres */
 .container-contact {
-  width: 65%;
+  width: 35%;
   margin: 50px auto;
   padding: 2em;
   background-color: white;

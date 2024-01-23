@@ -25,9 +25,12 @@
                     <h3 class="mt-4">{{ meeting.date|format_date('none', 'MMMM Y', null, 'gregorian', 'fr') }}</h3>
                 {% endif %}
                 <ul class="list-group mt-2">
-                    
+                        <p>
+                <a class="deletion" href="{{ path('delete_meeting', {'id': meeting.id}) }}">&#x2715;</a>
+
                         {{ meeting.date|date('d-m-Y') }} {% if meeting.note %}
                         :{{ meeting.note }}
+                        </p>
                         {% endif %}
                     
                 </ul>

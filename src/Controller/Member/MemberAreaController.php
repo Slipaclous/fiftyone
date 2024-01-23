@@ -92,6 +92,18 @@ class MemberAreaController extends AbstractController
         ]);
     }
 
+    #[Route("/delete-meeting/{id}",name:"delete_meeting")]
+    public function deleteMeeting(Metting $meeting, EntityManagerInterface $entityManager): RedirectResponse
+    {
+
+        $entityManager->remove($meeting);
+        $entityManager->flush();
+
+        $this->addFlash('success','Réunion supprimée avec succès');
+
+        return $this->redirectToRoute('upcoming_meetings');
+    }
+
     // Action pour créer un résumé de réunion
     #[Route('/create-summary', name:'create_summary')]
     public function createMeetingSummary(Request $request, EntityManagerInterface $entityManager): Response
