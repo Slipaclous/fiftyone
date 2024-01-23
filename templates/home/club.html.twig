@@ -35,7 +35,9 @@
 
 <div class="committee-members">
     {% for user in users %}
-        {% if user.fonction != 'administrateur' and user.fonction != 'membre' %}
+         {% if user.fonction == 'administrateur' or user.fonction == 'membre' %}
+        {# Ne rien faire pour les administrateurs et membres #}
+        {% else %}
             <div class="member-card">
             {% if user.avatar is not null %}
                 <img src="{{ asset(user.avatar) }}" alt="image_membres" class="">
