@@ -461,10 +461,15 @@ ul.site-links li:hover > ul {
 .fonction{
   text-transform: uppercase;
   font-weight: 600;
+  margin-top: 15px;
 }
 .become-oner li{
   list-style: initial;
   text-align: initial;
+}
+
+.member-avatar{
+  object-fit: cover;
 }
 .committee-members,
         .regular-members {

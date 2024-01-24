@@ -40,7 +40,7 @@
         {% else %}
             <div class="member-card">
             {% if user.avatar is not null %}
-                <img src="{{ asset(user.avatar) }}" alt="image_membres" class="">
+                <img class="member-avatar" src="{{ asset(user.avatar) }}" alt="image_membres" class="">
             {% else %}
                 <img src="/images/anonyme_avatar.jpg" alt="">
             {% endif %}
