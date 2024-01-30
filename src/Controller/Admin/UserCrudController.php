@@ -81,7 +81,8 @@ class UserCrudController extends AbstractCrudController
                         "Trésorier"=>"tresorier",
                         "Aide à la Communauté"=>"aideCommunaute",
                         "membre"=>"membre",
-                        "administrateur"=>"administrateur"
+                        "administrateur"=>"administrateur",
+                        "Secrétaire"=>"secretaire"
 
                     ])
         ];

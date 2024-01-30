@@ -85,9 +85,9 @@
             
                 {% else %}
                 <p>Pas d'activités à venir.</p>
+                {% endif %}
                 </div>
             <div class="msg">
-                {% endif %}
                 <a href="{{ path('app_member_event') }}" class="single-event button-3">Voir les activités</a>
             </div>
             </div>
@@ -143,20 +143,16 @@
                     C223.857,14.654,197.707,40.804,197.707,72.946z" />
                 </svg>
                 </div>
-
             </div>
-
             <div class="upcoming-event">
                 <h4>Prochaine réunion</h4>
                 {% if meeting %}
                 <p>{{ meeting.getDate()|format_date('none', 'd MMMM Y', null, 'gregorian', 'fr') }}</p>
                 {% else %}
                 <p>Aucune réunion à venir.</p>
-
                 {% endif %}
             </div>
             <div class="msg">
-
                 <a href="{{path("upcoming_meetings")}}" class="single-event button-3">Prochaines réunions </a>
             </div>
         </div>

@@ -38,6 +38,7 @@ class HomeController extends AbstractController
             'responsableProtocole' => 4,
             'tresorier' => 5,
             'aideCommunaute' => 6,
+            'secretaire'=>7
         ];
 
         usort($user, function ($a, $b) use ($functionOrder) {

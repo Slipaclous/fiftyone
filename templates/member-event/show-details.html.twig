@@ -51,7 +51,7 @@
     </div>
 {% else %}
     <p>Vous participez déjà à cet évènement.</p>
-    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="button">Modifier mes invités</a>
+    <a href="{{ path('app_edit_guest_list', {'id': participant.id}) }}" class="button">Modifier ma participation</a>
     <form action="{{ path('app_cancel_participation', {'id': participant.id}) }}" method="post">
         <button type="submit" class="button-2">Annuler ma participation</button>
     </form>

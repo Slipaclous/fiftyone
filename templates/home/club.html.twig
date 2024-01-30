@@ -26,7 +26,8 @@
     'vicePrésident': 3,
     'responsableProtocole': 4,
     'tresorier': 5,
-    'aideCommunaute': 6
+    'aideCommunaute': 6,
+    'secretaire':7
 } %}
 
 {# Filtrer et trier les membres du comité #}
@@ -48,44 +49,51 @@
             {# Utilisez une série d'instructions if-elseif pour simuler un bloc switch #}
             {% if user.fonction == 'president' %}
                 <p class="fonction">Président</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% elseif user.fonction == 'pastPresident' %}
                 <p class="fonction">Past-Président</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% elseif user.fonction == 'vicePresident' %}
                 <p class="fonction">Vice-Président</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% elseif user.fonction == 'responsableProtocole' %}
                 <p class="fonction">Responsable du Protocole</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% elseif user.fonction == 'tresorier' %}
                 <p class="fonction">Trésorier</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% elseif user.fonction == 'aideCommunaute' %}
                 <p class="fonction">Aide à la communauté</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
+            {% elseif user.fonction == 'secretaire' %}
+                <p class="fonction">Aide à la communauté</p>
+                <p>{{ user.firstName }} {{ user.lastName }}</p>
+                <p class="email-member">{{ user.email }}</p>
             {% else %}
                 {# Ajoutez des conditions supplémentaires si nécessaire #}
             {% endif %}
-
-            <p>{{ user.firstName }} {{ user.lastName }}</p>
-            <p>{{ user.email }}</p>
         </div>
         {% endif %}
     {% endfor %}
 </div>
-
-
-
-
-
-
 <h2 class="title-home">Nos Membres</h2>
     <div class="regular-members">
         {% for user in users %}
             {% if user.fonction is null or user.fonction == "membre" and user.fonction!= "administrateur" %}
                 <div class="member-card">
                     {% if user.avatar is not null %}
-                        <img src="{{ asset(user.avatar)}}" alt="image_membres" class="">
+                        <img class="member-avatar" src="{{ asset(user.avatar)}}" alt="image_membres" class="">
                     {% else %}
                         <img src="/images/anonyme_avatar.jpg" alt="">
                     {% endif %}
                     <p>{{ user.firstName }} {{ user.lastName }}</p>
-                    <p>{{user.email}}</p>
+                    <p class="email-member">{{ user.email }}</p>
                     {# Vous pouvez ajouter plus d'informations ici si nécessaire #}
                 </div>
             {% endif %}

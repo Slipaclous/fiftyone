@@ -460,8 +460,16 @@ ul.site-links li:hover > ul {
 }
 .fonction{
   text-transform: uppercase;
+  font-size: 1rem;
   font-weight: 600;
+  padding: 5px;
   margin-top: 15px;
+}
+.email-member{
+  width: 100%;
+  word-wrap: break-word;
+  height: 100%;
+  padding: 8px;
 }
 .become-oner li{
   list-style: initial;
@@ -485,6 +493,7 @@ ul.site-links li:hover > ul {
             border: 1px solid #ccc;
             text-align: center;
             width: 250px; /* Ajustez la largeur selon vos besoins */
+            
         }
 
 .committee-members,
@@ -1402,7 +1411,7 @@ ul.site-links li:hover > ul {
     padding: 5px 10px;
   }
   .contact{
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.44);
     border-radius: 25px;

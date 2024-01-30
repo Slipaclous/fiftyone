@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Modification de votre profil</h1>
     <div class="contact">
+    <h1 class="title-home">Modification de votre profil</h1>
     {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="bouton-voir">Sauvegarder mes informations</button>
+        <button type="submit" class="button">Sauvegarder mes informations</button>
     {{ form_end(form) }}
     </div>
 {% endblock %}
