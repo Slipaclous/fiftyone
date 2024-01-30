@@ -495,7 +495,9 @@ ul.site-links li:hover > ul {
             width: 250px; /* Ajustez la largeur selon vos besoins */
             
         }
-
+        .regular-names{
+          margin-top: 10px;
+        }
 .committee-members,
         .regular-members p{
         
@@ -512,6 +514,7 @@ ul.site-links li:hover > ul {
             width: 100px;
             height: 100px;
         }
+        
   .presentation {
     text-align: center;
     margin-top: 50px;
