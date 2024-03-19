@@ -18,7 +18,7 @@
     <div class="container py-5">
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for event in events|sort((b, a) => b.date <=> a.date) %}
-                {% if event.date > date() %}
+                {% if event.date >= date() %}
                     <div class="col">
                         <a href="{{ path('app_member_event_details', {'id': event.id}) }}">
                             <div class="cardi h-100" style="position: relative">

@@ -24,6 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $resetToken = null;
     /**
      * @var string The hashed password
      */
@@ -92,6 +94,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function setResetToken(?string $resetToken): self
+{
+    $this->resetToken = $resetToken;
+
+    return $this;
+}
+
+public function getResetToken(): ?string
+{
+    return $this->resetToken;
+}
 
     /**
      * A visual identifier that represents this user.
