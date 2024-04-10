@@ -1067,7 +1067,8 @@ ul.site-links li:hover > ul {
       position: absolute;
       z-index: 2;
       opacity: 0;
-      top: 40%;
+      top: 50%;
+      transform: translate(0,-50%);
       text-transform: uppercase;
       margin: 0 15px;
       width: 80%;
@@ -2116,7 +2117,7 @@ a {
 }
 .title-carousel{
   color: #003049;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: bolder;
   margin: 20px;
   text-transform: uppercase;
@@ -2533,7 +2534,6 @@ a {
   }
   .last-3-news-title{
     opacity: 1;
-    top: 45%;
     font-size: 1.4rem;
   }
   .last-3-news-img{
@@ -2552,6 +2552,11 @@ a {
     width: 90%;
     left: 5% ;
     margin: 0 auto;
+    min-height:75vh
+  }
+  .custom-carousel{
+    width: 91%;
+    min-height: 75vh;
   }
   .contact{
     width: 80%;
@@ -2570,7 +2575,10 @@ a {
   }
   .controls{
     width: 110% ;
-    left: 50% !;
+    left: 50% ;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 8%;
   }
   .last-3-news{
     width: 70vw;
