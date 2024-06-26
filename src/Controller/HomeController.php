@@ -34,7 +34,7 @@ class HomeController extends AbstractController
         $functionOrder = [
             'president' => 1,
             'pastPresident' => 2,
-            'vicePrésident' => 3,
+            'vicePresident' => 3,
             'responsableProtocole' => 4,
             'tresorier' => 5,
             'aideCommunaute' => 6,
