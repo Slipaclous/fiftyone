@@ -978,6 +978,12 @@ ul.site-links li:hover > ul {
         border: #003049 1px solid;
         border-radius: 10px;
       }
+      .event-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
       .event-image{
         height:  60%;
         object-fit: cover;
