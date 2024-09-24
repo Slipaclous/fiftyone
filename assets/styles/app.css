@@ -967,16 +967,31 @@ ul.site-links li:hover > ul {
         display: flex;
         margin: 0 auto;
         min-height: 40vh;
+        width: 80%;
+        justify-content: center;
+        margin-top: 50px;
       }
       .event-card{
         min-height: 100%;
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 50px;
+        
         border: #003049 1px solid;
         border-radius: 10px;
+      }
+
+      @media(max-width:720px){
+        .event-card{
+          margin: 0 auto;
+        }
+        .event-image{
+          width: 60%;
+          object-fit: cover;
+          margin-bottom: 20px;
+        }
       }
       .event-info{
         display: flex;
@@ -985,7 +1000,6 @@ ul.site-links li:hover > ul {
         justify-content: center;
       }
       .event-image{
-        height:  60%;
         object-fit: cover;
         margin-bottom: 20px;
       }
