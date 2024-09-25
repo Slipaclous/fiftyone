@@ -965,6 +965,8 @@ ul.site-links li:hover > ul {
       }
       .events-container{
         display: flex;
+        flex-direction: column;
+        align-items: center;
         margin: 0 auto;
         min-height: 40vh;
         width: 80%;
@@ -972,7 +974,8 @@ ul.site-links li:hover > ul {
         margin-top: 50px;
       }
       .event-card{
-        min-height: 100%;
+        width: 40%;
+        min-height: 80%;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
@@ -982,10 +985,29 @@ ul.site-links li:hover > ul {
         border: #003049 1px solid;
         border-radius: 10px;
       }
+      .event-title{
+        text-align: center;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgb(206, 179, 25);
+        color: #003049;
+        margin-bottom: 25px;
+
+      }
+
+      @media(max-width:1024px){
+        .event-card{
+          width: 75%;
+        }
+      }
 
       @media(max-width:720px){
         .event-card{
           margin: 0 auto;
+          width: 85%;
+        }
+        .event-title{
+          font-size: 2rem;
+          
         }
         .event-image{
           width: 60%;
@@ -998,8 +1020,11 @@ ul.site-links li:hover > ul {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin: 20px;
       }
       .event-image{
+        margin-top: 20px;
+        width: 80%;
         object-fit: cover;
         margin-bottom: 20px;
       }
