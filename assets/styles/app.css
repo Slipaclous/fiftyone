@@ -343,28 +343,7 @@ header {
    text-align: center;
   background-color: white;
   font-weight: bolder;
-  }
-
-  footer{
-    margin-top: auto;
-    min-height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content:space-around ;
-  }
-  footer .row{
-    width: 100%;
-    margin: 0;
-    height: 100%;
-  }
-  .footer{
-    display: flex;
-    justify-content:space-around ;
-    align-items: center;
-    flex-shrink: 0;
-    height: 100%;
-  }
-  
+  }  
   .site-title {
     font-size: 28px;
     margin-left: 40px;
@@ -391,7 +370,7 @@ header {
   .site-links li a {
     text-decoration: none;
     color: #003049;
-    font-size: 1.1rem;
+    font-size: 1rem;
     position: relative;
     padding: 5px 10px;
   }
@@ -430,7 +409,11 @@ ul.site-links ul {
   justify-content: none!important;
 }
 .sub-link{
-  font-size: 1rem !important;
+  width: 120% !important;
+  padding: 0;
+  display: block;
+  font-size: 0.8rem;
+  text-align: left;
 }
 
 ul.site-links > li {
@@ -517,9 +500,6 @@ ul.site-links li:hover > ul {
   .presentation {
     text-align: center;
     margin-top: 50px;
-  }
-  footer p{
-    margin: 0;
   }
   .blocks {
     display: flex;
@@ -678,18 +658,6 @@ ul.site-links li:hover > ul {
         text-align: center;
         margin: 15px;
       }
-  footer {
-    background-color: white;
-    border: 1px solid rgb(206, 179, 25);
-    color: #003049;
-    font-weight: 600;
-    padding: 20px;
-    text-align: center;
-  }
-  footer a{
-    color: #003049;
-    text-decoration: none;
-  }
   .btn-pres{
     box-sizing: border-box;
     transition-duration: 0.3s;
@@ -2299,7 +2267,7 @@ a {
   padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
 }
-@media (max-width: 767px) {
+@media (max-width: 878px) {
   .site-title {
     font-size: 20px;
   }
@@ -2351,10 +2319,6 @@ a {
   }
   .logo-presa{
     width: 80vw;
-  }
- .footer {
-    flex-direction: column;
-    height: 25vh;
   }
   .container-news{
     width: 90%;
@@ -2468,8 +2432,17 @@ a {
     margin: 0;
   }
 }
+
+@media (max-width:1400px){
+  .site-links li a{
+    font-size: 0.9rem;
+  }
+  .menu ul{
+    width: 75%;
+  }
+}
 /* media query for screens between 1400px and 1024 px */
-@media (min-width: 1200px) and (max-width: 1400px) {
+@media (min-width: 1200px) and (max-width: 1460px) {
   .card-home{
     min-height: 60vh;
   }
@@ -2727,7 +2700,7 @@ a {
     width: 100%;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 878px) {
   .container-member {
     width: 90%;
   }
@@ -2783,7 +2756,7 @@ a {
     min-height: 65vh;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 878px) {
   .site-links {
     display: none;
   }
@@ -2840,4 +2813,686 @@ a {
   #menu-toggle:checked ~ .menu-icon span:nth-child(3) {
     transform: rotate(-45deg) translate(27px, 25px);
   }
+}
+
+
+/* Footer new */
+
+/* Footer Section */
+.footer-section {
+  background: #FFFFFF; /* Couleur de fond blanche */
+  position: relative;
+  border-top: 2px solid #003049;
+}
+.footer-cta {
+  border-bottom: 1px solid #003087; /* Ligne de séparation bleue */
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.footer-cta .row{
+  width: 100%;
+}
+.single-cta i {
+  color: #003087; /* Icônes en bleu */
+  font-size: 30px;
+  float: left;
+  margin-top: 8px;
+}
+.cta-text {
+  padding-left: 15px;
+  display: inline-block;
+}
+.cta-text h4 {
+  color: #003087; /* Titre en bleu */
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.cta-text span {
+  color: #757575; /* Texte gris */
+  font-size: 15px;
+}
+.footer-content {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 2;
+}
+.footer-logo {
+  margin-bottom: 30px;
+}
+.footer-logo img {
+    max-width: 200px;
+}
+.media-icons{
+  background-color: rgb(235, 232, 232);
+  width: 25%;
+  border-radius: 50%;
+  margin: 0;
+  display: block;
+  margin: 0 !important;
+  text-align: center;
+}
+.footer-text{
+ text-align: center;
+}
+.footer-social-icon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-text p {
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #7e7e7e; /* Texte gris */
+  line-height: 28px;
+}
+
+.footer-social-icon span {
+  color: #003087; /* Texte bleu */
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+.footer-social-icon a {
+  color: #003087; /* Icônes en bleu */
+  font-size: 16px;
+  margin-right: 15px;
+}
+.footer-widget-heading h3 {
+  color: #003087; /* Titres en bleu */
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+.footer-widget{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer-widget ul {
+  padding: 0;
+}
+.footer-widget ul li {
+
+  margin-bottom: 12px;
+}
+.footer-widget ul li a:hover{
+  color: #FFD700; /* Effet de survol doré */
+}
+.footer-widget ul li a {
+  color: #003087; /* Liens en bleu */
+  text-transform: capitalize;
+}
+.copyright-area {
+  background: #f7f7f7; /* Couleur de fond pour le bas du footer */
+  padding: 25px 0;
+  width: 100%; /* Assurez-vous que la div prend toute la largeur */
+  position: relative; /* S'assure que la div se positionne correctement */
+  bottom: 0; /* Colle la div au bas de la page */
+  left: 0; /* Assure que la div commence au bord gauche */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copyright-area-justify{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.copyright-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #878787; /* Texte gris */
+  text-align: center;
+}
+.copyright-text p a {
+  color: #003087; /* Liens en bleu */
+}
+.mentions{
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    text-align: center;
+  }
+
+}
+@media (max-width: 1000px) {
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Pour centrer le texte */
+  }
+
+  .footer-section {
+    width: 100%; /* Les sections prennent 100% de la largeur disponible */
+  }
+
+  .footer-widget ul li {
+    text-align: center; /* Centrer les liens */
+  }
+  .footer-text{
+    width: 50%;
+   text-align: center;
+  }
+}
+/* General Section Styling */
+.latest-news-section {
+  padding: 3rem 1rem;
+  background-color: #f9f9f9; /* Light, neutral background */
+  color: #333;
+}
+
+/* Title and Icon */
+.title-home {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #003049; /* Club's primary blue color */
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #003049; /* Simple underline */
+  padding-bottom: 0.5rem;
+}
+
+.news-icon {
+  margin-right: 0.5rem;
+}
+
+/* News Grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual News Card */
+.news-card-index {
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.news-card-index:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* News Image */
+.news-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  min-height: 25vh;
+}
+
+/* News Info */
+.news-info {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.news-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.news-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+/* General Styles for Contact Section */
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #f4f4f9; /* Light background for clarity */
+  color: #333;
+}
+
+/* Banner Image and Title */
+.contact-banner {
+  position: relative;
+  width: 100%;
+  max-height: 250px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.contact-banner-img {
+  width: 100%;
+  height: auto;
+  filter: brightness(70%); /* Adds subtle dark overlay on image */
+}
+
+.contact-title {
+  bottom: 1rem;
+  color:#003049;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Adds depth to text */
+}
+
+/* Contact Form Container */
+.contact-container {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Form Group and Input Styling */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #00539C; /* Club’s primary color */
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #00539C; /* Club's primary blue */
+  color: #fff;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #004080; /* Darker blue on hover */
+}
+
+/* General Styling for the Section */
+.about-section {
+  padding: 3rem 1.5rem;
+  background-color: #f4f4f9;
+  color: #333;
+  text-align: center;
+}
+
+/* Title Styling */
+.presentation-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #00539C; /* Club’s primary color */
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+/* Wrapper for Image and Text Columns */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.image-pres {
+  flex: 1;
+  margin-bottom: 2rem;
+}
+
+.logo-pres {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Text Column Styling */
+.text-pres {
+  flex: 2;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Benefits List */
+.benefits-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  color: #00539C;
+  font-weight: bold;
+  border-left: 4px solid #00539C;
+  padding-left: 1rem;
+}
+
+.benefits-list li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.additional-text {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .content-wrapper {
+      flex-direction: row;
+      gap: 2rem;
+  }
+}
+
+
+/* Actualités index */
+/* Container for the news cards */
+.news-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Styling individual news cards */
+.news-item-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 375px;
+  max-width: 100%;
+}
+
+.news-item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image styling */
+.news-item-image {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center center;
+  transition: opacity 0.2s ease;
+}
+
+.news-item-card:hover .news-item-image {
+  opacity: 0.95;
+}
+
+/* Card body styling */
+.news-item-body {
+  padding: 1.2rem;
+  text-align: left;
+}
+
+/* Title and date styling */
+.news-item-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00539C; /* Club primary color */
+  margin: 0.5rem 0;
+}
+
+.news-item-date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+/* Description text styling */
+.news-item-description {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+/* Button styling (optional) */
+.news-item-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+/* Hero banner styling */
+.hero-banner {
+  width: 100%;
+  padding: 3rem 1rem;
+  background-color: #f7f7f7; /* Soft background color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Title styling with underline effect */
+.hero-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333; /* Dark text for contrast */
+  margin: 0;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.hero-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: #00539C; /* Accent color */
+  margin: 0.5rem auto 0;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .hero-banner {
+      padding: 5rem 1rem;
+  }
+  .hero-title {
+      font-size: 2.5rem;
+  }
+  .hero-title::after {
+      width: 80px;
+  }
+}
+
+/* SHow news page  */ 
+
+.breadcrumb-custom {
+    margin-bottom: 20px;
+}
+
+.breadcrumb-link {
+    color: #007ACC;
+    text-decoration: none;
+}
+
+.news-page-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.news-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-title {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.news-date {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.news-content {
+    line-height: 1.6;
+}
+
+.news-image-cover {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.news-cover-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 20px;
+}
+
+.carousel-inner {
+    display: flex;
+    overflow: hidden;
+}
+.carousel-inner button {
+    margin-bottom: 40px;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    transition: transform 0.6s ease;
+}
+
+.carousel-slide.active {
+    display: block;
+}
+
+.carousel-image {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.carousel-prev,
+.carousel-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+
+.comment-section {
+    padding-top: 30px;
+}
+
+.comment-title {
+    font-size: 1.2rem;
+    color: #007ACC;
+}
+
+.comment-btn,
+.submit-comment-btn {
+    padding: 8px 16px;
+    background-color: #007ACC;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form {
+    display: none;
+    margin-top: 15px;
+}
+
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comment-item {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-date {
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.comment-text {
+    margin-top: 5px;
+    color: #555;
+}
+ /* Carousel */
+ .carousel-image {
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
+
+/* Comment styles */
+.comments-list {
+  list-style: none;
+  padding: 0;
+}
+.comment {
+  margin-bottom: 15px;
+  padding-left: 15px;
 }

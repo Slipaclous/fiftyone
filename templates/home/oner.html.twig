@@ -1,44 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-    <script>
-    {{ parent() }}
-        // Votre code JavaScript ici
-    </script>
-{% endblock %}
+{% block title %}Fifty-One Club Enghien{% endblock %}
 
-{% block title %}Fifty-One club Enghien{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        
-    </style>
-{% endblock %}
 {% block body %}
-    <h1 class="presentation-title">POURQUOI DEVENIR FIFTY-ONER?</h1>
+<section class="about-section">
+    <h1 class="presentation-title">Pourquoi devenir Fifty-Oner?</h1>
 
-    <div class="principe">
-            <div class="image-pres">
-                <img src="/images/fity-oner.jpg" class="logo-presa" alt="Image">
-            </div>
-            <div class="text-pres">
-              <p>Le Fifty-One te permet de :</p>
-<ul class="become-oner">
-    <li>mettre en oeuvre des projets sociaux</li>
-    <li> recevoir le soutien et l’amitié d’un groupe fort et engagé </li>
-    <li>élargir ton réseau et tes ressources pour booster ces projets </li>
-    <li> acquérir une expérience valorisante pour une vie sociale et professionnelle</li>
-    <li> apporter ta contribution à un monde meilleur pour tous</li>
-</ul>
-
-
-
-
-
-
-
-Tu t’investis avec les autres dans une cause qui t’est chère. Tu développeras des amitiés sincères, profitables à toi-même et ta famille, et tu pourras aussi élargir ton réseau professionnel et international. Ensemble, vous organisez et participez à divers événements, vous montez des actions, vous récoltez des fonds. Vous décidez des projets que vous souhaitez soutenir et vous vous apportez aide et soutien mutuels jusqu’à atteindre les objectifs fixés. Avec, en retour, des moments de joie et de réussite, dans l’amitié.
-            </div>
+    <div class="content-wrapper">
+        <div class="image-pres">
+            <img src="/images/fity-oner.jpg" class="logo-pres" alt="Fifty-One Club Image">
         </div>
+        
+        <div class="text-pres">
+            <p>Le Fifty-One te permet de :</p>
+            <ul class="benefits-list">
+                <li>Mettre en œuvre des projets sociaux</li>
+                <li>Recevoir le soutien et l’amitié d’un groupe fort et engagé</li>
+                <li>Élargir ton réseau et tes ressources pour booster ces projets</li>
+                <li>Acquérir une expérience valorisante pour une vie sociale et professionnelle</li>
+                <li>Apporter ta contribution à un monde meilleur pour tous</li>
+            </ul>
+            <p class="additional-text">
+                Tu t’investis avec les autres dans une cause qui t’est chère. Tu développeras des amitiés sincères, profitables à toi-même et à ta famille, et tu pourras aussi élargir ton réseau professionnel et international. Ensemble, vous organisez et participez à divers événements, montez des actions, et récoltez des fonds. Vous décidez des projets que vous souhaitez soutenir et vous vous apportez aide et soutien mutuels jusqu’à atteindre les objectifs fixés. Avec, en retour, des moments de joie et de réussite, dans l’amitié.
+            </p>
+        </div>
+    </div>
+</section>
 {% endblock %}

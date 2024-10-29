@@ -1,128 +1,85 @@
 {% extends 'base.html.twig' %}
 
-
-
-{% block title %}{{ news.Titre }} {% endblock %}
+{% block title %}{{ news.Titre }}{% endblock %}
 
 {% block body %}
-<div class="breadcrumb">
-    <a href="{{path('news_index')}}" class="area-back">Actualités ></a>
+<div class="breadcrumb-custom">
+    <a href="{{ path('news_index') }}" class="breadcrumb-link">Actualités ></a>
 </div>
-  <div class="container-actu">
 
+<div class="news-page-container">
+    <div class="news-header">
+        <h1 class="news-title">{{ news.Titre }}</h1>
+        <p class="news-date">{{ news.date|date('d-m-Y') }}</p>
+    </div>
 
-    <div class="imgcover">
-      <img src="/images/{{news.getCover}}" alt="image" class="cover">
-    </div> 
-         
-    <p class="date-show">Date: {{ news.date|date('Y-m-d') }}</p>
-    <h1 class="actu-title-show">{{ news.Titre }}</h1>
-    <h3 class="subtitle-actu">{{ news.soustitre }}</h3>
-    <p>{{ news.description|raw }}</p>
-  <div id="carouselExampleIndicators" class="carousel slide carousel-fade carousel-news-actus" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            {% for image in news.getImages() %}
-                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
-            {% endfor %}
-        </ol>
-        <div class="carousel-inner">
-            {% for image in news.getImages() %}
-                <div class="carousel-item {% if loop.first %}active{% endif %}">
-                    <a href="#" data-toggle="modal" data-target="#imageModal" data-image-url="/images/{{ image.Url }}">
-                        <div class="carousel-background" style="background-image: url('/images/{{ image.Url }}');"></div>
-                    </a>
+    <div class="news-content">
+        <div class="news-image-cover">
+            <img src="/images/{{ news.getCover }}" alt="News Cover" class="news-cover-img">
+        </div>
+
+        <h2 class="news-subtitle">{{ news.soustitre }}</h2>
+        <div class="news-description">{{ news.description|raw }}</div>
+        
+        {# Carousel Section #}
+        <div id="newsCarousel" class="carousel-container">
+            <div class="carousel-inner">
+                {% for image in news.getImages() %}
+                <div class="carousel-slide{% if loop.first %} active{% endif %}">
+                    <img src="/images/{{ image.Url }}" alt="Carousel Image" class="carousel-image">
                 </div>
-            {% endfor %}
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-
-    <!-- Bootstrap Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> {# Use modal-lg for large size, you can also try modal-xl for an even larger size #}
-        <div class="modal-content">
-            <div class="modal-body">
-                <img class="img-fluid" src="" alt="Full Image">
+                {% endfor %}
             </div>
+            <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
         </div>
     </div>
-</div>
 
-
-   <div class="comment-section">
-        <h3 class="subtitle-actu">Commentaires</h3>
-        
-      
-        <button id="toggleCommentForm" type="button" class="submit-btn">Ajoutez un commentaire</button>
-        
-       
-        <div id="commentForm" class="comment-form" style="display: none;">
+    <div class="comment-section">
+        <h3 class="comment-title">Commentaires</h3>
+        <button id="toggleCommentForm" class="comment-btn">Ajouter un commentaire</button>
+        <div id="commentForm" class="comment-form">
             {{ form_start(commentForm) }}
             {{ form_widget(commentForm) }}
-            <button class="submit-btn" type="submit">Envoyer</button>
+            <button type="submit" class="submit-comment-btn">Envoyer</button>
             {{ form_end(commentForm) }}
         </div>
         
-        
-        <ul>
+        <ul class="comment-list">
             {% for comment in comments %}
-                <li class="comment">
-                    <div class="avatar">{{ comment.pseudo|first }}</div>
-                    <div class="comment-content">
-                        <div class="comment-author">{{ comment.pseudo }}</div>
-                        <div class="comment-date">{{ comment.dateUpload|date('d-m-Y') }}</div>
-                        <div class="comment-text">{{ comment.contenu }}</div>
-                    </div>
-                </li>
+            <li class="comment-item">
+                <div class="comment-author">{{ comment.pseudo }}</div>
+                <p class="comment-date">{{ comment.dateUpload|date('d-m-Y') }}</p>
+                <div class="comment-text">{{ comment.contenu }}</div>
+            </li>
             {% endfor %}
         </ul>
     </div>
 </div>
 {% endblock %}
+
 {% block javascripts %}
 <script>
-{{ parent() }}
-    document.addEventListener('DOMContentLoaded', function () {
-        const commentForm = document.getElementById('commentForm');
-        const toggleButton = document.getElementById('toggleCommentForm');
-
-        toggleButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            if (commentForm.style.display === 'none' || commentForm.style.display === '') {
-                commentForm.style.display = 'block';
-                toggleButton.style.display = 'none'; // Hide the button
-                commentForm.style.opacity = 0;
-                commentForm.style.transition = 'opacity 0.5s';
-                setTimeout(() => commentForm.style.opacity = 1, 10);
-            } else {
-                commentForm.style.opacity = 0;
-                setTimeout(() => {
-                    commentForm.style.display = 'none';
-                    toggleButton.style.display = 'block'; // Show the button
-                }, 500);
-            }
-        });
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("carousel-slide");
+    
+    function showSlide(index) {
+        if (index >= slides.length) slideIndex = 0;
+        if (index < 0) slideIndex = slides.length - 1;
+        
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+        }
+        slides[slideIndex].classList.add("active");
+    }
+    
+    function moveSlide(n) {
+        showSlide(slideIndex += n);
+    }
+    
+    document.getElementById("toggleCommentForm").addEventListener("click", function() {
+        const form = document.getElementById("commentForm");
+        form.style.display = form.style.display === "none" ? "block" : "none";
     });
-     $(document).ready(function () {
-            // Initialize Bootstrap modal
-            $('#imageModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var imageUrl = button.data('image-url'); // Extract info from data-* attributes
-
-                // Update the modal body with the clicked image
-                var modal = $(this);
-                modal.find('.modal-body img').attr('src', imageUrl);
-            });
-        });
 </script>
 {% endblock %}
-

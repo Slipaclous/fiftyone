@@ -14,9 +14,11 @@
     {% endif %}{% endblock %}
 
 {% block body %}
-<div class="bandeau-actus">
-  <h4>Actualités</h4>
+<div class="hero-banner">
+    <h1 class="hero-title">Actualités</h1>
 </div>
+
+
 <div class="example"></div>
 <div class="last-news">
 <a href="{{ path('news_show', { 'slug': lastNews[0].getSlug }) }}">
@@ -121,25 +123,24 @@
 </ul>
 
 
-    <div class="news-flex-container">
+   <div class="news-grid-container">
     {% for news in news %}
-      <div class="news-card">
-    <a href="{{ path('news_show', { 'slug': news.getSlug }) }}" class="">
-        <div class="card-home mb-4">
-        
-          <img src="/images/{{ news.cover }}" class="card-img-top" alt="News Image">
-        <p class="date-show">Le {{news.getDate|date('d-m-Y')}}</p>
-          <div class="card-body">
-            <h5 class="card-title">{{ news.getTitre() }}</h5>
-            <p class="card-text">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw  }}</p>
-            <div class="bout">
-          </div>
-          </div>
-        </div>
-      </a>
-      </div>
-    {% endfor %}
+    <div class="news-item-card">
+        <a href="{{ path('news_show', { 'slug': news.getSlug }) }}">
+            <div class="news-item-image" style="background-image: url('/images/{{ news.cover }}');"></div>
+            <div class="news-item-body">
+                <h5 class="news-item-title">{{ news.getTitre() }}</h5>
+                <p class="news-item-date">Le {{ news.getDate|date('d-m-Y') }}</p>
+                <p class="news-item-description">{{ news.getDescription()|striptags|slice(0, 100) ~ '...'|raw }}</p>
+                <div class="news-item-button-container">
+                    <!-- Button or additional link content if needed -->
+                </div>
+            </div>
+        </a>
     </div>
+    {% endfor %}
+</div>
+
   
  <div class="pagination">
     {{ knp_pagination_render(news) }}

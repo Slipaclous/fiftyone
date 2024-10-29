@@ -1,17 +1,83 @@
-<footer>
-    
-        <div class="row">
-            <div class="col-md-12 footer">
-                <a href="{{path('app_mentions')}}">Mentions légales</a>
-                <p>© 2022-2023 Fifty-One Enghien</p>
-                <div class="reseau">
-                    <a href="https://www.facebook.com/51FiftyOneEnghien"><svg class="avatar avatar-svg" width="800px" height="800px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="24" cy="24" r="20" fill="#3B5998"/>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M29.315 16.9578C28.6917 16.8331 27.8498 16.74 27.3204 16.74C25.8867 16.74 25.7936 17.3633 25.7936 18.3607V20.1361H29.3774L29.065 23.8137H25.7936V35H21.3063V23.8137H19V20.1361H21.3063V17.8613C21.3063 14.7453 22.7708 13 26.4477 13C27.7252 13 28.6602 13.187 29.8753 13.4363L29.315 16.9578Z" fill="white"/>
-                        </svg>
-                    </a>
-                </div>
+<footer class="footer-section">
+  <div class="container">
+    <div class="footer-cta pt-5 pb-5">
+      
+        <div class="col-xl-4 col-md-4 mb-30">
+          <div class="single-cta">
+            <i class="fas fa-map-marker-alt"></i>
+            <div class="cta-text">
+              <h4>Retrouvez-nous</h4>
+              <span>Enghien</span>
             </div>
+          </div>
         </div>
+        <div class="col-xl-4 col-md-4 mb-30">
+          <div class="single-cta">
+            <i class="far fa-envelope-open"></i>
+            <div class="cta-text">
+              <h4>Envoyez-nous un email</h4>
+              <span>fifty-one-enghien@gmail.com</span>
+            </div>
+          </div>
+        </div>
+      
+    </div>
+
+    <div class="footer-content pt-5 pb-5">
     
+        <div class="col-xl-4 col-lg-4 mb-50">
+          <div class="footer-widget">
+            <div class="footer-logo">
+              <a href="{{ path('home') }}">
+                <img src="/images/logo3.png" class="img-fluid" alt="logo fifty-one">
+              </a>
+            </div>
+            <div class="footer-text">
+              <p>Fifty-One Enghien est un club de services sociaux œuvrant pour divers projets communautaires. Rejoignez-nous pour faire une différence.</p>
+            </div>
+            <div class="footer-social-icon">
+              <span>Suivez-nous</span>
+              <a class="media-icons" href="https://www.facebook.com/51FiftyOneEnghien" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f facebook-bg"></i>
+              </a>
+              <!-- Ajoutez d'autres icônes sociales au besoin -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 mb-50">
+          <div class="footer-widget">
+            <div class="footer-widget-heading">
+              <h3>Liens Utiles</h3>
+            </div>
+            <ul>
+              <li><a href="{{ path('home') }}">Accueil</a></li>
+              <li><a href="{{ path('app_club') }}">Le Fifty-One club d'Enghien</a></li>
+              <li><a href="{{ path('app_events') }}">Évènements</a></li>
+              <li><a href="{{ path('news_index') }}">Actualités</a></li>
+              <li><a href="{{ path('contact') }}">Contact</a></li>
+              <li><a href="{{ path('app_mentions') }}">Mentions légales</a></li>
+            </ul>
+          </div>
+        </div>
+      
+    </div>
+
+  </div>
+    <div class="copyright-area">
+      <div class="copyright-area-justify">
+        <div class="row">
+            <div class="copyright-text">
+              <p>Copyright &copy; 2022-2023, Tous droits réservés. Développé par <a href="https://www.gminor.dev">G-Minor</a></p>
+            </div>
+          
+        
+            
+              
+                <li class="mentions"><a href="{{ path('app_mentions') }}">Mentions légales</a></li>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </footer>
